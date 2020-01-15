@@ -56,6 +56,7 @@ const BusinessHourForm = ({ hour, onBusinessHourChange }) => {
             />
           </div>
         </div>
+        <button>remove</button>
       </div>
     </form>
   );
