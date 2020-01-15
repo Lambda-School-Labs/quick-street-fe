@@ -3,8 +3,7 @@ import about from "../../styles/css/vendor_about.module.css";
 import VendorAboutForm from "./VendorAboutForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave, faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
-import Map from '../../components/Map';
-
+import Map from "../../components/Map";
 
 const About = ({
   editAbout,
@@ -12,10 +11,12 @@ const About = ({
   info,
   setInfo,
   editProfile,
-  saveProfile
+  saveProfile,
+  addBusinessHourHandler
 }) => {
   const [editingDetails, setEditingDetails] = useState(false);
-  console.log(info);
+
+  console.log(`business hour change`, info.business_hour);
   return (
     <div className={about.vendor_about_container}>
       <div className={about.inner_container}>
@@ -24,15 +25,23 @@ const About = ({
           <div className={about.vendor_about_btn_group}>
             <FontAwesomeIcon
               id={about.pen}
-              className={`${about.icon} " " ${editingDetails ? about.red_edit : about.normal_pen}`}
+              className={`${about.icon} " " ${
+                editingDetails ? about.red_edit : about.normal_pen
+              }`}
               icon={faPen}
-              onClick={() => { editProfile(); setEditingDetails(!editingDetails); }}
+              onClick={() => {
+                editProfile();
+                setEditingDetails(!editingDetails);
+              }}
             />
             <FontAwesomeIcon
               id={about.save}
               className={about.icon}
               icon={faSave}
-              onClick={(e) => { saveProfile(e); setEditingDetails(false); }}
+              onClick={e => {
+                saveProfile(e);
+                setEditingDetails(false);
+              }}
             />
 
             {/* <img src={create} alt='create' onClick={editProfile} />
@@ -46,8 +55,8 @@ const About = ({
             vendorInfo={vendorInfo}
             info={info}
             setInfo={setInfo}
+            addBusinessHourHandler={addBusinessHourHandler}
           />
-
         </div>
       </div>
     </div>

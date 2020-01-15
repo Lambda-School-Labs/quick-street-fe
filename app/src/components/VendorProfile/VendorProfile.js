@@ -4,7 +4,7 @@ import VendorProducts from "../VendorProduct/VendorProducts";
 import VendorAddProductForm from "../../components/VendorProduct/VendorAddProductForm";
 import picture from "../../assets/placeholder.png";
 import VendorBulletin from "../VendorBulletin/VendorBulletin";
-import Footer from '../Footer';
+import Footer from "../Footer";
 //Styles
 import profile from "../../styles/css/vendor_profile.module.css";
 import banner from "../../styles/css/vendor_banner.module.css";
@@ -26,11 +26,10 @@ const VendorProfile = props => {
   const [productImagesIds, setProductImagesIds] = useState([]);
   const [info, setInfo] = useState({
     business_name: "",
-    days: "0",
+    days: "",
     phone: "",
     about: "",
-    hour_from: "",
-    hour_to: "",
+    business_hour: [{ days: "", time_from: "", time_to: "" }],
     location: ""
   });
   const vendorId = props.match.params.id;
@@ -152,6 +151,18 @@ const VendorProfile = props => {
     setModal(true);
   };
 
+  const addBusinessHour = e => {
+    console.log(`add business hour`);
+    e.preventDefault();
+    setInfo({
+      ...info,
+      business_hour: [
+        ...info.business_hour,
+        { days: "", time_from: "", time_to: "" }
+      ]
+    });
+  };
+
   const addProductformCancelHandler = e => {
     e.preventDefault();
     setModal(false);
@@ -169,13 +180,11 @@ const VendorProfile = props => {
         business_name: info.business_name
       })
       .then(res => {
-        console.log(`update vendor info`, res);
         setVendorInfo(res.data.data);
       });
   };
 
   const editProfile = () => {
-    console.log(`edit profile clicked`);
     setEditAbout(true);
   };
 
@@ -191,7 +200,6 @@ const VendorProfile = props => {
         description: info.about
       })
       .then(res => {
-        console.log(`update vendor info`, res);
         setVendorInfo(res.data.data);
       });
   };
@@ -201,15 +209,10 @@ const VendorProfile = props => {
     myWidget.open();
   };
 
-
-
-  console.log('banner pen: ', document.getElementById(`${banner.pen}`))
-  console.log('editingName: ', editingName)
   return (
     <div className={profile.vendor_profile_container}>
       <div className={profile.vendor_header_container}>
         <h1>Market Avenue</h1>
-
 
         <div id={profile.hamburger_dropdown}>
           <span id={profile.closebtn} onClick={() => setShow(!show)}>
@@ -218,14 +221,17 @@ const VendorProfile = props => {
             <span class={profile.line3}></span>
           </span>
 
-          <div className={show ? profile.hamburger_dropdown_links : profile.no_drop}>
+          <div
+            className={
+              show ? profile.hamburger_dropdown_links : profile.no_drop
+            }
+          >
             <p className={profile.header_about}>About</p>
             <p className={profile.header_food}>Food</p>
             <p className={profile.header_business_name}>
               {vendorInfo.business_name}
             </p>
           </div>
-
         </div>
 
         <div className={profile.header_links}>
@@ -241,21 +247,22 @@ const VendorProfile = props => {
         <div className={banner.banner_text_btns}>
           <div className={banner.vendor_header_name}>
             <input
-
               onChange={e =>
                 setInfo({ ...info, business_name: e.target.value })
               }
               value={
                 editBusinessName ? info.business_name : vendorInfo.business_name
               }
-              className={editingName ? banner.glowing_border : 'none'}
+              className={editingName ? banner.glowing_border : "none"}
             />
           </div>
 
           <div className={banner.vendor_profile_btn_group}>
             <FontAwesomeIcon
               id={banner.pen}
-              className={`${banner.icon} " " ${editingName ? banner.red_edit : banner.normal_pen}`}
+              className={`${banner.icon} " " ${
+                editingName ? banner.red_edit : banner.normal_pen
+              }`}
               icon={faPen}
               onClick={() => {
                 editName();
@@ -266,8 +273,10 @@ const VendorProfile = props => {
               id={banner.save}
               className={banner.icon}
               icon={faSave}
-              onClick={(e) => { saveName(e); setEditingName(false); }}
-
+              onClick={e => {
+                saveName(e);
+                setEditingName(false);
+              }}
             />
 
             {/* <img src={create} alt='create' onClick={editProfile} />
@@ -291,12 +300,12 @@ const VendorProfile = props => {
               </Image>
             </CloudinaryContext>
           ) : (
-              <img
-                className={banner.vendor_banner_image}
-                src={picture}
-                alt="vendor header"
-              />
-            )}
+            <img
+              className={banner.vendor_banner_image}
+              src={picture}
+              alt="vendor header"
+            />
+          )}
           <div className={banner.vendor_banner_upload}>
             <FontAwesomeIcon
               id={banner.upload}
@@ -320,6 +329,7 @@ const VendorProfile = props => {
         editAbout={editAbout}
         editProfile={editProfile}
         saveProfile={saveProfile}
+        addBusinessHourHandler={addBusinessHour}
       />
 
       <VendorProducts
@@ -340,7 +350,7 @@ const VendorProfile = props => {
       <VendorBulletin vendorId={vendorId} />
 
       <Footer />
-    </div >
+    </div>
   );
 };
 
