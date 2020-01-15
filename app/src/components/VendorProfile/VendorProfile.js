@@ -142,6 +142,7 @@ const VendorProfile = props => {
     fetchImageIds();
   }, [productIds]);
 
+  console.log(vendorInfo);
   if (products.length !== 0 && productImagesIds.length !== 0) {
     for (let i = 0; i < products.length; i++) {
       products[i].imageId = productImagesIds[i];
@@ -160,6 +161,15 @@ const VendorProfile = props => {
         ...info.business_hour,
         { days: "", time_from: "", time_to: "" }
       ]
+    });
+  };
+
+  const deleteBusinessHour = (e, i) => {
+    e.preventDefault();
+    console.log(`delete hour`);
+    setInfo({
+      ...info,
+      business_hour: [...info.business_hour.filter((h, idx) => idx !== i)]
     });
   };
 
@@ -330,6 +340,7 @@ const VendorProfile = props => {
         editProfile={editProfile}
         saveProfile={saveProfile}
         addBusinessHourHandler={addBusinessHour}
+        deleteBusinessHour={deleteBusinessHour}
       />
 
       <VendorProducts

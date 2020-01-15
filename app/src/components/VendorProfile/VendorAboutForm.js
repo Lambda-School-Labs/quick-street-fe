@@ -15,7 +15,8 @@ const VendorAboutForm = ({
   vendorInfo,
   info,
   setInfo,
-  addBusinessHourHandler
+  addBusinessHourHandler,
+  deleteBusinessHour
 }) => {
   const changeHandler = e => {
     if (editAbout) {
@@ -108,6 +109,7 @@ const VendorAboutForm = ({
               key={idx}
               hour={h}
               onBusinessHourChange={e => onBusinessHourChange(e, idx)}
+              deleteHour={e => deleteBusinessHour(e, idx)}
             />
           ))}
 

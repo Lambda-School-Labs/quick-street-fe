@@ -12,7 +12,8 @@ const About = ({
   setInfo,
   editProfile,
   saveProfile,
-  addBusinessHourHandler
+  addBusinessHourHandler,
+  deleteBusinessHour
 }) => {
   const [editingDetails, setEditingDetails] = useState(false);
 
@@ -56,6 +57,7 @@ const About = ({
             info={info}
             setInfo={setInfo}
             addBusinessHourHandler={addBusinessHourHandler}
+            deleteBusinessHour={deleteBusinessHour}
           />
         </div>
       </div>

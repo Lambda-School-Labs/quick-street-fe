@@ -1,9 +1,9 @@
 import React from "react";
 import about from "../../styles/css/vendor_about.module.css";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const BusinessHourForm = ({ hour, onBusinessHourChange }) => {
+const BusinessHourForm = ({ hour, onBusinessHourChange, deleteHour }) => {
   console.log(`hour`, hour);
   return (
     <form>
@@ -56,7 +56,12 @@ const BusinessHourForm = ({ hour, onBusinessHourChange }) => {
             />
           </div>
         </div>
-        <button>remove</button>
+        <FontAwesomeIcon
+          id={about.clock}
+          className={about.input_icon}
+          icon={faTrashAlt}
+          onClick={deleteHour}
+        />
       </div>
     </form>
   );
