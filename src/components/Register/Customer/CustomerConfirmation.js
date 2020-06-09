@@ -1,40 +1,40 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 
-import axiosWithAuth from '../../../utils/axiosWithAuth';
-import { CustomButton } from '../../index';
-import { Context as CartContext } from '../../../contexts/TestCartContext';
+import axiosWithAuth from "../../../utils/axiosWithAuth";
+import { CustomButton } from "../../index";
+import { Context as CartContext } from "../../../contexts/TestCartContext";
 
 // stlyes
-import registration from '../../../styles/scss/registration.module.scss';
+import registration from "../../../styles/scss/registration.module.scss";
 
-const CustomerConfirmation = props => {
+const CustomerConfirmation = (props) => {
   const { createCart } = useContext(CartContext);
   const { email, password } = props.values;
-  const [duplicateEmail, setDuplicateEmail] = useState('');
+  const [duplicateEmail, setDuplicateEmail] = useState("");
 
-  const cancel = event => {
+  const cancel = (event) => {
     event.preventDefault();
     props.previousStep();
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const registerObject = {
       email,
       password,
-      isVendor: false
+      isVendor: false,
     };
     axiosWithAuth()
-      .post('/auth/register', registerObject)
-      .then(response => {
+      .post("/auth/register", registerObject)
+      .then((response) => {
         // console.log('POST CustomerConfirm res: ', response);
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user_id', response.data.id);
-        localStorage.setItem('isVendor', response.data.isVendor);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user_id", response.data.id);
+        localStorage.setItem("isVendor", response.data.isVendor);
         createCart(response.data.id);
         props.history.push(`/browse`);
       })
-      .catch(error => {
+      .catch((error) => {
         // console.log(error.response);
         // console.log(error.response.data.error);
         setDuplicateEmail(
@@ -59,11 +59,11 @@ const CustomerConfirmation = props => {
           <div class={registration.errorMessage}>{duplicateEmail}</div>
         )}
 
-        <div className='vendor_confirmation_div'>
-          <CustomButton styleClass='green-border' onClick={cancel}>
+        <div className="vendor_confirmation_div">
+          <CustomButton styleClass="green-border" onClick={cancel}>
             Back
           </CustomButton>
-          <CustomButton styleClass='green-full' onClick={handleSubmit}>
+          <CustomButton styleClass="green-full" onClick={handleSubmit}>
             Save & Confirm
           </CustomButton>
         </div>
