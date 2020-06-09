@@ -6,7 +6,10 @@ import { CustomButton } from "../../index";
 import { Context as AuthContext } from "../../../contexts/AuthContext";
 // styles
 import registration from "../../../styles/scss/registration.module.scss";
-const VendorConfirmation = props => {
+
+///This is part 3 of the registry process for vendors. Connected to authContext through signup function on line 48
+
+const VendorConfirmation = (props) => {
   const { signup } = useContext(AuthContext); // used to have 'state'
   const [duplicateEmail] = useState(""); // removed setDuplicateEmail
   // console.log('VendorConfirmation props: ', props);
@@ -17,10 +20,10 @@ const VendorConfirmation = props => {
     phoneNumber,
     streetAddress,
     city,
-    zipcode
+    zipcode,
   } = props.values;
 
-  const cancel = event => {
+  const cancel = (event) => {
     event.preventDefault();
     props.previousStep();
   };
@@ -114,6 +117,7 @@ const VendorConfirmation = props => {
         {city.length === 0 && (
           <div className={registration.city_zip_container}>
             <div className={registration.city_zip}>
+              <h1>Zipcode</h1>
               <p>{zipcode}</p>
             </div>
           </div>
@@ -136,7 +140,7 @@ const VendorConfirmation = props => {
                 business_name: businessName,
                 phone: phoneNumber,
                 address: convertAddress(),
-                vendor: true
+                vendor: true,
               })
             }
           >

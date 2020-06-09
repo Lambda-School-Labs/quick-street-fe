@@ -6,9 +6,9 @@ import {
   CustomerConfirmation,
   VendorConfirmation,
   VendorDetails,
-  RegisterDetails
+  RegisterDetails,
 } from "../components/index";
-const Register = props => {
+const Register = (props) => {
   // console.log('Register.js props: ', props);
 
   const [userInfo, setUserInfo] = useState({
@@ -26,14 +26,14 @@ const Register = props => {
     streetAddress: "",
     city: "",
     zipcode: "",
-    zipcodeError: ""
+    zipcodeError: "",
   });
 
   const nextStep = () => {
     const { step } = userInfo;
     setUserInfo({
       ...userInfo,
-      step: step + 1
+      step: step + 1,
     });
   };
 
@@ -41,11 +41,11 @@ const Register = props => {
     const { step } = userInfo;
     setUserInfo({
       ...userInfo,
-      step: step - 1
+      step: step - 1,
     });
   };
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setUserInfo({
       ...userInfo,
       [event.target.name]: event.target.value,
@@ -54,7 +54,7 @@ const Register = props => {
       roleError: "",
       businessNameError: "",
       phoneNumberError: "",
-      zipcodeError: ""
+      zipcodeError: "",
     });
   };
 
