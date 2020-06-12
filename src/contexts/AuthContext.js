@@ -48,34 +48,39 @@ const createCart = (customerId) => {
 const signup = (dispatch) => async ({
   email,
   password,
-  business_name,
-  phone,
-  address,
-  vendor,
+  role,
+  //   business_name,
+  //   phone,
+  //   address,
+  //   vendor,
 }) => {
   try {
-    const response = await axiosWithAuth().post("/auth/register", {
+    const response = await axiosWithAuth().post("/auth/registration", {
       email,
       password,
-      business_name,
-      phone,
-      address,
-      vendor,
+      role,
+      //   business_name,
+      //   phone,
+      //   address,
+      //   vendor,
     });
-    localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user_id", response.data.id);
-    localStorage.setItem("isVendor", response.data.isVendor);
-    dispatch({ type: "signup", payload: response.data.token });
+    // localStorage.setItem("token", response.data.token);
+    // localStorage.setItem("user_id", response.data.id);
+    // localStorage.setItem("isVendor", response.data.isVendor);
+    // dispatch({ type: "signup", payload: response.data.token });
+    console.log("this is the response", response);
+    console.log("vendor", role);
     if (response.status === 200) {
       console.log("response after creating a vendor", response);
-      //   window.location.href = `/profile/${response.data.id}`;
+      window.location.href = "/login";
+      // window.location.href = `/profile/${response.data.id}`;
     }
   } catch (error) {
     console.log("Error while creating a vendor", error.response);
-    dispatch({
-      type: "add_error",
-      payload: "something went wrong",
-    });
+    // dispatch({
+    //   type: "add_error",
+    //   payload: "something went wrong",
+    // });
   }
 };
 
@@ -90,10 +95,12 @@ const signin = (dispatch) => async ({ email, password }) => {
     localStorage.setItem("user_id", response.data.id);
     localStorage.setItem("isVendor", response.data.isVendor);
     if ((response.status === 200) & response.data.isVendor) {
+      console.log("You are logged in");
       window.location.href = `profile/${response.data.id}`;
     } else {
+      console.log("user is customer?");
       checkIfCart(response.data.id);
-      // window.location.href='browse'
+      window.location.href = "browse";
     }
   } catch (error) {
     console.log(error.response);

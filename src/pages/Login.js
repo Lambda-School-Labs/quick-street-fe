@@ -10,8 +10,8 @@ import login from "../styles/scss/login.module.scss";
 import { CustomButton } from "../components/index";
 // import Image from "../assets/images/Image";
 
-const Login = props => {
-  const { signin } = useContext(AuthContext);  // removed state, signout
+const Login = (props) => {
+  const { signin } = useContext(AuthContext); // removed state, signout
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,7 +29,7 @@ const Login = props => {
               id="email"
               // placeholder='Enter your email'
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             {/* <p className={login.errorMessage}>{credentials.emailError}</p> */}
           </div>
@@ -41,7 +41,7 @@ const Login = props => {
               id="password"
               // placeholder='Please enter a password'
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             {/* <p className={login.errorMessage}>{credentials.passwordError}</p> */}
           </div>
