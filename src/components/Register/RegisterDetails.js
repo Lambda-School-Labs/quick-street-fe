@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import registration from "../../styles/scss/registration.module.scss";
 import { CustomButton } from "../index";
 
+//Adding auth context
+import { Context as AuthContext } from "../../../src/contexts/AuthContext";
+
 //This is the first screen that we see. All of this is running through RegisterContext.js
 const RegisterDetails = (props) => {
+  const { signup } = useContext(AuthContext);
   const { values, nextStep, handleChange, setUserInfo } = props;
 
   const proceed = (event) => {
@@ -120,9 +124,20 @@ const RegisterDetails = (props) => {
             Cancel
           </CustomButton>
         </div>
-        <div className={registration.button_wrapper}>
+        {/* <div className={registration.button_wrapper}>
           <CustomButton styleClass="green-full" onClick={proceed}>
             Next
+          </CustomButton>
+        </div> */}
+        <div className={registration.button_wrapper}>
+          <CustomButton
+            styleClass="green-full"
+            onClick={(e) => {
+              e.preventDefault();
+              signup(values);
+            }}
+          >
+            Register
           </CustomButton>
         </div>
       </form>

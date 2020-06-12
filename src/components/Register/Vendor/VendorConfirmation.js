@@ -8,7 +8,7 @@ import { Context as AuthContext } from "../../../contexts/AuthContext";
 import registration from "../../../styles/scss/registration.module.scss";
 
 ///This is part 3 of the registry process for vendors. Connected to authContext through signup function on line 48
-
+//maybe just axe this part.
 const VendorConfirmation = (props) => {
   const { signup } = useContext(AuthContext); // used to have 'state'
   const [duplicateEmail] = useState(""); // removed setDuplicateEmail
