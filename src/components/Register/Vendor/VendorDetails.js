@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import registration from "../../../styles/scss/registration.module.scss";
 import { CustomButton } from "../../index";
-
+import { Context as AuthContext } from "../../../contexts/AuthContext";
 //Page 2 of vendor registry
 const VendorDetails = (props) => {
+  const { updateVendor } = useContext(AuthContext);
   const { values, handleChange, nextStep, previousStep, setUserInfo } = props;
 
   const proceed = (event) => {
@@ -15,27 +16,27 @@ const VendorDetails = (props) => {
   };
 
   const validate = () => {
-    let businessNameError = "";
-    let phoneNumberError = "";
+    let business_nameError = "";
+    let phoneError = "";
     let zipcodeError = "";
 
-    if (!values.businessName) {
-      businessNameError = "Business name required";
+    if (!values.business_name) {
+      business_nameError = "Business name required";
     }
 
     if (!values.phoneNumber) {
-      phoneNumberError = "Phone number required";
+      phoneError = "Phone number required";
     }
 
     if (!values.zipcode) {
       zipcodeError = "Zipcode required";
     }
 
-    if (businessNameError || phoneNumberError || zipcodeError) {
+    if (business_nameError || phoneError || zipcodeError) {
       setUserInfo({
         ...values,
-        businessNameError,
-        phoneNumberError,
+        business_nameError,
+        phoneError,
         zipcodeError,
       });
       return false;
@@ -54,39 +55,37 @@ const VendorDetails = (props) => {
       <h1>Great!</h1>
       <h1>Let's get you set up.</h1>
       <form className={registration.form_step2}>
-        <label htmlFor="businessName">Business Name</label>
+        <label htmlFor="business_name">Business Name</label>
         <input
           type="text"
-          name="businessName"
+          name="business_name"
           id="businessName"
           // placeholder='Enter your business name'
-          value={values.businessName}
+          value={values.business_name}
           onChange={handleChange}
         />
         <div className={registration.errorMessage}>
           {values.businessNameError}
         </div>
 
-        <label htmlFor="phoneNumber">Phone Number</label>
+        <label htmlFor="phone">Phone Number</label>
         <input
           type="text"
-          name="phoneNumber"
+          name="phone"
           id="phoneNumber"
           // placeholder='Enter your phone number'
-          value={values.phoneNumber}
+          value={values.phone_number}
           onChange={handleChange}
         />
-        <div className={registration.errorMessage}>
-          {values.phoneNumberError}
-        </div>
+        <div className={registration.errorMessage}>{values.phoneError}</div>
 
-        <label htmlFor="streetAddress">Street Address</label>
+        <label htmlFor="address">Street Address</label>
         <input
           type="text"
-          name="streetAddress"
+          name="address"
           id="streetAddress"
           // placeholder='Enter your street address'
-          value={values.streetAddress}
+          value={values.address}
           onChange={handleChange}
         />
 
@@ -121,8 +120,14 @@ const VendorDetails = (props) => {
         <CustomButton styleClass="green-border" onClick={cancel}>
           Back
         </CustomButton>
-        <CustomButton styleClass="green-full" onClick={proceed}>
-          Next
+        <CustomButton
+          styleClass="green-full"
+          onClick={(e) => {
+            e.preventDefault();
+            updateVendor(values);
+          }}
+        >
+          Update Vendor Info
         </CustomButton>
       </form>
     </div>

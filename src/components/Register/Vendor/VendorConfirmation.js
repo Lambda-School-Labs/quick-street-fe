@@ -140,7 +140,7 @@ const VendorConfirmation = (props) => {
                 business_name: businessName,
                 phone: phoneNumber,
                 address: convertAddress(),
-                vendor: true,
+                // vendor: true,
               })
             }
           >

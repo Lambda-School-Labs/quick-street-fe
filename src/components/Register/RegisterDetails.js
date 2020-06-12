@@ -11,8 +11,7 @@ const RegisterDetails = (props) => {
   const { signup } = useContext(AuthContext);
   const { values, nextStep, handleChange, setUserInfo } = props;
 
-  const proceed = (event) => {
-    event.preventDefault();
+  const proceed = () => {
     if (validate()) {
       // console.log(values);
       nextStep();
@@ -124,17 +123,13 @@ const RegisterDetails = (props) => {
             Cancel
           </CustomButton>
         </div>
-        {/* <div className={registration.button_wrapper}>
-          <CustomButton styleClass="green-full" onClick={proceed}>
-            Next
-          </CustomButton>
-        </div> */}
         <div className={registration.button_wrapper}>
           <CustomButton
             styleClass="green-full"
             onClick={(e) => {
               e.preventDefault();
               signup(values);
+              proceed();
             }}
           >
             Register
