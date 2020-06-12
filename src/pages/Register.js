@@ -19,11 +19,11 @@ const Register = (props) => {
     passwordError: "",
     role: "",
     roleError: "",
-    businessName: "",
-    businessNameError: "",
-    phoneNumber: "",
-    phoneNumberError: "",
-    streetAddress: "",
+    business_name: "",
+    business_nameError: "",
+    phone: "",
+    phoneError: "",
+    address: "",
     city: "",
     zipcode: "",
     zipcodeError: "",
@@ -52,8 +52,8 @@ const Register = (props) => {
       emailError: "",
       passwordError: "",
       roleError: "",
-      businessNameError: "",
-      phoneNumberError: "",
+      business_nameError: "",
+      phoneError: "",
       zipcodeError: "",
     });
   };
@@ -86,36 +86,36 @@ const Register = (props) => {
     }
   };
 
-  const vendorConfirmation = () => {
-    if (userInfo.step === 3) {
-      return (
-        <VendorConfirmation
-          values={userInfo}
-          previousStep={previousStep}
-          history={props.history}
-        />
-      );
-    }
-  };
+  // const vendorConfirmation = () => {
+  //   if (userInfo.step === 3) {
+  //     return (
+  //       <VendorConfirmation
+  //         values={userInfo}
+  //         previousStep={previousStep}
+  //         history={props.history}
+  //       />
+  //     );
+  //   }
+  // };
 
-  const customerConfirmation = () => {
-    if (userInfo.step === 2 && userInfo.role === "customer") {
-      return (
-        <CustomerConfirmation
-          values={userInfo}
-          previousStep={previousStep}
-          history={props.history}
-        />
-      );
-    }
-  };
+  // const customerConfirmation = () => {
+  //   if (userInfo.step === 2 && userInfo.role === "customer") {
+  //     return (
+  //       <CustomerConfirmation
+  //         values={userInfo}
+  //         previousStep={previousStep}
+  //         history={props.history}
+  //       />
+  //     );
+  //   }
+  // };
 
   return (
     <div className={registration.container}>
       {userDetails()}
       {vendorDetails()}
-      {vendorConfirmation()}
-      {customerConfirmation()}
+      {/* {vendorConfirmation()}
+      {customerConfirmation()} */}
     </div>
   );
 };

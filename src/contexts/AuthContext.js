@@ -45,15 +45,7 @@ const createCart = (customerId) => {
     });
 };
 
-const signup = (dispatch) => async ({
-  email,
-  password,
-  role,
-  //   business_name,
-  //   phone,
-  //   address,
-  //   vendor,
-}) => {
+const signup = (dispatch) => async ({ email, password, role }) => {
   try {
     const response = await axiosWithAuth().post("/auth/registration", {
       email,
@@ -64,19 +56,54 @@ const signup = (dispatch) => async ({
       //   address,
       //   vendor,
     });
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("user_id", response.data.id);
+    localStorage.setItem("isVendor", response.data.isVendor);
+    // dispatch({ type: "signup", payload: response.data.token });
+    if (response.status === 200 && role === "vendor") {
+      console.log("response updating vendor info", response);
+    } else if (response.status === 200 && role === "customer") {
+      console.log("user is customer?");
+      checkIfCart(response.data.id);
+      window.location.href = "browse";
+
+      // window.location.href = "/login";
+      // window.location.href = `/profile/${response.data.id}`;
+    }
+  } catch (error) {
+    console.log("Error while creating a user", error.response);
+    // dispatch({
+    //   type: "add_error",
+    //   payload: "something went wrong",
+    // });
+  }
+};
+const updateVendor = (dispatch) => async ({
+  business_name,
+  phone,
+  address,
+  city,
+  zipcode,
+}) => {
+  try {
+    const response = await axiosWithAuth().post("/vendors/add", {
+      business_name,
+      phone,
+      address,
+      zipcode,
+      city,
+    });
     // localStorage.setItem("token", response.data.token);
     // localStorage.setItem("user_id", response.data.id);
     // localStorage.setItem("isVendor", response.data.isVendor);
     // dispatch({ type: "signup", payload: response.data.token });
     console.log("this is the response", response);
-    console.log("vendor", role);
     if (response.status === 200) {
-      console.log("response after creating a vendor", response);
-      window.location.href = "/login";
+      console.log("response after creating a user", response);
       // window.location.href = `/profile/${response.data.id}`;
     }
   } catch (error) {
-    console.log("Error while creating a vendor", error.response);
+    console.log("Error while creating a user", error.response);
     // dispatch({
     //   type: "add_error",
     //   payload: "something went wrong",
@@ -124,6 +151,6 @@ const changeMessage = (dispatch) => () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup, changeMessage },
+  { signin, signout, signup, changeMessage, updateVendor },
   { token: "", errorMessage: "", message: "Hello Friend" }
 );
