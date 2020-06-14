@@ -4,7 +4,7 @@ import {
   VendorProducts,
   Bulletin,
   BannerUploader,
-  Nav
+  Nav,
 } from "../components/index";
 import { Placeholder } from "../assets/images/index";
 //Styles
@@ -18,13 +18,13 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import Footer from "../components/shared/Footer";
 import browse from "../styles/scss/browse.module.scss";
 
-const Profile = props => {
+const Profile = (props) => {
   // It all starts here!...with vendorId from localStorage
   const [vendorId] = useState(localStorage.getItem("user_id")); // removed setVendorId from const
   const [vendorInfo, setVendorInfo] = useState({
     location: {
-      zipcode: "18641"
-    }
+      zipcode: "18641",
+    },
   });
   const [bannerInfo, setBannerInfo] = useState("no_banner.jpg");
   const [products, setProducts] = useState([]);
@@ -43,15 +43,16 @@ const Profile = props => {
     //console.log('USEEFFECT 1 Profile.js');
     axiosWithAuth()
       .get(`/vendors/${vendorId}`)
-      .then(response => {
-        setVendorInfo(response.data.data);
+      .then((response) => {
+        console.log("Here is the response data", response.data);
+        setVendorInfo(response.data);
         /* setBannerInfo(vendorInfo.data.data.vendor_banner); */
         console.log(
           "GET useEffect Profile.js setVendorInfo(response)",
           response
         );
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("ERROR Profile.js GET vendors/:vendorId error: ", error);
       });
   }, [vendorId]);
@@ -60,14 +61,14 @@ const Profile = props => {
     //console.log('USEEFFECT 2 Profile.js');
     axiosWithAuth()
       .get(`/vendors/${vendorId}/products`)
-      .then(response => {
+      .then((response) => {
         console.log(
           "GET Profile.js /vendors/:vendorId/products response",
           response
         );
-        setProducts(response.data.data);
+        setProducts(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(
           "ERROR Profile.js GET fetchProducts() vendors/:vendorId/products error: ",
           error
@@ -85,11 +86,11 @@ const Profile = props => {
         `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,
         vendorInfo
       )
-      .then(res => {
+      .then((res) => {
         // console.log(`update vendor info`, res);
         setVendorInfo(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("ERROR PUT SAVE NAME", err);
       });
   };
@@ -99,7 +100,7 @@ const Profile = props => {
     setEditAbout(!editAbout);
   };
 
-  const saveProfile = e => {
+  const saveProfile = (e) => {
     if (e) {
       e.preventDefault();
     }
@@ -110,11 +111,11 @@ const Profile = props => {
         `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,
         vendorInfo
       )
-      .then(res => {
+      .then((res) => {
         console.log(`Profile.js saveProfile()`, res);
         setVendorInfo(res.data.data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("VendorProf. PUT error ", err);
       });
   };
@@ -135,11 +136,11 @@ const Profile = props => {
                   <React.Fragment>
                     <input
                       className={banner.business_name_input}
-                      onChange={e => {
+                      onChange={(e) => {
                         if (editingName) {
                           setVendorInfo({
                             ...vendorInfo,
-                            business_name: e.target.value
+                            business_name: e.target.value,
                           });
                         }
                       }}
@@ -204,14 +205,14 @@ const Profile = props => {
           {/* Inner Banner Container */}
         </div>
         {/* END BANNER WRAPPER */}
-
+        {/* 
         <About
           vendorInfo={vendorInfo}
           editAbout={editAbout}
           editProfile={editProfile}
           saveProfile={saveProfile}
           setVendorInfo={setVendorInfo}
-        />
+        /> */}
         <VendorProducts
           setReloadProducts={setReloadProducts}
           reloadProducts={reloadProducts}
