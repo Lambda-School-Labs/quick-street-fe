@@ -1,4 +1,5 @@
 export default {
   cloud_name: "dkz9kcsqy",
-  upload_preset: "quickStreet"
+  // cloud_name: "db7cuh33j",
+  upload_preset: "quickStreet",
 };

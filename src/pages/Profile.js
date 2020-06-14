@@ -173,7 +173,7 @@ const Profile = (props) => {
 
             <div className={banner.vendor_banner_image_container}>
               {vendorInfo.vendor_banner !== `no-photo.jpg` ? (
-                <CloudinaryContext cloudName="quickstlabs">
+                <CloudinaryContext cloudName="db7cuh33j">
                   <Image
                     className={banner.vendor_banner_image}
                     publicId={vendorInfo.vendor_banner}
@@ -205,20 +205,20 @@ const Profile = (props) => {
           {/* Inner Banner Container */}
         </div>
         {/* END BANNER WRAPPER */}
-        {/* 
+
         <About
           vendorInfo={vendorInfo}
           editAbout={editAbout}
           editProfile={editProfile}
           saveProfile={saveProfile}
           setVendorInfo={setVendorInfo}
-        /> */}
+        />
         <VendorProducts
           setReloadProducts={setReloadProducts}
           reloadProducts={reloadProducts}
           // reloadProducts={reloadProducts}
           products={products}
-          vendorId={vendorInfo._id}
+          vendorId={vendorInfo.id}
         />
         <Bulletin vendorId={vendorId} />
       </div>
