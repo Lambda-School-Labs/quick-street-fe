@@ -17,7 +17,7 @@ import {
   Profile, //** Vendors Editing Page */
   Styling, // ** Styling Template */
   Dashboard, // ** Dashboard Page **/
-  OrderReview // ** Order Review Page **/
+  OrderReview, // ** Order Review Page **/
 } from "./pages/index";
 
 import RegisterContext from "./pages/RegisterContext";
