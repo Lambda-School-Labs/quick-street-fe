@@ -21,7 +21,7 @@ const Dashboard = (props) => {
     axiosWithAuth()
       .get(`/vendors/${vendorId}`)
       .then((res) => {
-        console.log(res.data.data);
+        console.log(res.data);
         // Vendor banner is not set up
         // setVendorBannerId(res.data.data.vendor_banner);
         setVendorName(res.data.business_name);
