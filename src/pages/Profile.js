@@ -218,7 +218,6 @@ const Profile = (props) => {
         <VendorProducts
           setReloadProducts={setReloadProducts}
           reloadProducts={reloadProducts}
-          // reloadProducts={reloadProducts}
           products={products}
           vendorId={vendorInfo.id}
         />

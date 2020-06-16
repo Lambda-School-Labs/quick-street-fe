@@ -79,7 +79,6 @@ const EditProduct = (props) => {
   };
 
   const submitProductDetails = () => {
-    const vendorId = localStorage.getItem("user_id");
     setDetailsSaved(true);
     setTimeout(function () {
       setDetailsSaved(false);
@@ -159,19 +158,21 @@ const EditProduct = (props) => {
       });
   };
 
-  const deleteProduct = () => {
-    const vendorId = { vendorId: product.vendor.id };
-    axiosWithAuth()
-      .delete(`/products/${props.product_id}`, { data: vendorId })
+  const deleteProduct = async () => {
+    // const vendorId = { vendorId: product.vendor.id };
+    console.log(props.product_id);
+    await axiosWithAuth()
+      .delete(`/products/${props.product_id}`)
       .then((response) => {
         console.log("DELETE EditProduct.js deleteProduct :", response);
         setReloadProducts(!reloadProducts);
         setProductDeleted(true);
 
         setTimeout(function () {
+          console.log("goose goose");
           setProductDeleted(false);
           props.setEditingProd(false);
-        }, 2000);
+        }, 1000);
       })
       .catch((err) => {
         console.log("Error DELETE EditProduct.js deleteProduct", err);
