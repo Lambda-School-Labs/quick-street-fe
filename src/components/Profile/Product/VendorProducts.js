@@ -27,9 +27,9 @@ const VendorProducts = ({
     console.log(`VenorProducts.js showEditingProduct prodId: `, prodId);
   };
 
-  const createNewProduct = () => {
+  const createNewProduct = async () => {
     console.log(vendorId);
-    axiosWithAuth()
+    await axiosWithAuth()
       .post(`/vendors/${vendorId}/products`, {
         name: "Give your product a name!",
         price: 0,
@@ -41,7 +41,8 @@ const VendorProducts = ({
         );
         console.log("reload products", reloadProducts);
         //POST new product, then proceed directly to editing mode with the id. I this way we can reuse the EditingProductForm as is.
-        setEditingProdId(response.data.id);
+        console.log(response);
+        setEditingProdId(response.data[0].id);
         setEditingProd(true);
         setReloadProducts(!reloadProducts);
       })
