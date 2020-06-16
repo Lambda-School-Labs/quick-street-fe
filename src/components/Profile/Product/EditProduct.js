@@ -22,6 +22,7 @@ const EditProduct = (props) => {
   const [reloadingImages, setReloadingImages] = useState(false);
 
   useEffect(() => {
+    console.log("product id", props.product_id);
     //console.log('USEEFFECT 4 EditProducts.js GET /products/:prodcutId')
     // loading images popup on (off in next useEffect)
     // setLoadingImages(true);
@@ -30,30 +31,30 @@ const EditProduct = (props) => {
       /* ${props.product_id} */
       .get(`/products/${props.product_id}`)
       .then((response) => {
-        console.log("RESPONSE");
+        console.log("RESPONSE", response);
         // console.log(response);
-        setProduct(response.data.data);
+        setProduct(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }); // removed , [] dependency
+  }, []); // removed , [] dependency
 
-  useEffect(() => {
-    // get all images of same product in previous request.
-    //console.log('USEEFFECT 5 EditProducts.js GET /products/:prodcutId/product-images')
-    axiosWithAuth()
-      /* ${props.product_id} */
-      .get(`/products/${props.product_id}/product-images`)
-      .then((response) => {
-        setImages(response.data.data);
-        // loading popup off
-        setLoadingImages(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }); // removed ,  [reloadingImages] dependency
+  // useEffect(() => {
+  //   // get all images of same product in previous request.
+  //   //console.log('USEEFFECT 5 EditProducts.js GET /products/:prodcutId/product-images')
+  //   axiosWithAuth()
+  //     /* ${props.product_id} */
+  //     .get(`/products/${props.product_id}/product-images`)
+  //     .then((response) => {
+  //       setImages(response.data.data);
+  //       // loading popup off
+  //       setLoadingImages(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }); // removed ,  [reloadingImages] dependency
 
   const delHover = (imgId, span, inOut) => {
     if (inOut === "in") {
@@ -87,7 +88,7 @@ const EditProduct = (props) => {
     console.log("PUT subitProd.Details payload: ", { ...product });
 
     axiosWithAuth()
-      .put(`/products/${product.id}`, { ...product, vendorId })
+      .put(`/products/${product.id}`, { ...product })
       .then((res) => {
         console.log("PUT res EditProduct.js submitProd.Details: res ", res);
       })
@@ -159,7 +160,7 @@ const EditProduct = (props) => {
   };
 
   const deleteProduct = () => {
-    const vendorId = { vendorId: product.vendor._id };
+    const vendorId = { vendorId: product.vendor.id };
     axiosWithAuth()
       .delete(`/products/${props.product_id}`, { data: vendorId })
       .then((response) => {
@@ -261,13 +262,14 @@ const EditProduct = (props) => {
             className={`${editingProduct.edit_product_left} ${editingProduct.inner_container}`}
           >
             <div className={editingProduct.left_upper_container}>
-              <div className={editingProduct.add_image_btns}>
+              {/* This doesn't work yet */}
+              {/* <div className={editingProduct.add_image_btns}>
                 <ProductImageUploader
                   productId={product.id}
                   setReloadingImages={setReloadingImages}
                   reloadingImages={reloadingImages}
                 />
-              </div>
+              </div> */}
               {/* Image deleted POPUP */}
               {imageDeleted ? ( // <<<<<< TURNARY
                 <h1>
@@ -370,7 +372,7 @@ const EditProduct = (props) => {
                   <div className={editingProduct.input_wrapper}>
                     <label htmlFor="diet">Dietary Category(ies): </label>
                     <div className={editingProduct.diet_category_container}>
-                      {product &&
+                      {product.diet &&
                         product.diet.map((category) => (
                           <p>{category} &nbsp;</p>
                         ))}

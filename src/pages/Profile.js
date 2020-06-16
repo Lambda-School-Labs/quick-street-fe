@@ -18,6 +18,8 @@ import axiosWithAuth from "../utils/axiosWithAuth";
 import Footer from "../components/shared/Footer";
 import browse from "../styles/scss/browse.module.scss";
 
+//This is the VENDOR PROFILE PAGE!!!!
+
 const Profile = (props) => {
   // It all starts here!...with vendorId from localStorage
   const [vendorId] = useState(localStorage.getItem("user_id")); // removed setVendorId from const
