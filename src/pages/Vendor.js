@@ -15,7 +15,6 @@ import "../styles/scss/OldcustomerFacingVendorProfile.scss";
 import browse from "../styles/scss/browse.module.scss";
 
 const Vendor = (props) => {
-  console.log("vendor props", props);
   const vendorId = props.match.params.id;
   // const [ cartModal, setCartModal ] = useState(false);
   console.log("vendor id", vendorId);
