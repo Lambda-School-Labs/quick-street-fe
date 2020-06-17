@@ -13,19 +13,20 @@ const Product = ({
 }) => {
   const [productImages, setProductImages] = useState("");
 
-  // useEffect(() => {
-  // 	//console.log(`USEEFFECT 3 Product.js productId: `, productId)
-  // 	axiosWithAuth()
-  // 		.get(`/products/${productId}/product-images`)
-  // 		.then(response => {
-  // 			//console.log(`GET /:productId/product-images Product.js `, response)
-  // 			setProductImages(response.data.data);
-  // 		})
-  // 		.catch(error => {
-  // 			console.log(`ERROR GET /:productId/product-images Product.js`, error);
-  // 		})
-  // }); // removed this dependency , [setReloadProducts, reloadProducts]
-  //   console.log(productImages[0]);
+  useEffect(() => {
+  	console.log(`USEEFFECT 3 Product.js productId: `, productId)
+  	axiosWithAuth()
+  		.get(`/products/${productId}/product-images`)
+  		.then(response => {
+  			console.log(`GET /:productId/product-images Product.js `, response)
+  			setProductImages(response.data.data);
+  		})
+  		.catch(error => {
+  			console.log(`ERROR GET /:productId/product-images Product.js`, error);
+  		})
+  }, [setReloadProducts, reloadProducts]);
+    console.log(productImages[0]);
+    
   return (
     <div className={product.vendor_product}>
       <CloudinaryContext cloudName="quickstlabs">

@@ -49,7 +49,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/an
 
 - It allows us to create variables, mixins and functions which makes it easy to reuse styles across the app. It allows us to write nested CSS which is easy to write and understand
 
-#### Cloudinary React
+####  React
 
 -
 
