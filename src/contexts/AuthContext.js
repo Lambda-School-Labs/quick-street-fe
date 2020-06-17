@@ -100,7 +100,7 @@ const updateVendor = (dispatch) => async ({
     console.log("this is the response", response);
     if (response.status === 200) {
       console.log("response after creating a user", response);
-      // window.location.href = `/profile/${response.data.id}`;
+      window.location.href = `/profile/${response.data.id}`;
     }
   } catch (error) {
     console.log("Error while creating a user", error.response);
