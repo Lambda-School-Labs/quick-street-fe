@@ -12,18 +12,18 @@ const EditProductForm = (props) => {
   // this state is for pre selecting checkboxes
   const [dietsOnFile, setDietsOnFile] = useState([]);
   // const [unitOnFile, setUnitOnFile] = useState([]);
-  console.log("product.diet: ", product.diet);
+  console.log("product.diet_category: ", product.diet_category);
   console.log("dietsOnFile", dietsOnFile);
 
   useEffect(() => {
-    setDietsOnFile(product.diet);
+    setDietsOnFile(product.diet_category);
   }, [product]);
 
   const updateVendorDiets = (diets) => {
     const vendorId = localStorage.getItem("user_id");
     console.log("updateVendorDiets() diets", diets);
     axiosWithAuth()
-      .put(`/vendors/${vendorId}`, { diet_categories: diets })
+      .put(`/vendors/${vendorId}`, { diet_category: diets })
       .then((results) => {
         console.log("PUT EditProd.Form updateVendorDiets()", results);
       })
@@ -40,12 +40,12 @@ const EditProductForm = (props) => {
   const handleSelect = (e) => {
     if (e.target.checked) {
       console.log("Checked!", e.target.checked);
-      if (product.diet.indexOf(e.target.value) === -1) {
+      if (product.diet_category.indexOf(e.target.value) === -1) {
         const updatedProduct = {
           ...product,
           [e.target.name]: [...product[e.target.name], e.target.value],
         };
-        console.log("UPDATED DIETS", updatedProduct.diet);
+        console.log("UPDATED DIETS", updatedProduct.diet_category);
         console.log("NOTHING HERE WITH VALUE: ", e.target.value);
         console.log("ADDING: ", e.target.value);
         setProduct({
@@ -53,16 +53,16 @@ const EditProductForm = (props) => {
           [e.target.name]: [...product[e.target.name], e.target.value],
         });
         //update the Vendor diet_categories on backend.
-        updateVendorDiets(updatedProduct.diet);
+        updateVendorDiets(updatedProduct.diet_category);
       } else {
         console.log("ALREADY GOT THAT!");
       }
     }
 
     if (!e.target.checked) {
-      if (product.diet.indexOf(e.target.value) !== -1) {
+      if (product.diet_category.indexOf(e.target.value) !== -1) {
         console.log("REMOVING VALUE: ", e.target.value);
-        let newArray = product.diet.filter((item) => {
+        let newArray = product.diet_category.filter((item) => {
           return item !== e.target.value;
         });
         console.log("NEW ARRAY WILL BE: ", newArray);
@@ -134,7 +134,7 @@ const EditProductForm = (props) => {
                   }
                   onChange={handleSelect}
                   className={`form-check-input ${editingProduct.checkbox_input}`}
-                  name="diet"
+                  name="diet_category"
                   type="checkbox"
                   value="Gluten Free"
                 />
@@ -154,7 +154,7 @@ const EditProductForm = (props) => {
                   }
                   onChange={handleSelect}
                   className={`form-check-input ${editingProduct.checkbox_input}`}
-                  name="diet"
+                  name="diet_category"
                   type="checkbox"
                   value="Vegetarian"
                 />
@@ -174,7 +174,7 @@ const EditProductForm = (props) => {
                   }
                   onChange={handleSelect}
                   className={`form-check-input ${editingProduct.checkbox_input}`}
-                  name="diet"
+                  name="diet_category"
                   type="checkbox"
                   value="Vegan"
                 />
@@ -194,7 +194,7 @@ const EditProductForm = (props) => {
                   }
                   onChange={handleSelect}
                   className={`form-check-input ${editingProduct.checkbox_input}`}
-                  name="diet"
+                  name="diet_category"
                   type="checkbox"
                   value="Keto"
                 />
@@ -214,7 +214,7 @@ const EditProductForm = (props) => {
                   }
                   onChange={handleSelect}
                   className={`form-check-input ${editingProduct.checkbox_input}`}
-                  name="diet"
+                  name="diet_category"
                   type="checkbox"
                   value="Dairy Free"
                 />
