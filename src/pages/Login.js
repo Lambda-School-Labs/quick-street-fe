@@ -1,19 +1,56 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context as AuthContext } from "../contexts/AuthContext";
 
 // styles
 import login from "../styles/scss/login.module.scss";
-// import axiosWithAuth from "../utils/axiosWithAuth";
 
 // components
 import { CustomButton } from "../components/index";
 // import Image from "../assets/images/Image";
 
 const Login = (props) => {
-  const { signin } = useContext(AuthContext); // removed state, signout
+  const { state, signin } = useContext(AuthContext); // removed state, signout
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [valid, setValid] = useState({
+    emailError: "",
+    passwordError: "",
+  });
+
+  //creating validation function
+  const validateLogin = () => {
+    let emailError = "";
+    let passwordError = "";
+
+    if (!email.includes("@")) {
+      emailError = "Invalid email";
+    }
+
+    if (password.length === 0) {
+      passwordError = "Password required";
+    }
+
+    if (password.length < 6 && password) {
+      passwordError = "Minimum password is 6 characters";
+    }
+
+    if (emailError || passwordError) {
+      setValid({
+        ...valid,
+        emailError,
+        passwordError,
+      });
+      return false;
+    } else {
+      setValid({
+        ...valid,
+        emailError,
+        passwordError,
+      });
+      return true;
+    }
+  };
 
   return (
     <div className={login.container}>
@@ -27,11 +64,11 @@ const Login = (props) => {
               type="text"
               name="email"
               id="email"
-              // placeholder='Enter your email'
+              placeholder="Enter email..."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            {/* <p className={login.errorMessage}>{credentials.emailError}</p> */}
+            <p className={login.errorMessage}>{valid.emailError}</p>
           </div>
           <div className={login.form_wrapper}>
             <label htmlFor="password">Password</label>
@@ -39,15 +76,24 @@ const Login = (props) => {
               type="password"
               name="password"
               id="password"
-              // placeholder='Please enter a password'
+              placeholder="Enter password..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onBlur={(e) => validateLogin()}
             />
-            {/* <p className={login.errorMessage}>{credentials.passwordError}</p> */}
+            <p className={login.errorMessage}>{valid.passwordError}</p>
           </div>
+          {state.errorMessage ? <h3>{state.errorMessage}</h3> : null}
+
           <div className={login.button_wrapper}>
             <CustomButton
-              onClick={() => signin({ email, password })}
+              onClick={() => {
+                if (validateLogin()) {
+                  console.log("email", email);
+                  console.log("password", password);
+                  signin({ email, password });
+                }
+              }}
               styleClass="green-full"
             >
               Login

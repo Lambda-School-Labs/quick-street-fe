@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import createDataContext from "./createDataContext";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
@@ -51,15 +52,11 @@ const signup = (dispatch) => async ({ email, password, role }) => {
       email,
       password,
       role,
-      //   business_name,
-      //   phone,
-      //   address,
-      //   vendor,
     });
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("user_id", response.data.id);
     localStorage.setItem("isVendor", response.data.isVendor);
-    // dispatch({ type: "signup", payload: response.data.token });
+    dispatch({ type: "signup", payload: response.data.token });
     if (response.status === 200 && role === "vendor") {
       console.log("response updating vendor info", response);
     } else if (response.status === 200 && role === "customer") {
@@ -72,10 +69,10 @@ const signup = (dispatch) => async ({ email, password, role }) => {
     }
   } catch (error) {
     console.log("Error while creating a user", error.response);
-    // dispatch({
-    //   type: "add_error",
-    //   payload: "something went wrong",
-    // });
+    dispatch({
+      type: "add_error",
+      payload: "something went wrong registering this user.",
+    });
   }
 };
 const updateVendor = (dispatch) => async ({
@@ -104,10 +101,10 @@ const updateVendor = (dispatch) => async ({
     }
   } catch (error) {
     console.log("Error while creating a user", error.response);
-    // dispatch({
-    //   type: "add_error",
-    //   payload: "something went wrong",
-    // });
+    dispatch({
+      type: "add_error",
+      payload: "something went wrong updating this vendor account.",
+    });
   }
 };
 
@@ -131,6 +128,10 @@ const signin = (dispatch) => async ({ email, password }) => {
     }
   } catch (error) {
     console.log(error.response);
+    dispatch({
+      type: "add_error",
+      payload: "There was an error logging you in. Try again later.",
+    });
   }
 };
 
