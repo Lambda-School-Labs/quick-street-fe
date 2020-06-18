@@ -56,7 +56,7 @@ const ViewAboutVendor = (props) => {
           </div>
           <div className={profile.column_right}>
             <h1>Location</h1>
-            <p>The vendor can be found at {vendor.location.zipcode} area</p>
+            <p>The vendor can be found at {vendor.zipcode} area</p>
             {/* <Map
               zipcode={vendor.location.zipcode}
               width={403}
