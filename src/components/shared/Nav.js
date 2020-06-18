@@ -304,7 +304,7 @@ const Nav = () => {
                   }}
                   to="/register"
                 >
-                  Join Us
+                  Register
                 </Link>
               </div>
             )}

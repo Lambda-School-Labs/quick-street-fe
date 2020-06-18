@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axiosWithAuth from '../../../../utils/axiosWithAuth';
 import { Context as CartContext } from '../../../../contexts/TestCartContext';
+
 //stlying 
-import { Image, CloudinaryContext, Transformation } from 'cloudinary-react';
+import { Image, Context, Transformation } from 'cloudinary-react';
 import profile from '../../../../styles/scss/profile.module.scss';
 import modal from '../../../../styles/scss/browseModal.module.scss';
 import { CustomButton } from '../../../index';
@@ -51,15 +52,15 @@ const ViewVendorProduct = (props) => {
 
 	useEffect(() => {
 		axiosWithAuth()
-			.get(`/products/${props.product._id}/product-images`)
+			.get(`/images/${props.product.id}/product-images`)
 			.then((response) => {
-				//console.log('ViewVendorProducts.js response', response);
+				console.log('ViewVendorProducts.js response', response);
 				setImages(response.data.data);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-	}); // removed [] dependency
+	}, []);
 
 	const modalLeftStyle = {
 		width: "50%"
@@ -69,11 +70,11 @@ const ViewVendorProduct = (props) => {
 		<>
 			<div onClick={() => showHideModal(true)} className={profile.products_card} key={props.product._id}>
 				{/* <img className={profile.image} src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
-				<CloudinaryContext cloudName="quickstlabs">
+				<Context cloudName="quickstlabs">
 					<Image className={profile.image} publicId={images[0] && images[0].public_id}>
 						<Transformation height="122" width="146" crop="fill" />
 					</Image>
-				</CloudinaryContext>
+				</Context>
 				<p className={profile.name}>{props.product.name}</p>
 				<p className={profile.price}>${props.product.price}</p>
 			</div>
