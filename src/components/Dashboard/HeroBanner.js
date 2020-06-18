@@ -1,12 +1,12 @@
 import React from "react";
-import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
+import { Image, Context, Transformation } from "cloudinary-react";
 
 // styling
 import herobanner from "../../styles/scss/herobanner.module.scss";
 const HeroBanner = props => {
   return (
     <div className={herobanner.wrapper}>
-      <CloudinaryContext cloudName="quickstlabs">
+      <Context cloudName="quickstlabs">
         <Image publicId={props.vendorBannerId}>
           <Transformation
             gravity="center"
@@ -15,7 +15,7 @@ const HeroBanner = props => {
             crop="fill"
           />
         </Image>
-      </CloudinaryContext>
+      </Context>
       <p>{props.name}</p>
     </div>
   );

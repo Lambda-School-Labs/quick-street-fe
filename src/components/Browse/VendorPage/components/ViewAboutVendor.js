@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Map from "../../../shared/Map";
+// import Map from "../../../shared/Map";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
 // styling
 import profile from "../../../../styles/scss/profile.module.scss";
