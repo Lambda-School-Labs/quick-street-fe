@@ -28,10 +28,9 @@ const EditProduct = (props) => {
     // setLoadingImages(true);
     // get product (details)
     axiosWithAuth()
-      /* ${props.product_id} */
       .get(`/products/${props.product_id}`)
       .then((response) => {
-        console.log("RESPONSE", response);
+        console.log("RESPONSE Product data", response);
         // console.log(response);
         setProduct(response.data);
       })
@@ -95,7 +94,7 @@ const EditProduct = (props) => {
         console.log(
           "PUT error & product_id & token:::",
           err,
-          product._id,
+          product.id,
           localStorage.getItem("token")
         );
       });
@@ -120,7 +119,7 @@ const EditProduct = (props) => {
     console.log("PUT Edit.P saveAllAndClose payload: ", { ...product });
 
     axiosWithAuth()
-      .put(`/products/${product.id}`, { ...product, vendorId })
+      .put(`/products/${product.id}`, { ...product })
       .then((res) => {
         console.log("PUT res EditProduct.js submitProd.Details: res ", res);
       })
@@ -373,8 +372,8 @@ const EditProduct = (props) => {
                   <div className={editingProduct.input_wrapper}>
                     <label htmlFor="diet">Dietary Category(ies): </label>
                     <div className={editingProduct.diet_category_container}>
-                      {product.diet &&
-                        product.diet.map((category) => (
+                      {product.diet_category &&
+                        product.diet_category.map((category) => (
                           <p>{category} &nbsp;</p>
                         ))}
                     </div>

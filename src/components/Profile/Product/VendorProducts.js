@@ -33,6 +33,7 @@ const VendorProducts = ({
       .post(`/vendors/${vendorId}/products`, {
         name: "Give your product a name!",
         price: 0,
+        diet_category: [],
       })
       .then((response) => {
         console.log(
