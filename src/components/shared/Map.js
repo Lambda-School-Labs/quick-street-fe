@@ -4,6 +4,8 @@ import axios from "axios";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 
 import "../../styles/css/map.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Map = ({ zipcode, setZipcode }) => {
   const [vendors, setVendors] = useState([]);
@@ -14,6 +16,7 @@ const Map = ({ zipcode, setZipcode }) => {
     height: "400px",
     zoom: 10,
   });
+  const [vendorInfo, setVendorInfo] = useState([]);
 
   const apiKey =
     "pk.eyJ1IjoiYnNoZXJ3b29kOSIsImEiOiJja2JrYWJhbDEwbWR4MnVxbGdnODV4NHBqIn0.MUDew7rv2_CqYXAPrkBOgA";
@@ -27,6 +30,7 @@ const Map = ({ zipcode, setZipcode }) => {
         console.log("mapbox response", response);
         setViewport({
           ...viewport,
+          zoom: 8,
           latitude: response.data.features[0].center[1],
           longitude: response.data.features[0].center[0],
         });
@@ -47,6 +51,28 @@ const Map = ({ zipcode, setZipcode }) => {
       .then((res) => setVendors(res.data))
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    vendors.map((item) => {
+      axios
+        .get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${item.city}.json?access_token=${apiKey}`
+        )
+        .then((response) => {
+          console.log("mapbox response", response);
+          vendorInfo.push({
+            id: Date.now(),
+            latitude: response.data.features[0].center[1],
+            longitude: response.data.features[0].center[0],
+          });
+        });
+    });
+  }, [vendors]);
+
+  useEffect(() => {
+    console.log("vendors", vendors);
+    console.log("vendorInfo", vendorInfo);
+  }, []);
   // removed , [mapDetails] dependency
   return (
     <div style={{ paddingTop: "20px" }}>
@@ -58,7 +84,20 @@ const Map = ({ zipcode, setZipcode }) => {
           setViewport(viewport);
         }}
       >
-        markers here
+        {vendorInfo.map((item) => (
+          <Marker
+            options
+            key={item.id}
+            latitude={item.latitude}
+            longitude={item.longitude}
+          >
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              size="3x"
+              style={{ color: "red" }}
+            />
+          </Marker>
+        ))}
       </ReactMapGL>
     </div>
   );
