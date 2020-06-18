@@ -12,8 +12,8 @@ const Map = ({ zipcode, setZipcode }) => {
   const [viewport, setViewport] = useState({
     latitude: 40.7622125,
     longitude: -111.9068791,
-    width: "100%",
-    height: "400px",
+    width: "90%",
+    height: "40vh",
     zoom: 10,
   });
   const [vendorInfo, setVendorInfo] = useState([]);
