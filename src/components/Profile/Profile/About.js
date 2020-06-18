@@ -306,59 +306,67 @@ const About = ({
           {/* VENDOR CATEGORIES  */}
           <div className={about.about_info}>
             <div className={about.info_top}>
-              <h2>Choose Your Categories</h2>
+              <h2>Vendor Categories</h2>
             </div>
             {/* ==== TOP/BOTTOM divide ====== */}
             <div className={about.info_bottom}>
               <div className={about.info_content}>
                 {editingNow === "categories" ? ( // TURNARY ? show form...
                   <div>
-                    <VendorCategories
-                      vendorInfo={vendorInfo}
-                      setVendorInfo={setVendorInfo}
+                  <form action="">
+                    <textarea
+                      onChange={handleChanges}
+                      name="hours"
+                      value={vendorInfo.vendor_category}
+                      cols="30"
+                      rows="10"
+                    ></textarea>
+                  </form>
+                  <p
+                    className={about.save_changes}
+                    onClick={() => {
+                      setEditingNow("none");
+                      saveProfile();
+                      console.log("saveProfile() Profile.js info_content p ");
+                    }}
+                  >
+                    <i className="fa fa-save"></i>&nbsp;save
+                  </p>
+                </div> //<<<<<<< TURNARY : else...
+              ) : (
+                <div className={about.saved_text_container}>
+                  {hoveringClass === "hours_pen" && (
+                    <img
+                      className={`${about.edit_icon}`}
+                      src={pencil_light}
+                      alt=""
                     />
-                    <p
-                      className={about.save_changes}
-                      onClick={(e) => {
-                        setEditingNow("none");
-                        saveProfile(e);
-                        console.log("saveProfile() Profile.js info_content p ");
-                      }}
-                    >
-                      <i className="fa fa-save"></i>&nbsp;save
-                    </p>
-                  </div> //<<<<<<< TURNARY : else...
-                ) : (
-                  <div className={about.saved_text_container}>
-                    {hoveringClass === "categories_pen" && (
-                      <img
-                        className={`${about.edit_icon}`}
-                        src={pencil_light}
-                        alt=""
-                      />
-                    )}
-                    {/* We don't have any vendor categories set up yet.  */}
-                    {/* <div
-                      className={about.saved_text_content}
-                      onMouseOver={() => setHoveringClass("categories_pen")}
-                      onMouseLeave={() => setHoveringClass("not_hovering")}
-                      onClick={() => {
-                        setEditingNow("categories");
-                        setHoveringClass("not_hovering");
-                        saveProfile();
-                      }}
-                    >
-                      {vendorInfo.vendor_category ? (
-                        vendorInfo.vendor_category.map((cat) => <p>{cat}</p>)
-                      ) : (
-                        <p>...Loading</p>
-                      )}
-                    </div> */}
-                  </div>
-                )}
-              </div>
+                  )}
+                  <p
+                    className={about.saved_text_content}
+                    onMouseOver={() => setHoveringClass("hours_pen")}
+                    onMouseLeave={() => setHoveringClass("not_hovering")}
+                    onClick={() => {
+                      setEditingNow("hours");
+                      setHoveringClass("not_hovering");
+                      saveProfile();
+                    }}
+                  >
+                    {vendorInfo.vendor_category}
+                  </p>
+                </div>
+              )}{" "}
+              {/* END OF TURNARY - HOURS OF OPERATION */}
+            </div>
+            <div className={about.edit_guides}>
+              {editAbout && (
+                <p>
+                  <i className="fa fa-save"></i>&nbsp; click to save
+                </p>
+              )}
             </div>
           </div>
+        </div>
           {/* END HOURS OF VENDOR CATEGORY */}
         </div>
 
@@ -385,7 +393,7 @@ const About = ({
                       <input
                         onChange={handleZip}
                         name="phone"
-                        value={vendorInfo.location.zipcode}
+                        value={vendorInfo.zipcode}
                         cols="30"
                         rows="10"
                       ></input>
@@ -420,7 +428,7 @@ const About = ({
                         saveProfile();
                       }}
                     >
-                      This vendor can be found.
+                      {vendorInfo.zipcode}
                       {/* This vendor can be found in the{" "}
                       {vendorInfo.location.zipcode} area. */}
                     </p>

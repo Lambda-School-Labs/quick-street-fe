@@ -1,68 +1,106 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import ReactMapGL, { Marker } from "react-map-gl";
+import axios from "axios";
+import axiosWithAuth from "../../utils/axiosWithAuth";
 
-// import "../../styles/css/map.css";
+import "../../styles/css/map.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
-// const Map = props => {
-//   // console.log('props in map.js', props);
-//   const [mapDetails, setMapDetails] = useState({
-//     lng: -78.435315,
-//     lat: 28.644141,
-//     isDefault: false
-//   });
+const Map = ({ zipcode, setZipcode }) => {
+  const [vendors, setVendors] = useState([]);
+  const [viewport, setViewport] = useState({
+    latitude: 40.7622125,
+    longitude: -111.9068791,
+    width: "90%",
+    height: "40vh",
+    zoom: 10,
+  });
+  const [vendorInfo, setVendorInfo] = useState([]);
 
-//   const getGeocode = () => {
-//     // console.log(props.zipcode);
-//     // console.log(`${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`);
-//     // Using Google Geocoding API to convert zipcode to coordinates
-//     axios
-//       .get(
-//         `https://maps.googleapis.com/maps/api/geocode/json?address=${props.zipcode}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
-//       )
-//       .then(response => {
-//         // console.log(response);
-//         // console.log(response.data.results[0].geometry.location);
-//         setMapDetails({
-//           ...mapDetails,
-//           lat: response.data.results[0].geometry.location.lat,
-//           lng: response.data.results[0].geometry.location.lng,
-//           isDefault: true
-//         });
-//       });
-//   };
+  const apiKey =
+    "pk.eyJ1IjoiYnNoZXJ3b29kOSIsImEiOiJja2JrYWJhbDEwbWR4MnVxbGdnODV4NHBqIn0.MUDew7rv2_CqYXAPrkBOgA";
 
-//   useEffect(() => {
-//     if (props.zipcode !== "") {
-//       getGeocode();
-//     }
-//   }); // removed , [props.zipcode] dependency
+  const getGeocode = () => {
+    axios
+      .get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${zipcode}.json?access_token=${apiKey}`
+      )
+      .then((response) => {
+        console.log("mapbox response", response);
+        setViewport({
+          ...viewport,
+          zoom: 8,
+          latitude: response.data.features[0].center[1],
+          longitude: response.data.features[0].center[0],
+        });
+        // console.log(response.data.results[0].geometry.location);
+      });
+  };
 
-//   useEffect(() => {
-//     // let options = {
-//     //   center: { lat: mapDetails.lat, lng: mapDetails.lng },
-//     //   zoom: mapDetails.isDefault ? 11 : 5,
-//     //   zoomControl: false,
-//     //   gestureHandling: "none"
-//     // };
-//     // const map = new window.google.maps.Map(
-//     //   document.getElementById("map"),
-//     //   options
-//     // );
+  useEffect(() => {
+    console.log("zipcode", zipcode);
+    if (zipcode !== "") {
+      getGeocode();
+    }
+  }, [zipcode]);
 
-//     if (mapDetails.isDefault) {
-//       // let cityCircle = new window.google.maps.Circle({
-//       //   strokeColor: "#B706F5",
-//       //   strokeOpacity: 0.6,
-//       //   strokeWeight: 2,
-//       //   fillColor: "#B706F5",
-//       //   fillOpacity: 0.1,
-//       //   map: map,
-//       //   center: { lat: mapDetails.lat, lng: mapDetails.lng },
-//       //   radius: props.radius
-//       // });
-//     }
-//   }); // removed , [mapDetails] dependency
-//   return <div id="map" />;
-// };
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/vendors/all")
+      .then((res) => setVendors(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-// export default Map;
+  useEffect(() => {
+    vendors.map((item) => {
+      axios
+        .get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${item.city}.json?access_token=${apiKey}`
+        )
+        .then((response) => {
+          console.log("mapbox response", response);
+          vendorInfo.push({
+            id: Date.now(),
+            latitude: response.data.features[0].center[1],
+            longitude: response.data.features[0].center[0],
+          });
+        });
+    });
+  }, [vendors]);
+
+  useEffect(() => {
+    console.log("vendors", vendors);
+    console.log("vendorInfo", vendorInfo);
+  }, []);
+  // removed , [mapDetails] dependency
+  return (
+    <div style={{ paddingTop: "20px" }}>
+      <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken={apiKey}
+        mapStyle={"mapbox://styles/bsherwood9/ckbkauyij0kw41it2u7y8cbf2"}
+        onViewportChange={(viewport) => {
+          setViewport(viewport);
+        }}
+      >
+        {vendorInfo.map((item) => (
+          <Marker
+            options
+            key={item.id}
+            latitude={item.latitude}
+            longitude={item.longitude}
+          >
+            <FontAwesomeIcon
+              icon={faMapMarkerAlt}
+              size="3x"
+              style={{ color: "red" }}
+            />
+          </Marker>
+        ))}
+      </ReactMapGL>
+    </div>
+  );
+};
+
+export default Map;
