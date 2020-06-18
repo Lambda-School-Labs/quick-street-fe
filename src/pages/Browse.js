@@ -1,8 +1,8 @@
 // ** Browse lists of vendors page ** //
-import React, { useState } from "react"; // removed useEffect as it is not being used below
+import React, { useState, useEffect } from "react"; // removed useEffect as it is not being used below
 import axiosWithAuth from "../utils/axiosWithAuth";
 // components
-import { Search, Nav, Footer, CustomButton } from "../components/index"; // removed Menu, ShoppingCartItems, Modal
+import { Map, Search, Nav, Footer, CustomButton } from "../components/index"; // removed Menu, ShoppingCartItems, Modal
 //removed map
 // styles
 import browse from "../styles/scss/browse.module.scss";
@@ -24,54 +24,55 @@ const Browse = (props) => {
     setCustomerZip(event.target.value);
   };
 
-  const handleQueryChange = (event) => {
-    console.log(event.target.value);
+  //   const handleQueryChange = (event) => {
+  //     console.log(event.target.value);
 
-    if (!query.includes(event.target.value)) {
-      setQuery([...query, event.target.value]);
-    } else {
-      setQuery(query.filter((el) => el !== event.target.value));
-    }
-  };
+  //     if (!query.includes(event.target.value)) {
+  //       setQuery([...query, event.target.value]);
+  //     } else {
+  //       setQuery(query.filter((el) => el !== event.target.value));
+  //     }
+  //   };
 
   // console.log(`query`, query);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const query = new URLSearchParams(props.location.search);
-    // console.log('query', query);
-    query.set("zip", customerZip);
-    props.history.replace(`${props.location.pathname}?${query.toString()}`);
-    getSearchResults(customerZip);
+    // const query = new URLSearchParams(props.location.search);
+    // console.log("query", query);
+    setZipcode(customerZip);
+    // query.set("zip", customerZip);
+    // props.history.replace(`${props.location.pathname}?${query.toString()}`);
+    // getSearchResults(customerZip);
   };
 
-  const getSearchResults = (zip) => {
-    const queryString = query.join("&");
-    // console.log(queryString);
-    axiosWithAuth()
-      .get(`/vendors/radius/${zip}/5/?${queryString}`)
-      .then((response) => {
-        // console.log(response);
-        setVendors({
-          ...vendors,
-          count: response.data.count,
-          vendorDetails: response.data.data,
-        });
-        setZipcode(zip);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //   const getSearchResults = (zip) => {
+  //     const queryString = query.join("&");
+  //     console.log(queryString);
+  //     axiosWithAuth()
+  //       .get(`/vendors/radius/${zip}/5/?${queryString}`)
+  //       .then((response) => {
+  //         // console.log(response);
+  //         setVendors({
+  //           ...vendors,
+  //           count: response.data.count,
+  //           vendorDetails: response.data.data,
+  //         });
+  //         setZipcode(zip);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
-  // useEffect(() => {
-  // 	const query = new URLSearchParams(props.location.search);
-  // 	const zip = query.get('zip');
-  // 	if (zip) {
-  // 		setCustomerZip(zip);
-  // 		getSearchResults(zip);
-  // 	}
-  // });
+  //   useEffect(() => {
+  //     const query = new URLSearchParams(props.location.search);
+  //     const zip = query.get("zip");
+  //     if (zip) {
+  //       setCustomerZip(zip);
+  //       getSearchResults(zip);
+  //     }
+  //   });
   // removed [] dependency
 
   return (
@@ -100,7 +101,7 @@ const Browse = (props) => {
           </div>
           <div className={browse.filter_wrapper}>
             <p>Filter by vendor category</p>
-            <div className={`form-check ${browse.checkbox_container}`}>
+            {/* <div className={`form-check ${browse.checkbox_container}`}>
               <div>
                 <input
                   onChange={handleQueryChange}
@@ -216,18 +217,19 @@ const Browse = (props) => {
                   value="diet_categories[in]=Vegetarian"
                 />
                 <label for="defaultCheck1">Vegetarian</label>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
           </div>
         </form>
 
-        {/* <Map
+        <Map
           zipcode={zipcode}
+          setZipcode={setZipcode}
           vendors={vendors}
           height={300}
           width={1280}
           radius={8046}
-        /> */}
+        />
         <Search
           zipcode={zipcode}
           vendors={vendors}

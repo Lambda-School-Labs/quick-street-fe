@@ -43,7 +43,7 @@ import vendordetails from "../components/Register/Vendor/VendorDetails";
 
 // Shared components
 import footer from "../components/shared/Footer";
-// import map from "../components/shared/Map";
+import map from "../components/shared/Map";
 import nav from "../components/shared/Nav";
 import custombutton from "../components/shared/CustomButton";
 import modal from "../components/shared/Modal";
@@ -109,7 +109,7 @@ export const VendorDetails = vendordetails;
 
 // Shared components
 export const Footer = footer;
-// export const Map = map;
+export const Map = map;
 export const Nav = nav;
 export const CustomButton = custombutton;
 export const Modal = modal;
