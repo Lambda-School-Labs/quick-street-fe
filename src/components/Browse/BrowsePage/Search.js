@@ -45,14 +45,14 @@ const Browse = (props) => {
         </p>
       )}
       <div className={browse.vendors_div}>
-        {props.vendors.vendorDetails.map((vendor) => (
+        {props.vendors.map((vendor) => (
           <div className={browse.vendor_details_div} key={vendor.id}>
             <div className={browse.vendor_banner_image}>
-              <Context cloudName="quickstlabs">
+              {/* <Context cloudName="quickstlabs">
                 <Image publicId={vendor.vendor_banner}>
                   <Transformation height="160" width="150" crop="fill" />
                 </Image>
-              </Context>
+              </Context> */}
             </div>
             {/* <img
               className="vendor_banner_image"
@@ -60,9 +60,9 @@ const Browse = (props) => {
               alt="Banner Image"
             ></img> */}
             <div className={browse.vendor_name}>{vendor.business_name}</div>
-            <div className={browse.category}>
+            {/* <div className={browse.category}>
               <p>{vendor.vendor_category}</p>
-            </div>
+            </div> */}
             <Link className={browse.view_vendor} to={`/browse/${vendor.id}`}>
               View
             </Link>
