@@ -44,7 +44,7 @@ const Profile = (props) => {
   useEffect(() => {
     //console.log('USEEFFECT 1 Profile.js');
     axiosWithAuth()
-      .get(`/vendors/${vendorId}`)
+      .get(`/vendors/me`)
       .then((response) => {
         console.log("Here is the response data", response.data);
         setVendorInfo(response.data);

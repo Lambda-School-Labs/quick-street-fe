@@ -13,10 +13,7 @@ const Browse = (props) => {
   const [zipcode, setZipcode] = useState("");
   const [query, setQuery] = useState([]);
 
-  const [vendors, setVendors] = useState({
-    count: "",
-    vendorDetails: [],
-  });
+  const [vendors, setVendors] = useState([]);
   const [customerZip, setCustomerZip] = useState("");
   // const customerId = localStorage.getItem('user_id');
 
@@ -41,29 +38,27 @@ const Browse = (props) => {
     // const query = new URLSearchParams(props.location.search);
     // console.log("query", query);
     setZipcode(customerZip);
+    getSearchResults(customerZip);
     // query.set("zip", customerZip);
     // props.history.replace(`${props.location.pathname}?${query.toString()}`);
     // getSearchResults(customerZip);
   };
 
-  //   const getSearchResults = (zip) => {
-  //     const queryString = query.join("&");
-  //     console.log(queryString);
-  //     axiosWithAuth()
-  //       .get(`/vendors/radius/${zip}/5/?${queryString}`)
-  //       .then((response) => {
-  //         // console.log(response);
-  //         setVendors({
-  //           ...vendors,
-  //           count: response.data.count,
-  //           vendorDetails: response.data.data,
-  //         });
-  //         setZipcode(zip);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
+  const getSearchResults = (zip) => {
+    //   const queryString = query.join("&");
+    //   console.log(queryString);
+    let newObj = { data: zip };
+    axiosWithAuth()
+      // .get(`/vendors/radius/${zip}/5/?${queryString}`)
+      .post(`vendors/all/places`, newObj)
+      .then((response) => {
+        console.log(response);
+        setVendors(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   //   useEffect(() => {
   //     const query = new URLSearchParams(props.location.search);
