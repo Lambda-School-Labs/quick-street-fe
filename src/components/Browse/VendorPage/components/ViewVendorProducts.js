@@ -4,25 +4,23 @@ import axiosWithAuth from "../../../../utils/axiosWithAuth";
 import Product from "./ViewVendorProduct";
 //styling
 import profile from "../../../../styles/scss/profile.module.scss";
-const ViewVendorProducts = props => {
+const ViewVendorProducts = (props) => {
   const [vendorProducts, setVendorProducts] = useState({
     products: [],
-    count: 0
   });
   // const { cart, setCart } = props;
 
-  const getVendorProducts = id => {
+  const getVendorProducts = (id) => {
     axiosWithAuth()
       .get(`/vendors/${id}/products`)
-      .then(response => {
-        // console.log(response);
+      .then((response) => {
+        console.log(response);
         setVendorProducts({
           ...vendorProducts,
-          products: response.data.data,
-          count: response.data.count
+          products: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -36,10 +34,10 @@ const ViewVendorProducts = props => {
       <div className={profile.products_wrapper}>
         <h1>Products</h1>
         <div className={profile.products_card_wrapper}>
-          {vendorProducts.products.map(product => (
+          {vendorProducts.products.map((product) => (
             <Product
               product={product}
-              key={product._id}
+              key={product.id}
               vendorId={props.vendorId}
             />
           ))}
