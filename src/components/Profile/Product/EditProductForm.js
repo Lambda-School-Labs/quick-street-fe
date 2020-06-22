@@ -99,6 +99,7 @@ const EditProductForm = (props) => {
               onChange={handleChanges}
               type="text"
               name="name"
+              placeholder="What is your product called?"
               value={product.name}
             />
           </div>
@@ -108,6 +109,7 @@ const EditProductForm = (props) => {
               onChange={handleChanges}
               type="text"
               name="description"
+              placeholder="Enter your product description."
               value={product.description}
             />
           </div>
