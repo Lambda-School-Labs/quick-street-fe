@@ -76,9 +76,11 @@ const ProductImageUploader = (props) => {
         console.log("product id from correct fields", correct_fields.product)
         console.log('ProductImageUploader.js vendorId ', vendorId);
         console.log("public id info from correct fields", correct_fields.public_id)
+        const correctImageData = correct_fields.public_id.split("/",2)
+        console.log("new image data", correctImageData[1])
 
         axiosWithAuth()
-          .put(`/products/${productId}/product-images`, {"public_id": correct_fields.public_id})
+          .put(`/products/${productId}/product-images`, {"public_id": correctImageData[1]})
           .then(res => {
             console.log('POST ProductImagesUploader res: ', res);
             setReloadingImages(!reloadingImages)
