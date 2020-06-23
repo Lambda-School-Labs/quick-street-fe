@@ -263,13 +263,13 @@ const EditProduct = (props) => {
           >
             <div className={editingProduct.left_upper_container}>
               {/* This doesn't work yet */}
-              {/* <div className={editingProduct.add_image_btns}>
+              <div className={editingProduct.add_image_btns}>
                 <ProductImageUploader
                   productId={product.id}
                   setReloadingImages={setReloadingImages}
                   reloadingImages={reloadingImages}
                 />
-              </div> */}
+              </div>
               {/* Image deleted POPUP */}
               {imageDeleted ? ( // <<<<<< TURNARY
                 <h1>

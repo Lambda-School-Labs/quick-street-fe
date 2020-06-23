@@ -28,7 +28,7 @@ const VendorProducts = ({
   };
 
   const createNewProduct = async () => {
-    console.log(vendorId);
+    console.log('vendor id after new product creation', vendorId);
     await axiosWithAuth()
       .post(`/vendors/${vendorId}/products`, {
         name: "Give your product a name!",
@@ -46,6 +46,7 @@ const VendorProducts = ({
         setEditingProdId(response.data[0].id);
         setEditingProd(true);
         setReloadProducts(!reloadProducts);
+        console.log("reload products now", reloadProducts)
       })
       .catch((error) => {
         console.log("VendorProduct.js createNewProduct() error", error);
