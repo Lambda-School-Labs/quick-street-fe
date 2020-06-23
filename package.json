@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://heroku.com/apps/quick-street-frontend",
+  "engines": {
+    "npm": "6.11.3",
+    "node": "10.15.0"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
