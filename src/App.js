@@ -32,7 +32,7 @@ const App = () => {
       <Route path="/RegisterContext" component={RegisterContext} />
       <Route path="/LoginContext" component={LoginContext} />
       <Route path="/styling" component={Styling} />
-      <Route path="/landing" component={Landing} />
+      <Route exact path="/" component={Landing} />
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Switch>
