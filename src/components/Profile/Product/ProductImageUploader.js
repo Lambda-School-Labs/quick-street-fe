@@ -80,7 +80,7 @@ const ProductImageUploader = (props) => {
         console.log("new image data", correctImageData[1])
 
         axiosWithAuth()
-          .put(`/products/${productId}/product-images`, {"public_id": correctImageData[1fav]})
+          .put(`/products/${productId}/product-images`, {"public_id": correctImageData[1]})
           .then(res => {
             console.log('POST ProductImagesUploader res: ', res);
             setReloadingImages(!reloadingImages)
