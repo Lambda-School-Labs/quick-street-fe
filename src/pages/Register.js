@@ -110,6 +110,8 @@ const Register = (props) => {
   //   }
   // };
 
+  console.log("something unique")
+  
   return (
     <div className={registration.container}>
       {userDetails()}
