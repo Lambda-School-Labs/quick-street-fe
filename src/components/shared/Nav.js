@@ -141,9 +141,11 @@ const Nav = () => {
     }
   };
   console.log("Customer ID", customerId);
+
   useEffect(() => {
     getCartItems(customerId);
   }, []); // removed [] dependency
+  
   console.log("State Items", state);
   const toggleDrawer = (side, open) => (event) => {
     if (

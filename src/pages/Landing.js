@@ -16,6 +16,7 @@ import {
   Footer
 } from '../components/index';
 
+
 const Landing = () => {
   return (
     <React.Fragment>
