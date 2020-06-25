@@ -22,7 +22,7 @@ const About = ({
   saveProfile,
   setVendorInfo,
 }) => {
-  const [editingNow, setEditingNow] = useState("none"); //change back to none
+  const [editingNow, setEditingNow] = useState(null); //change back to none
   const [hoveringClass, setHoveringClass] = useState("not_hovering");
 
   const handleChanges = (e) => {
@@ -30,16 +30,7 @@ const About = ({
       ...vendorInfo,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const handleZip = (e) => {
-    setVendorInfo({
-      ...vendorInfo,
-      location: {
-        ...vendorInfo.location,
-        zipcode: e.target.value,
-      },
-    });
+    console.log(vendorInfo);
   };
 
   return (
@@ -70,7 +61,7 @@ const About = ({
                     <p
                       className={about.save_changes}
                       onClick={(e) => {
-                        setEditingNow("none");
+                        setEditingNow(null);
                         saveProfile(e);
                         console.log("saveProfile() Profile.js info_content p ");
                       }}
@@ -94,7 +85,6 @@ const About = ({
                       onClick={() => {
                         setEditingNow("about");
                         setHoveringClass("not_hovering");
-                        saveProfile();
                       }}
                     >
                       {vendorInfo.description}
@@ -135,7 +125,7 @@ const About = ({
                     <p
                       className={about.save_changes}
                       onClick={() => {
-                        setEditingNow("none");
+                        setEditingNow(null);
                         saveProfile();
                         console.log("saveProfile() Profile.js info_content p ");
                       }}
@@ -159,7 +149,6 @@ const About = ({
                       onClick={() => {
                         setEditingNow("hours");
                         setHoveringClass("not_hovering");
-                        saveProfile();
                       }}
                     >
                       {vendorInfo.hours}
@@ -200,7 +189,7 @@ const About = ({
                     <p
                       className={about.save_changes}
                       onClick={(e) => {
-                        setEditingNow("none");
+                        setEditingNow(null);
                         saveProfile(e);
                         console.log("saveProfile() Profile.js info_content p ");
                       }}
@@ -230,7 +219,6 @@ const About = ({
                         onClick={() => {
                           setEditingNow("phone");
                           setHoveringClass("not_hovering");
-                          saveProfile();
                         }}
                       >
                         {vendorInfo.phone}
@@ -253,7 +241,7 @@ const About = ({
                     <p
                       className={about.save_changes}
                       onClick={(e) => {
-                        setEditingNow("none");
+                        setEditingNow(null);
                         saveProfile(e);
                         console.log("saveProfile() Profile.js info_content p ");
                       }}
@@ -283,7 +271,6 @@ const About = ({
                         onClick={() => {
                           setEditingNow("email");
                           setHoveringClass("not_hovering");
-                          saveProfile();
                         }}
                       >
                         {vendorInfo.email}
@@ -303,7 +290,6 @@ const About = ({
             </div>
           </div>
           {/* END CONTACT */}
-
         </div>
 
         {/* ========   COLUMN LEFT/RIGHT DIVIDE ========= */}
@@ -327,8 +313,8 @@ const About = ({
                   <div>
                     <form action="">
                       <input
-                        onChange={handleZip}
-                        name="phone"
+                        onChange={handleChanges}
+                        name="zipcode"
                         value={vendorInfo.zipcode}
                         cols="30"
                         rows="10"
@@ -337,7 +323,7 @@ const About = ({
                     <p
                       className={about.save_changes}
                       onClick={(e) => {
-                        setEditingNow("none");
+                        setEditingNow(null);
                         saveProfile(e);
                         console.log("saveProfile() Profile.js info_content p ");
                       }}
@@ -361,12 +347,9 @@ const About = ({
                       onClick={() => {
                         setEditingNow("zipcode");
                         setHoveringClass("not_hovering");
-                        saveProfile();
                       }}
                     >
                       {vendorInfo.zipcode}
-                      {/* This vendor can be found in the{" "}
-                      {vendorInfo.location.zipcode} area. */}
                     </p>
                   </div>
                 )}{" "}

@@ -145,7 +145,7 @@ const Nav = () => {
   useEffect(() => {
     getCartItems(customerId);
   }, []); // removed [] dependency
-  
+
   console.log("State Items", state);
   const toggleDrawer = (side, open) => (event) => {
     if (
@@ -188,7 +188,7 @@ const Nav = () => {
       </MenuItem>
       {isVendor === "true" && (
         <MenuItem onClick={handleMenuClose}>
-          <Link to={`/profile/${customerId}`}>Profile</Link>
+          <Link to={`/profile`}>Profile</Link>
         </MenuItem>
       )}
       <MenuItem onClick={handleMenuClose}>

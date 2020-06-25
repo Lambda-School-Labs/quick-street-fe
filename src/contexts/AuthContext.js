@@ -97,8 +97,8 @@ const updateVendor = (dispatch) => async ({
     console.log("this is the response", response);
     if (response.status === 200) {
       console.log("response after creating a user", response);
-      const userToken = localStorage.getItem('token')
-      window.location.href = `/profile/${userToken}`;
+      const userToken = localStorage.getItem("token");
+      window.location.href = `/profile`;
     }
   } catch (error) {
     console.log("Error while creating a user", error.response);
