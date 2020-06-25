@@ -303,71 +303,7 @@ const About = ({
             </div>
           </div>
           {/* END CONTACT */}
-          {/* VENDOR CATEGORIES  */}
-          <div className={about.about_info}>
-            <div className={about.info_top}>
-              <h2>Vendor Categories</h2>
-            </div>
-            {/* ==== TOP/BOTTOM divide ====== */}
-            <div className={about.info_bottom}>
-              <div className={about.info_content}>
-                {editingNow === "categories" ? ( // TURNARY ? show form...
-                  <div>
-                  <form action="">
-                    <textarea
-                      onChange={handleChanges}
-                      name="hours"
-                      value={vendorInfo.vendor_category}
-                      cols="30"
-                      rows="10"
-                    ></textarea>
-                  </form>
-                  <p
-                    className={about.save_changes}
-                    onClick={() => {
-                      setEditingNow("none");
-                      saveProfile();
-                      console.log("saveProfile() Profile.js info_content p ");
-                    }}
-                  >
-                    <i className="fa fa-save"></i>&nbsp;save
-                  </p>
-                </div> //<<<<<<< TURNARY : else...
-              ) : (
-                <div className={about.saved_text_container}>
-                  {hoveringClass === "hours_pen" && (
-                    <img
-                      className={`${about.edit_icon}`}
-                      src={pencil_light}
-                      alt=""
-                    />
-                  )}
-                  <p
-                    className={about.saved_text_content}
-                    onMouseOver={() => setHoveringClass("hours_pen")}
-                    onMouseLeave={() => setHoveringClass("not_hovering")}
-                    onClick={() => {
-                      setEditingNow("hours");
-                      setHoveringClass("not_hovering");
-                      saveProfile();
-                    }}
-                  >
-                    {vendorInfo.vendor_category}
-                  </p>
-                </div>
-              )}{" "}
-              {/* END OF TURNARY - HOURS OF OPERATION */}
-            </div>
-            <div className={about.edit_guides}>
-              {editAbout && (
-                <p>
-                  <i className="fa fa-save"></i>&nbsp; click to save
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-          {/* END HOURS OF VENDOR CATEGORY */}
+
         </div>
 
         {/* ========   COLUMN LEFT/RIGHT DIVIDE ========= */}
