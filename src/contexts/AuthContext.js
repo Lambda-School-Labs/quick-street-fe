@@ -54,8 +54,8 @@ const signup = (dispatch) => async ({ email, password, role }) => {
       role,
     });
     localStorage.setItem("token", response.data.token);
-    localStorage.setItem("user_id", response.data.id);
-    localStorage.setItem("isVendor", response.data.isVendor);
+    // localStorage.setItem("user_id", response.data.id);
+    localStorage.setItem("isVendor", response.data.user.isVendor);
     dispatch({ type: "signup", payload: response.data.token });
     if (response.status === 200 && role === "vendor") {
       console.log("response updating vendor info", response);
@@ -97,7 +97,8 @@ const updateVendor = (dispatch) => async ({
     console.log("this is the response", response);
     if (response.status === 200) {
       console.log("response after creating a user", response);
-      window.location.href = `/profile/${response.data.id}`;
+      const userToken = localStorage.getItem('token')
+      window.location.href = `/profile/${userToken}`;
     }
   } catch (error) {
     console.log("Error while creating a user", error.response);
