@@ -62,12 +62,9 @@ const Profile = (props) => {
   useEffect(() => {
     //console.log('USEEFFECT 2 Profile.js');
     axiosWithAuth()
-      .get(`/vendors/${vendorId}/products`)
+      .get(`/vendors/me/products`)
       .then((response) => {
-        console.log(
-          "GET Profile.js /vendors/:vendorId/products response",
-          response
-        );
+        console.log("GET Profile.js /vendors/me/products response", response);
         setProducts(response.data);
       })
       .catch((error) => {
@@ -83,14 +80,12 @@ const Profile = (props) => {
   // };
 
   const saveName = () => {
+    console.log("Savename vendorinfo", vendorInfo);
     axiosWithAuth()
-      .put(
-        `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,
-        vendorInfo
-      )
+      .put(`/vendors/me/update`, vendorInfo)
       .then((res) => {
-        // console.log(`update vendor info`, res);
-        setVendorInfo(res.data.data);
+        console.log(`update vendor info`, res);
+        setVendorInfo(res.data[0]);
       })
       .catch((err) => {
         console.log("ERROR PUT SAVE NAME", err);
@@ -107,15 +102,12 @@ const Profile = (props) => {
       e.preventDefault();
     }
 
-    //console.log('SAVE PROFILE vendorInfo', vendorInfo);
+    console.log("SAVE PROFILE vendorInfo", vendorInfo);
     axiosWithAuth()
-      .put(
-        `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,
-        vendorInfo
-      )
+      .put(`/vendors/me/update`, vendorInfo)
       .then((res) => {
         console.log(`Profile.js saveProfile()`, res);
-        setVendorInfo(res.data.data);
+        setVendorInfo(res.data[0]);
       })
       .catch((err) => {
         console.log("VendorProf. PUT error ", err);
@@ -157,7 +149,7 @@ const Profile = (props) => {
                       }}
                     >
                       <p className={`${banner.save_changes}`}>
-                        <i className="fa fa-save"></i>&nbsp; save
+                        <i className="fa fa-save"></i>&nbsp; Save
                       </p>
                     </div>
                   </React.Fragment>
