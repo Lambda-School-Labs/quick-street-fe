@@ -14,20 +14,20 @@ const Product = ({
   const [productImages, setProductImages] = useState("");
 
   useEffect(() => {
-  	console.log(`USEEFFECT 3 Product.js productId: `, productId)
+  	// console.log(`USEEFFECT 3 Product.js productId: `, productId)
   	axiosWithAuth()
   		.get(`/products/${productId}/product-images`)
   		.then(response => {
-        console.log('inside response', response.data[0].public_id)
+        // console.log('inside response', response.data[0].public_id)
         let newImage = "product-images/" + response.data[0].public_id
-        console.log('new image', newImage)
+        // console.log('new image', newImage)
         setProductImages(...productImages, newImage);
   		})
   		.catch(error => {
         console.log(`ERROR GET /:productId/product-images Product.js`, error);
   		})
     }, [setReloadProducts, reloadProducts]);
-    console.log('image data', productImages)
+    // console.log('image data', productImages)
     // console.log(productImages[0]);
     
   return (

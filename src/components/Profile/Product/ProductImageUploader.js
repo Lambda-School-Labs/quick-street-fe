@@ -118,3 +118,4 @@ const ProductImageUploader = (props) => {
 }
 
 export default ProductImageUploader
+
