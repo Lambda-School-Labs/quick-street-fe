@@ -24,7 +24,7 @@ const VendorProducts = ({
   const showEditProduct = (prodId) => {
     setEditingProdId(prodId);
     setEditingProd(true);
-    console.log(`VenorProducts.js showEditingProduct prodId: `, prodId);
+    // console.log(`VenorProducts.js showEditingProduct prodId: `, prodId);
   };
 
   const createNewProduct = async () => {

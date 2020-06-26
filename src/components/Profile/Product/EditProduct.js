@@ -22,7 +22,7 @@ const EditProduct = (props) => {
   const [reloadingImages, setReloadingImages] = useState(false);
 
   useEffect(() => {
-    console.log("product id", props.product_id);
+    // console.log("product id", props.product_id);
     //console.log('USEEFFECT 4 EditProducts.js GET /products/:prodcutId')
     // loading images popup on (off in next useEffect)
     // setLoadingImages(true);
@@ -37,7 +37,7 @@ const EditProduct = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []); // removed , [] dependency
+  }, [reloadingImages]); // removed , [] dependency
 
   // useEffect(() => {
   //   // get all images of same product in previous request.

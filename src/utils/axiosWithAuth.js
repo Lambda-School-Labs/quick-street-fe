@@ -5,7 +5,7 @@ const axiosWithAuth = () => {
 
   return axios.create({
     // baseURL: "http://localhost:5000/api",
-    baseURL: "https://market-avenue.herokuapp.com/api",
+    baseURL: "https://market-avenue-be.herokuapp.com/api",
     headers: {
       Authorization: token,
       "Content-Type": "application/json",
