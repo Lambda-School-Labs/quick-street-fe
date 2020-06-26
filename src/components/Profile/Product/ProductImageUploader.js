@@ -45,7 +45,7 @@ const ProductImageUploader = (props) => {
     },
     async (error, result) => {
       if (!error && result && result.event === 'success') {
-        console.log('result info from upload', result.info)
+        // console.log('result info from upload', result.info)
         const image_info = await result.info;
         const correct_fields = {
           vendorId,
