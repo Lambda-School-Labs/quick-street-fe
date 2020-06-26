@@ -17,7 +17,7 @@ const Bulletin = (props) => {
       .get(`/vendors/me/posts`)
       .then((res) => {
         // console.log(res.data.data);
-        console.log("posts data", res.data);
+        // console.log("posts data", res.data);
         setPosts(res.data);
       });
   };

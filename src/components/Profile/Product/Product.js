@@ -26,7 +26,7 @@ const Product = ({
   		.catch(error => {
         console.log(`ERROR GET /:productId/product-images Product.js`, error);
   		})
-    }, [setReloadProducts, reloadProducts]);
+    }, []);
     // console.log('image data', productImages)
     // console.log(productImages[0]);
     

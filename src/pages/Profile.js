@@ -46,13 +46,13 @@ const Profile = (props) => {
     axiosWithAuth()
       .get(`/vendors/me`)
       .then((response) => {
-        console.log("Here is the response data", response.data);
+        // console.log("Here is the response data", response.data);
         setVendorInfo(response.data);
         /* setBannerInfo(vendorInfo.data.data.vendor_banner); */
-        console.log(
-          "GET useEffect Profile.js setVendorInfo(response)",
-          response
-        );
+        // console.log(
+        //   "GET useEffect Profile.js setVendorInfo(response)",
+        //   response
+        // );
       })
       .catch((error) => {
         console.log("ERROR Profile.js GET vendors/:vendorId error: ", error);
