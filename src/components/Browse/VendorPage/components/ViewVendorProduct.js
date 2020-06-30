@@ -11,13 +11,14 @@ import { Modal } from "../../../index";
 import ModalCarousel2 from "./ModalCarousel2";
 
 const ViewVendorProduct = (props) => {
-  const { state, addCartItem, addItemFromOtherVendor } = useContext(
-    CartContext
-  );
-  const cart = state.cart;
+  console.log("vendorId on viewVendorProduct", props.vendorId);
+  // const { state, addCartItem, addItemFromOtherVendor } = useContext(
+  //   CartContext
+  // );
+  // const cart = state.cart;
   // console.log('cart in the vendor product page', cart);
   const vendorId = props.vendorId;
-  const [images, setImages] = useState([{}]);
+  // const [images, setImages] = useState([{}]);
   const [quantity, setQuantity] = useState("1");
   const [showModal, setShowModal] = useState(false);
   const [messageModal, setMessageModal] = useState(false);
@@ -32,30 +33,30 @@ const ViewVendorProduct = (props) => {
     setShowModal(bool);
   };
 
-  const handleAddToCart = () => {
-    showHideModal(false);
-    if (cart.items.length === 0 || cart.items[0].item.vendor === vendorId) {
-      addCartItem({
-        productId: props.product._id,
-        price: props.product.price,
-        quantity: quantity,
-        customerId: customerId,
-      });
-    } else {
-      setMessageModal(true);
-    }
-  };
+  // const handleAddToCart = () => {
+  //   showHideModal(false);
+  //   if (cart.items.length === 0 || cart.items[0].item.vendor === vendorId) {
+  //     addCartItem({
+  //       productId: props.product._id,
+  //       price: props.product.price,
+  //       quantity: quantity,
+  //       customerId: customerId,
+  //     });
+  //   } else {
+  //     setMessageModal(true);
+  //   }
+  // };
 
-  const handleEmptyCart = () => {
-    setMessageModal(false);
-    addItemFromOtherVendor({
-      cartId: cart._id,
-      customerId,
-      productId: props.product._id,
-      price: props.product.price,
-      quantity: quantity,
-    });
-  };
+  // const handleEmptyCart = () => {
+  //   setMessageModal(false);
+  //   addItemFromOtherVendor({
+  //     cartId: cart._id,
+  //     customerId,
+  //     productId: props.product.id,
+  //     price: props.product.price,
+  //     quantity: quantity,
+  //   });
+  // };
 
   //   useEffect(() => {
   //     axiosWithAuth()
@@ -74,33 +75,34 @@ const ViewVendorProduct = (props) => {
   //   };
 
   return (
+    // <h1>Hello there</h1>
     <>
       <div
         onClick={() => showHideModal(true)}
         className={profile.products_card}
-        key={props.product._id}
+        key={props.product.id}
       >
         {/* <img className={profile.image} src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
-        <Context cloudName="quickstlabs">
+        {/* <Context cloudName="quickstlabs">
           <Image
             className={profile.image}
             publicId={images[0] && images[0].public_id}
           >
             <Transformation height="122" width="146" crop="fill" />
           </Image>
-        </Context>
+        </Context> */}
         <p className={profile.name}>{props.product.name}</p>
         <p className={profile.price}>${props.product.price}</p>
       </div>
 
-      <Modal showModal={showModal}>
-        <div className={modal.container}>
-          {/* <div className={modal.column_left} style={modalLeftStyle}>
+      {/* <Modal showModal={showModal}>
+        <div className={modal.container}> */}
+      {/* <div className={modal.column_left} style={modalLeftStyle}>
             {/* <img src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
-          {/* <ModalCarousel images={images} /> */}
-          {/* <ModalCarousel2 images={images} />
+      {/* <ModalCarousel images={images} /> */}
+      {/* <ModalCarousel2 images={images} />
           </div> */}
-          <div className={modal.column_right}>
+      {/* <div className={modal.column_right}>
             <div className={modal.row}>
               <h1>{props.product.name}</h1>
             </div>
@@ -176,7 +178,7 @@ const ViewVendorProduct = (props) => {
             </div>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   );
 };

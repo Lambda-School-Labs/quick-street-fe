@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
-// import Map from "../../../shared/Map";
+import Map from "../../../shared/Map";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
 // styling
 import profile from "../../../../styles/scss/profile.module.scss";
 // import { image } from '../../assets/rectangle.png';
 import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 const ViewAboutVendor = (props) => {
-  const [vendor, setVendor] = useState({
-    location: {},
-  });
+  console.log("view about vendor", props.vendorId);
+  const [vendor, setVendor] = useState({});
 
   const getVendor = (id) => {
     axiosWithAuth()
       .get(`/vendors/${id}`)
       .then((response) => {
-        // console.log(response);
+        console.log("view vendor about", response);
         setVendor(response.data);
       })
       .catch((error) => {
@@ -24,7 +23,7 @@ const ViewAboutVendor = (props) => {
 
   useEffect(() => {
     getVendor(props.vendorId);
-  }); // removed [] dependency
+  }, []); // removed [] dependency
 
   return (
     <>
@@ -57,12 +56,12 @@ const ViewAboutVendor = (props) => {
           <div className={profile.column_right}>
             <h1>Location</h1>
             <p>The vendor can be found at {vendor.zipcode} area</p>
-            {/* <Map
-              zipcode={vendor.location.zipcode}
-              width={403}
-              height={280}
-              radius={3000}
-            /> */}
+            <Map
+              zipcode={vendor.zipcode}
+              width={"90vw"}
+              height="50vh"
+              target={vendor.zipcode}
+            />
           </div>
         </div>
       </div>
