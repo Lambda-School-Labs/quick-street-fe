@@ -2,12 +2,7 @@ import React, { useState } from "react";
 
 //styling
 import registration from "../styles/scss/registration.module.scss";
-import {
-  CustomerConfirmation,
-  VendorConfirmation,
-  VendorDetails,
-  RegisterDetails,
-} from "../components/index";
+import { RegisterVendor, RegisterAll } from "../components/index";
 const Register = (props) => {
   // console.log('Register.js props: ', props);
 
@@ -61,7 +56,7 @@ const Register = (props) => {
   const userDetails = () => {
     if (userInfo.step === 1) {
       return (
-        <RegisterDetails
+        <RegisterAll
           values={userInfo}
           handleChange={handleChange}
           nextStep={nextStep}
@@ -75,7 +70,7 @@ const Register = (props) => {
   const vendorDetails = () => {
     if (userInfo.step === 2 && userInfo.role === "vendor") {
       return (
-        <VendorDetails
+        <RegisterVendor
           values={userInfo}
           handleChange={handleChange}
           nextStep={nextStep}
@@ -86,38 +81,10 @@ const Register = (props) => {
     }
   };
 
-  // const vendorConfirmation = () => {
-  //   if (userInfo.step === 3) {
-  //     return (
-  //       <VendorConfirmation
-  //         values={userInfo}
-  //         previousStep={previousStep}
-  //         history={props.history}
-  //       />
-  //     );
-  //   }
-  // };
-
-  // const customerConfirmation = () => {
-  //   if (userInfo.step === 2 && userInfo.role === "customer") {
-  //     return (
-  //       <CustomerConfirmation
-  //         values={userInfo}
-  //         previousStep={previousStep}
-  //         history={props.history}
-  //       />
-  //     );
-  //   }
-  // };
-
-  console.log("something unique")
-  
   return (
     <div className={registration.container}>
       {userDetails()}
       {vendorDetails()}
-      {/* {vendorConfirmation()}
-      {customerConfirmation()} */}
     </div>
   );
 };

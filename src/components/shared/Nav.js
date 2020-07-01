@@ -277,11 +277,15 @@ const Nav = () => {
         }}
       >
         <Toolbar>
-          <img
-            src={logo}
-            style={{ height: "45px", width: "45px" }}
-            alt="needs meaningful text"
-          />
+          <Link to="/">
+            {" "}
+            <img
+              src={logo}
+              style={{ height: "45px", width: "45px" }}
+              alt="needs meaningful text"
+            />
+          </Link>
+
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {!token && (

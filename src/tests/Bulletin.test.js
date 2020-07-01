@@ -18,10 +18,10 @@ afterEach(() => {
 });
 
 it("get posts data", async () => {
-  const fakePosts = { content: "fake 1", date: "2020/1/20" };
+  const fakePosts = { content: "fake 1", date: "2020/1/23" };
   jest.spyOn(global, "fetch").mockImplementation(() =>
     Promise.resolve({
-      json: () => Promise.resolve(fakePosts)
+      json: () => Promise.resolve(fakePosts),
     })
   );
   await act(async () => {

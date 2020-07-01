@@ -87,10 +87,6 @@ const Dashboard = (props) => {
       </div>
     );
   }
-
-  // else
-
-  //return Customer Components
 };
 
 export default Dashboard;

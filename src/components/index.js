@@ -31,15 +31,11 @@ import aboutform from "../components/Profile/Profile/AboutForm";
 import banneruploader from "../components/Profile/Profile/BannerUploader";
 import vendorcategories from "../components/Profile/Profile/VendorCategories";
 
-// Register customer components
-import customerconfirmation from "../components/Register/Customer/CustomerConfirmation";
-
 // Register components
-import registerdetails from "../components/Register/RegisterDetails";
+import registerall from "./Register/RegisterAll";
 
 // Register vendor components
-import vendorconfirmation from "../components/Register/Vendor/VendorConfirmation";
-import vendordetails from "../components/Register/Vendor/VendorDetails";
+import registervendor from "./Register/Vendor/RegisterVendor";
 
 // Shared components
 import footer from "../components/shared/Footer";
@@ -97,15 +93,11 @@ export const VendorCategories = vendorcategories;
 
 export const BannerUploader = banneruploader;
 
-// Register customer components exports
-export const CustomerConfirmation = customerconfirmation;
-
 // Register components
-export const RegisterDetails = registerdetails;
+export const RegisterAll = registerall;
 
 // Register vendor components
-export const VendorConfirmation = vendorconfirmation;
-export const VendorDetails = vendordetails;
+export const RegisterVendor = registervendor;
 
 // Shared components
 export const Footer = footer;

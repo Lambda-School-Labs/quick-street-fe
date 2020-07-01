@@ -4,10 +4,10 @@ import registration from "../../styles/scss/registration.module.scss";
 import { CustomButton } from "../index";
 
 //Adding auth context
-import { Context as AuthContext } from "../../../src/contexts/AuthContext";
+import { Context as AuthContext } from "../../contexts/AuthContext";
 
 //This is the first screen that we see. All of this is running through RegisterContext.js
-const RegisterDetails = (props) => {
+const RegisterAll = (props) => {
   const { signup } = useContext(AuthContext);
   const { values, nextStep, handleChange, setUserInfo } = props;
 
@@ -93,7 +93,7 @@ const RegisterDetails = (props) => {
         <div className={registration.vendorq_wrapper}>
           <p>Are you a vendor?</p>
           <div className={registration.radio_buttons_wrapper}>
-            <label for="vendor">
+            <label htmlFor="vendor">
               <input
                 type="radio"
                 name="role"
@@ -140,4 +140,4 @@ const RegisterDetails = (props) => {
   );
 };
 
-export default RegisterDetails;
+export default RegisterAll;
