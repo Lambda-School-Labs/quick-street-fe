@@ -20,17 +20,11 @@ import {
   OrderReview, // ** Order Review Page **/
 } from "./pages/index";
 
-import RegisterContext from "./pages/RegisterContext";
-import LoginContext from "./pages/LoginContext";
-// import Nav from './components/shared/Nav';
-
 const App = () => {
   return (
     <div>
       <Route path="/orderreview/:id" component={OrderReview} />
       <Route path="/orderconfirmation" component={OrderConfirmation} />
-      <Route path="/RegisterContext" component={RegisterContext} />
-      <Route path="/LoginContext" component={LoginContext} />
       <Route path="/styling" component={Styling} />
       <Route exact path="/" component={Landing} />
       <Route path="/register" component={Register} />

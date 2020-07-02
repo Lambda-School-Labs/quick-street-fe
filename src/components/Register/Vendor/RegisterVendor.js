@@ -3,7 +3,7 @@ import registration from "../../../styles/scss/registration.module.scss";
 import { CustomButton } from "../../index";
 import { Context as AuthContext } from "../../../contexts/AuthContext";
 //Page 2 of vendor registry
-const VendorDetails = (props) => {
+const RegisterVendor = (props) => {
   const { updateVendor } = useContext(AuthContext);
   const { values, handleChange, nextStep, previousStep, setUserInfo } = props;
 
@@ -134,4 +134,4 @@ const VendorDetails = (props) => {
   );
 };
 
-export default VendorDetails;
+export default RegisterVendor;

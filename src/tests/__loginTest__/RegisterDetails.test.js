@@ -2,10 +2,11 @@ import React from "react";
 
 import { render, fireEvent, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { Provider as AuthProvider } from "../contexts/AuthContext";
-import { Provider as CartProvider } from "../contexts/TestCartContext";
+import { Provider as AuthProvider } from "../../contexts/AuthContext";
+import { Provider as CartProvider } from "../../contexts/TestCartContext";
 import { BrowserRouter as Router } from "react-router-dom";
-import Login from "../pages/Login";
+import Register from "../../pages/Register";
+import RegisterAll from "../../components/Register/RegisterAll";
 
 describe("running tests on login", () => {
   it(`loads`, () => {
@@ -13,14 +14,17 @@ describe("running tests on login", () => {
       <Router>
         <AuthProvider>
           <CartProvider>
-            <Login />
+            <Register>
+              <RegisterAll />
+            </Register>
           </CartProvider>
         </AuthProvider>
       </Router>
     );
     const { getByText, getAllByText } = render(tree);
 
-    expect(getByText("Welcome Back!")).toBeInTheDocument();
-    expect(getAllByText("Login")).toHaveLength(2);
+    expect(
+      getByText("Create An Account With Quick Street")
+    ).toBeInTheDocument();
   });
 });
