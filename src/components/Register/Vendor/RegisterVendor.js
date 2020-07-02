@@ -5,31 +5,38 @@ import { Context as AuthContext } from "../../../contexts/AuthContext";
 //Page 2 of vendor registry
 const RegisterVendor = (props) => {
   const { updateVendor } = useContext(AuthContext);
-  const { values, handleChange, nextStep, previousStep, setUserInfo } = props;
-
-  const proceed = (event) => {
-    event.preventDefault();
-    if (validate()) {
-      console.log("Part 2 values", values);
-      nextStep();
-    }
-  };
+  const { values, handleChange, previousStep, setUserInfo } = props;
 
   const validate = () => {
+    console.log("these are the values", values);
     let business_nameError = "";
     let phoneError = "";
     let zipcodeError = "";
+    let fakeNumber = "";
+    if (values.phone) {
+      fakeNumber = values.phone.toString();
+    }
 
     if (!values.business_name) {
       business_nameError = "Business name required";
     }
 
-    if (!values.phoneNumber) {
+    if (!values.phone) {
       phoneError = "Phone number required";
+    }
+
+    if (
+      values.phone &&
+      !fakeNumber.match(/^(\d{1})?(-0?1\s)?\(?\d{3}\)?-?\d{3}-?\d{4}$/g)
+    ) {
+      phoneError = "Please match an accepted phone format";
     }
 
     if (!values.zipcode) {
       zipcodeError = "Zipcode required";
+    }
+    if (values.zipcode.length < 5) {
+      zipcodeError = "Please enter a valid zipcode";
     }
 
     if (business_nameError || phoneError || zipcodeError) {
@@ -60,12 +67,13 @@ const RegisterVendor = (props) => {
           type="text"
           name="business_name"
           id="businessName"
+          data-testid="business-input"
           // placeholder='Enter your business name'
           value={values.business_name}
           onChange={handleChange}
         />
         <div className={registration.errorMessage}>
-          {values.businessNameError}
+          {values.business_nameError}
         </div>
 
         <label htmlFor="phone">Phone Number</label>
@@ -73,8 +81,9 @@ const RegisterVendor = (props) => {
           type="text"
           name="phone"
           id="phoneNumber"
+          data-testid="phone-input"
           // placeholder='Enter your phone number'
-          value={values.phone_number}
+          value={values.phone}
           onChange={handleChange}
         />
         <div className={registration.errorMessage}>{values.phoneError}</div>
@@ -84,6 +93,7 @@ const RegisterVendor = (props) => {
           type="text"
           name="address"
           id="streetAddress"
+          data-testid="street-input"
           // placeholder='Enter your street address'
           value={values.address}
           onChange={handleChange}
@@ -96,6 +106,7 @@ const RegisterVendor = (props) => {
               type="text"
               name="city"
               id="city"
+              data-testid="city-input"
               // placeholder='Enter your city'
               value={values.city}
               onChange={handleChange}
@@ -107,6 +118,7 @@ const RegisterVendor = (props) => {
               type="text"
               name="zipcode"
               id="zipcode"
+              data-testid="zip-input"
               // placeholder='Enter your zipcode'
               value={values.zipcode}
               onChange={handleChange}
@@ -124,7 +136,9 @@ const RegisterVendor = (props) => {
           styleClass="green-full"
           onClick={(e) => {
             e.preventDefault();
-            updateVendor(values);
+            if (validate()) {
+              updateVendor(values);
+            }
           }}
         >
           Update Vendor Info
