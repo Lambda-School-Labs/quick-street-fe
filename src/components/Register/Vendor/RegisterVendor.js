@@ -6,6 +6,7 @@ import { Context as AuthContext } from "../../../contexts/AuthContext";
 const RegisterVendor = (props) => {
   const { updateVendor } = useContext(AuthContext);
   const { values, handleChange, previousStep, setUserInfo } = props;
+  // const {errors, SetErrors} = useState{}
 
   const validate = () => {
     console.log("these are the values", values);
@@ -72,7 +73,7 @@ const RegisterVendor = (props) => {
           value={values.business_name}
           onChange={handleChange}
         />
-        <div className={registration.errorMessage}>
+        <div data-testid="business-error" className={registration.errorMessage}>
           {values.business_nameError}
         </div>
 
@@ -86,7 +87,9 @@ const RegisterVendor = (props) => {
           value={values.phone}
           onChange={handleChange}
         />
-        <div className={registration.errorMessage}>{values.phoneError}</div>
+        <div data-testid="phone-error" className={registration.errorMessage}>
+          {values.phoneError}
+        </div>
 
         <label htmlFor="address">Street Address</label>
         <input
@@ -123,7 +126,7 @@ const RegisterVendor = (props) => {
               value={values.zipcode}
               onChange={handleChange}
             />
-            <div className={registration.errorMessage}>
+            <div data-testid="zip-error" className={registration.errorMessage}>
               {values.zipcodeError}
             </div>
           </div>

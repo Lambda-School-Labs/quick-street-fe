@@ -46,7 +46,7 @@ describe("running tests on vendor registry", () => {
     <Router>
       <AuthProvider>
         <CartProvider>
-          <RegisterVendor values={dummyData} handleChange={handleChange} />
+          <RegisterVendor values={dummyData} handleChange={handleChange} set />
         </CartProvider>
       </AuthProvider>
     </Router>
@@ -58,5 +58,33 @@ describe("running tests on vendor registry", () => {
     const { getByText } = render(tree);
     expect(getByText("Great!")).toBeInTheDocument();
     expect(getByText(`Let's get you set up.`)).toBeInTheDocument();
+  });
+
+  it(`Check that all fields exist. `, () => {
+    const { getByTestId, getByText, getByLabelText } = render(tree);
+    expect(getByText(`Business Name`)).toBeInTheDocument();
+    expect(getByText("Phone Number")).toBeInTheDocument();
+    expect(getByText("Street Address")).toBeInTheDocument();
+    expect(getByLabelText("City")).toBeInTheDocument();
+    expect(getByLabelText("Zipcode")).toBeInTheDocument();
+    expect(getByTestId("business-input")).toBeInTheDocument();
+    expect(getByTestId("phone-input")).toBeInTheDocument();
+    expect(getByTestId("street-input")).toBeInTheDocument();
+    expect(getByTestId("city-input")).toBeInTheDocument();
+    expect(getByText("Update Vendor Info")).toBeInTheDocument();
+    expect(getByText("Back")).toBeInTheDocument();
+  });
+
+  it("Error handling- blank errors", () => {
+    const { getByTestId, getByText } = render(tree);
+    const register = getByText("Update Vendor Info");
+    fireEvent.click(register);
+    expect(getByTestId("phone-error")).toHaveTextContent(
+      "Phone number required"
+    );
+    expect(getByTestId("business-error")).toHaveTextContent(
+      "Business name required"
+    );
+    expect(getByTestId("zip-error")).toHaveTextContent("Zipcode required");
   });
 });
