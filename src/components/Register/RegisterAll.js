@@ -74,21 +74,27 @@ const RegisterAll = (props) => {
           type="text"
           name="email"
           id="email"
+          data-testid="email-input"
           // placeholder='Enter your email'
           value={values.email}
           onChange={handleChange}
         />
-        <div className={registration.errorMessage}>{values.emailError}</div>
+        <div data-testid="emailError" className={registration.errorMessage}>
+          {values.emailError}
+        </div>
         <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           id="password"
+          data-testid="password-input"
           // placeholder='Please enter a password'
           value={values.password}
           onChange={handleChange}
         />
-        <div className={registration.errorMessage}>{values.passwordError}</div>
+        <div data-testid="passError" className={registration.errorMessage}>
+          {values.passwordError}
+        </div>
 
         <div className={registration.vendorq_wrapper}>
           <p>Are you a vendor?</p>
@@ -116,15 +122,22 @@ const RegisterAll = (props) => {
           </div>
         </div>
 
-        <div className={registration.errorMessage}>{values.roleError}</div>
+        <div data-testid="roleError" className={registration.errorMessage}>
+          {values.roleError}
+        </div>
 
         <div className={registration.button_wrapper}>
-          <CustomButton styleClass="green-border" onClick={cancel}>
+          <CustomButton
+            styleClass="green-border"
+            data-testid="cancel-button"
+            onClick={cancel}
+          >
             Cancel
           </CustomButton>
         </div>
         <div className={registration.button_wrapper}>
           <CustomButton
+            data-testid="register-button"
             styleClass="green-full"
             onClick={(e) => {
               e.preventDefault();
