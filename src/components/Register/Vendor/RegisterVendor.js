@@ -1,12 +1,35 @@
 import React, { useContext } from "react";
 import registration from "../../../styles/scss/registration.module.scss";
+import axiosWithAuth from "../../../utils/axiosWithAuth";
 import { CustomButton } from "../../index";
 import { Context as AuthContext } from "../../../contexts/AuthContext";
 //Page 2 of vendor registry
 const RegisterVendor = (props) => {
-  const { updateVendor } = useContext(AuthContext);
   const { values, handleChange, previousStep, setUserInfo } = props;
-  // const {errors, SetErrors} = useState{}
+  const updateVendor = () => async ({
+    business_name,
+    phone,
+    address,
+    city,
+    zipcode,
+  }) => {
+    try {
+      const response = await axiosWithAuth().post("/vendors/add", {
+        business_name,
+        phone,
+        address,
+        zipcode,
+        city,
+      });
+      console.log("this is the response", response);
+      if (response.status === 200) {
+        console.log("response after creating a user", response);
+        window.location.href = `/profile`;
+      }
+    } catch (error) {
+      console.log("Error while creating a user", error.response);
+    }
+  };
 
   const validate = () => {
     console.log("these are the values", values);
@@ -70,8 +93,8 @@ const RegisterVendor = (props) => {
           id="businessName"
           data-testid="business-input"
           // placeholder='Enter your business name'
-          value={values.business_name}
           onChange={handleChange}
+          value={values.business_name}
         />
         <div data-testid="business-error" className={registration.errorMessage}>
           {values.business_nameError}

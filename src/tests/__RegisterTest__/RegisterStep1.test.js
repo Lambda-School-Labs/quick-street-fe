@@ -9,7 +9,7 @@ import Register from "../../pages/Register";
 import RegisterAll from "../../components/Register/RegisterAll";
 import CustomButton from "../../components/shared/CustomButton";
 
-describe("running tests on login", () => {
+describe("running tests on registry", () => {
   //arrange (render component and set up mock data)
   //act
   //assert

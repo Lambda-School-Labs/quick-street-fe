@@ -75,39 +75,6 @@ const signup = (dispatch) => async ({ email, password, role }) => {
     });
   }
 };
-const updateVendor = (dispatch) => async ({
-  business_name,
-  phone,
-  address,
-  city,
-  zipcode,
-}) => {
-  try {
-    const response = await axiosWithAuth().post("/vendors/add", {
-      business_name,
-      phone,
-      address,
-      zipcode,
-      city,
-    });
-    // localStorage.setItem("token", response.data.token);
-    // localStorage.setItem("user_id", response.data.id);
-    // localStorage.setItem("isVendor", response.data.isVendor);
-    // dispatch({ type: "signup", payload: response.data.token });
-    console.log("this is the response", response);
-    if (response.status === 200) {
-      console.log("response after creating a user", response);
-      const userToken = localStorage.getItem("token");
-      window.location.href = `/profile`;
-    }
-  } catch (error) {
-    console.log("Error while creating a user", error.response);
-    dispatch({
-      type: "add_error",
-      payload: "something went wrong updating this vendor account.",
-    });
-  }
-};
 
 const signin = (dispatch) => async ({ email, password }) => {
   try {
@@ -153,6 +120,6 @@ const changeMessage = (dispatch) => () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup, changeMessage, updateVendor },
+  { signin, signout, signup, changeMessage },
   { token: "", errorMessage: "", message: "Hello Friend" }
 );
