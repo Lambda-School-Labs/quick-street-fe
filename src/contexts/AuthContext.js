@@ -46,36 +46,6 @@ const createCart = (customerId) => {
     });
 };
 
-const signup = (dispatch) => async ({ email, password, role }) => {
-  try {
-    const response = await axiosWithAuth().post("/auth/registration", {
-      email,
-      password,
-      role,
-    });
-    localStorage.setItem("token", response.data.token);
-    // localStorage.setItem("user_id", response.data.id);
-    localStorage.setItem("isVendor", response.data.user.isVendor);
-    dispatch({ type: "signup", payload: response.data.token });
-    if (response.status === 200 && role === "vendor") {
-      console.log("response updating vendor info", response);
-    } else if (response.status === 200 && role === "customer") {
-      console.log("user is customer?");
-      checkIfCart(response.data.id);
-      window.location.href = "browse";
-
-      // window.location.href = "/login";
-      // window.location.href = `/profile/${response.data.id}`;
-    }
-  } catch (error) {
-    console.log("Error while creating a user", error.response);
-    dispatch({
-      type: "add_error",
-      payload: "something went wrong registering this user.",
-    });
-  }
-};
-
 const signin = (dispatch) => async ({ email, password }) => {
   try {
     const response = await axiosWithAuth().post("/auth/login", {
@@ -120,6 +90,6 @@ const changeMessage = (dispatch) => () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signout, signup, changeMessage },
+  { signin, signout, changeMessage },
   { token: "", errorMessage: "", message: "Hello Friend" }
 );

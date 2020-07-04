@@ -1,20 +1,41 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import registration from "../../styles/scss/registration.module.scss";
 import { CustomButton } from "../index";
-
-//Adding auth context
-import { Context as AuthContext } from "../../contexts/AuthContext";
+import axiosWithAuth from "../../utils/axiosWithAuth";
 
 //This is the first screen that we see. All of this is running through RegisterContext.js
 const RegisterAll = (props) => {
-  const { signup } = useContext(AuthContext);
-  const { values, nextStep, handleChange, setUserInfo } = props;
-
-  const proceed = () => {
-    if (validate()) {
-      // console.log(values);
-      nextStep();
+  const [userValues, setUserValues] = useState({
+    email: "",
+    password: "",
+    isVendor: null,
+  });
+  const [errors, setErrors] = useState({
+    emailError: "",
+    passwordError: "",
+    roleError: "",
+  });
+  const signup = async (data) => {
+    try {
+      const response = await axiosWithAuth().post("/auth/registration", data);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user_id", response.data.id);
+      localStorage.setItem("isVendor", response.data.user.isVendor);
+      console.log("response updating vendor info", response);
+      if (response.status === 200 && response.data.user.isVendor === "true") {
+        props.setVendorCheck(true);
+        props.nextStep();
+      } else if (
+        response.status === 200 &&
+        response.data.user.isVendor === "false"
+      ) {
+        console.log("user is customer?");
+        // checkIfCart(response.data.id);
+        window.location.href = "browse";
+      }
+    } catch (error) {
+      console.log("Error while creating a user", error.response);
     }
   };
 
@@ -23,43 +44,49 @@ const RegisterAll = (props) => {
     props.history.push("/");
   };
 
+  const handleChange = (e) => {
+    setUserValues({
+      ...userValues,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const validate = () => {
     let emailError = "";
     let passwordError = "";
     let roleError = "";
-
-    if (!values.email.includes("@")) {
+    if (!userValues.email.includes("@")) {
       emailError = "Invalid email";
     }
-
-    if (values.password.length === 0) {
+    if (userValues.password.length === 0) {
       passwordError = "Password required";
     }
-
-    if (values.password.length < 6 && values.password) {
+    if (userValues.password.length < 6 && userValues.password) {
       passwordError = "Minimum password is 6 characters";
     }
-
-    if (!values.role) {
+    if (!userValues.isVendor) {
       roleError = "Role required";
     }
-
     if (emailError || passwordError || roleError) {
-      setUserInfo({
-        ...values,
+      setErrors({
+        ...errors,
         emailError,
         passwordError,
         roleError,
       });
       return false;
     }
-
+    setErrors({
+      ...errors,
+      emailError,
+      passwordError,
+      roleError,
+    });
     return true;
   };
 
   return (
     //bringing in our module
-
     <div className={registration.wrapper}>
       <h1>Create An Account With Quick Street</h1>
       <p>
@@ -76,11 +103,11 @@ const RegisterAll = (props) => {
           id="email"
           data-testid="email-input"
           // placeholder='Enter your email'
-          value={values.email}
+          value={userValues.email}
           onChange={handleChange}
         />
         <div data-testid="emailError" className={registration.errorMessage}>
-          {values.emailError}
+          {errors.emailError}
         </div>
         <label htmlFor="password">Password</label>
         <input
@@ -89,11 +116,11 @@ const RegisterAll = (props) => {
           id="password"
           data-testid="password-input"
           // placeholder='Please enter a password'
-          value={values.password}
+          value={userValues.password}
           onChange={handleChange}
         />
         <div data-testid="passError" className={registration.errorMessage}>
-          {values.passwordError}
+          {errors.passwordError}
         </div>
 
         <div className={registration.vendorq_wrapper}>
@@ -102,9 +129,8 @@ const RegisterAll = (props) => {
             <label htmlFor="vendor">
               <input
                 type="radio"
-                name="role"
-                value="vendor"
-                checked={values.role === "vendor"}
+                name="isVendor"
+                value="true"
                 onChange={handleChange}
               />
               Yes
@@ -112,9 +138,8 @@ const RegisterAll = (props) => {
             <label htmlFor="customer">
               <input
                 type="radio"
-                name="role"
-                value="customer"
-                checked={values.role === "customer"}
+                name="isVendor"
+                value="false"
                 onChange={handleChange}
               />
               No
@@ -123,7 +148,7 @@ const RegisterAll = (props) => {
         </div>
 
         <div data-testid="roleError" className={registration.errorMessage}>
-          {values.roleError}
+          {errors.roleError}
         </div>
 
         <div className={registration.button_wrapper}>
@@ -141,8 +166,10 @@ const RegisterAll = (props) => {
             styleClass="green-full"
             onClick={(e) => {
               e.preventDefault();
-              signup(values);
-              proceed();
+              if (validate()) {
+                console.log("uservalues", userValues);
+                signup(userValues);
+              }
             }}
           >
             Register
