@@ -11,35 +11,11 @@ describe("running tests on vendor registry", () => {
   //arrange (render component and set up mock data)
   //act
   //assert
-  let dummyData = {
-    email: "",
-    emailError: "",
-    password: "",
-    passwordError: "",
-    role: "",
-    roleError: "",
-    business_name: "",
-    business_nameError: "",
-    phone: "",
-    phoneError: "",
-    address: "",
-    city: "",
-    zipcode: "",
-    zipcodeError: "",
-  };
-
-  let handleChange = jest.fn();
-  let fakeFn = jest.fn();
-
   const tree = (
     <Router>
       <AuthProvider>
         <CartProvider>
-          <RegisterVendor
-            values={dummyData}
-            handleChange={handleChange}
-            setUserInfo={fakeFn}
-          />
+          <RegisterVendor />
         </CartProvider>
       </AuthProvider>
     </Router>
@@ -67,56 +43,26 @@ describe("running tests on vendor registry", () => {
     expect(getByText("Update Vendor Info")).toBeInTheDocument();
     expect(getByText("Back")).toBeInTheDocument();
   });
-  //   Error handling doesn't seem to be working.
-  //   it("Error handling- blank errors", () => {
-  //     const { getByTestId, getByText } = render(tree);
-  //     const register = getByText("Update Vendor Info");
-  //     fireEvent.click(register);
-  //     expect(getByTestId("phone-error")).toHaveTextContent(
-  //       "Phone number required"
-  //     );
-  //     expect(getByTestId("business-error")).toHaveTextContent(
-  //       "Business name required"
-  //     );
-  //     expect(getByTestId("zip-error")).toHaveTextContent("Zipcode required");
-  //   });
 
-  it("testing inputs", () => {
-    const handleChange = jest.fn();
-    const { getByTestId } = render(
-      <RegisterVendor
-        values={{ business_name: "test" }}
-        handleChange={handleChange}
-      />
+  it("Error handling- blank errors", () => {
+    const { getByTestId, getByText } = render(tree);
+    const register = getByText("Update Vendor Info");
+    fireEvent.click(register);
+    expect(getByTestId("phone-error")).toHaveTextContent(
+      "Phone number required"
     );
-    // const renderer = new ShallowRenderer();
-    // const setup = { business_name: "Walmart" };
-    // renderer.render(<RegisterVendor values={setup} />);
-    // const result = renderer.getRenderOutput();
-    // console.log("result", result);
-    // const tree2 = (
-    //   <Router>
-    //     <AuthProvider>
-    //       <CartProvider>
-    //         <RegisterVendor handleChange={handleChange} setUserInfo={fakeFn} />
-    //       </CartProvider>
-    //     </AuthProvider>
-    //   </Router>
-    // );
-
-    // expect(result.type).toBe("div");
-    const business = getByTestId("business-input")
-    fireEvent.change(business, { target: { value: "yes" } });
-    expect(handleChange).toHaveBeenCalledTimes(1);
-    expect(business).toHaveTextContent("yes");
+    expect(getByTestId("business-error")).toHaveTextContent(
+      "Business name required"
+    );
+    expect(getByTestId("zip-error")).toHaveTextContent(
+      "Please enter a valid zipcode"
+    );
   });
 
   it("testing inputs", () => {
-    const handleChange = jest.fn();
-    const { getByTestId } = render(
-      <input
-        name="cat"
-        value=""
-      />
-    );
+    const { getByTestId } = render(tree);
+    const business = getByTestId("business-input");
+    fireEvent.change(business, { target: { value: "yes" } });
+    expect(business.value).toBe("yes");
+  });
 });

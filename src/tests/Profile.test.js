@@ -4,7 +4,7 @@ import { render, cleanup, fireEvent } from "@testing-library/react";
 
 describe("test that profile page", () => {
   const fakeData = {
-    business_name: "the dog store",
+    business_name: "Cat Face",
     phone: "555-555-1234",
     address: "1234 Stanley Ave",
     zipcode: 91206,
@@ -17,6 +17,6 @@ describe("test that profile page", () => {
   };
   it("testing that about component renders", () => {
     const { getByText } = render(<About vendorInfo={fakeData} />);
-    expect(getByText("the dog store")).toBeInDocument();
+    expect(getByText("Cat Face")).toBeInDocument();
   });
 });
