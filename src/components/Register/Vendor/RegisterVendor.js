@@ -1,61 +1,85 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import registration from "../../../styles/scss/registration.module.scss";
+import axiosWithAuth from "../../../utils/axiosWithAuth";
 import { CustomButton } from "../../index";
-import { Context as AuthContext } from "../../../contexts/AuthContext";
+
 //Page 2 of vendor registry
 const RegisterVendor = (props) => {
-  const { updateVendor } = useContext(AuthContext);
-  const { values, handleChange, previousStep, setUserInfo } = props;
-  // const {errors, SetErrors} = useState{}
+  const [vendorData, setVendorData] = useState({
+    business_name: "",
+    phone: "",
+    address: "",
+    city: "",
+    zipcode: "",
+  });
+
+  const [errors, setErrors] = useState({
+    business_nameError: "",
+    phoneError: "",
+    zipcodeError: "",
+  });
+
+  const handleChange = (event) => {
+    setVendorData({
+      ...vendorData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const updateVendor = async (data) => {
+    try {
+      const response = await axiosWithAuth().post("/vendors/add", data);
+      console.log("this is the response", response);
+      if (response.status === 200) {
+        console.log("response after creating a user", response);
+        window.location.href = `/profile`;
+      }
+    } catch (error) {
+      console.log("Error while creating a user", error.response);
+    }
+  };
 
   const validate = () => {
-    console.log("these are the values", values);
     let business_nameError = "";
     let phoneError = "";
     let zipcodeError = "";
     let fakeNumber = "";
-    if (values.phone) {
-      fakeNumber = values.phone.toString();
+    if (vendorData.phone) {
+      fakeNumber = vendorData.phone.toString();
     }
-
-    if (!values.business_name) {
+    if (!vendorData.business_name) {
       business_nameError = "Business name required";
     }
-
-    if (!values.phone) {
+    if (!vendorData.phone) {
       phoneError = "Phone number required";
     }
-
     if (
-      values.phone &&
+      vendorData.phone &&
       !fakeNumber.match(/^(\d{1})?(-0?1\s)?\(?\d{3}\)?-?\d{3}-?\d{4}$/g)
     ) {
       phoneError = "Please match an accepted phone format";
     }
-
-    if (!values.zipcode) {
+    if (!vendorData.zipcode) {
       zipcodeError = "Zipcode required";
     }
-    if (values.zipcode.length < 5) {
+    if (vendorData.zipcode.length < 5) {
       zipcodeError = "Please enter a valid zipcode";
     }
-
     if (business_nameError || phoneError || zipcodeError) {
-      setUserInfo({
-        ...values,
+      setErrors({
+        ...errors,
         business_nameError,
         phoneError,
         zipcodeError,
       });
       return false;
     }
-
     return true;
   };
 
   const cancel = (event) => {
     event.preventDefault();
-    previousStep();
+    props.previousStep();
   };
 
   return (
@@ -70,11 +94,11 @@ const RegisterVendor = (props) => {
           id="businessName"
           data-testid="business-input"
           // placeholder='Enter your business name'
-          value={values.business_name}
           onChange={handleChange}
+          value={vendorData.business_name}
         />
         <div data-testid="business-error" className={registration.errorMessage}>
-          {values.business_nameError}
+          {errors.business_nameError}
         </div>
 
         <label htmlFor="phone">Phone Number</label>
@@ -84,11 +108,11 @@ const RegisterVendor = (props) => {
           id="phoneNumber"
           data-testid="phone-input"
           // placeholder='Enter your phone number'
-          value={values.phone}
+          value={vendorData.phone}
           onChange={handleChange}
         />
         <div data-testid="phone-error" className={registration.errorMessage}>
-          {values.phoneError}
+          {errors.phoneError}
         </div>
 
         <label htmlFor="address">Street Address</label>
@@ -98,7 +122,7 @@ const RegisterVendor = (props) => {
           id="streetAddress"
           data-testid="street-input"
           // placeholder='Enter your street address'
-          value={values.address}
+          value={vendorData.address}
           onChange={handleChange}
         />
 
@@ -111,7 +135,7 @@ const RegisterVendor = (props) => {
               id="city"
               data-testid="city-input"
               // placeholder='Enter your city'
-              value={values.city}
+              value={vendorData.city}
               onChange={handleChange}
             />
           </div>
@@ -123,11 +147,11 @@ const RegisterVendor = (props) => {
               id="zipcode"
               data-testid="zip-input"
               // placeholder='Enter your zipcode'
-              value={values.zipcode}
+              value={vendorData.zipcode}
               onChange={handleChange}
             />
             <div data-testid="zip-error" className={registration.errorMessage}>
-              {values.zipcodeError}
+              {errors.zipcodeError}
             </div>
           </div>
         </div>
@@ -140,7 +164,7 @@ const RegisterVendor = (props) => {
           onClick={(e) => {
             e.preventDefault();
             if (validate()) {
-              updateVendor(values);
+              updateVendor(vendorData);
             }
           }}
         >

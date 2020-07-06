@@ -5,48 +5,17 @@ import "@testing-library/jest-dom/extend-expect";
 import { Provider as AuthProvider } from "../../contexts/AuthContext";
 import { Provider as CartProvider } from "../../contexts/TestCartContext";
 import { BrowserRouter as Router } from "react-router-dom";
-import Register from "../../pages/Register";
 import RegisterVendor from "../../components/Register/Vendor/RegisterVendor";
-import CustomButton from "../../components/shared/CustomButton";
 
 describe("running tests on vendor registry", () => {
   //arrange (render component and set up mock data)
   //act
   //assert
-  let dummyData = {
-    email: "",
-    emailError: "",
-    password: "",
-    passwordError: "",
-    role: "",
-    roleError: "",
-    business_name: "",
-    business_nameError: "",
-    phone: "",
-    phoneError: "",
-    address: "",
-    city: "",
-    zipcode: "",
-    zipcodeError: "",
-  };
-
-  let handleChange = (event) =>
-    (dummyData = {
-      ...dummyData,
-      [event.target.name]: event.target.value,
-      emailError: "",
-      passwordError: "",
-      roleError: "",
-      business_nameError: "",
-      phoneError: "",
-      zipcodeError: "",
-    });
-
   const tree = (
     <Router>
       <AuthProvider>
         <CartProvider>
-          <RegisterVendor values={dummyData} handleChange={handleChange} set />
+          <RegisterVendor />
         </CartProvider>
       </AuthProvider>
     </Router>
@@ -85,6 +54,15 @@ describe("running tests on vendor registry", () => {
     expect(getByTestId("business-error")).toHaveTextContent(
       "Business name required"
     );
-    expect(getByTestId("zip-error")).toHaveTextContent("Zipcode required");
+    expect(getByTestId("zip-error")).toHaveTextContent(
+      "Please enter a valid zipcode"
+    );
+  });
+
+  it("testing inputs", () => {
+    const { getByTestId } = render(tree);
+    const business = getByTestId("business-input");
+    fireEvent.change(business, { target: { value: "yes" } });
+    expect(business.value).toBe("yes");
   });
 });
