@@ -55,6 +55,26 @@ export default function BannerUploader(props) {
       if (!error && result && result.event === "success") {
         const banner_info = await result.info;
         console.log("BannerUpload.js UploadWidget banner_info ", banner_info);
+
+        console.log('VendorBannerUploader.js resut.info: ', banner_info);
+        // console.log('ProductImageUploader.js productId ', productId);
+        // console.log("product id from correct fields", correct_fields.product)
+        // console.log('ProductImageUploader.js vendorId ', vendorId);
+        // console.log("public id info from correct fields", correct_fields.public_id)
+        const correctBannerData = banner_info.public_id.split("/",2)
+        console.log("new image data", correctBannerData[1])
+
+
+        axiosWithAuth()
+          .put(`/vendors/${vendorId}/vendor-banner`, {"public_id": correctBannerData[1]})
+          .then(res => {
+            console.log('PUT VendorBannerUpload res: ', res);
+            setBannerInfo(banner_info.public_id)
+          })
+          .catch((err) => {
+            console.log('PUT VendorProfile.js Upload widget err', err);
+          });
+
         axiosWithAuth()
           .put(
             `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,

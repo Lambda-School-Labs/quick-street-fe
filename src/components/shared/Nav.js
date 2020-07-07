@@ -140,7 +140,7 @@ const Nav = () => {
       return 0;
     }
   };
-  console.log("Customer ID", customerId);
+  // console.log("Customer ID", customerId);
 
   useEffect(() => {
     getCartItems(customerId);

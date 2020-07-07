@@ -30,7 +30,12 @@ const Landing = () => {
             </h1>
             <div className={landing.button_container}>
               <CustomButton styleClass='red-full'>
-                <Link to='/register'>Get Started</Link>
+                <Link to='/register'>Register</Link>
+              </CustomButton>
+            </div>
+            <div className={landing.button_container}>
+              <CustomButton styleClass='red-full'>
+                <Link to='/login'>Login</Link>
               </CustomButton>
             </div>
           </div>
