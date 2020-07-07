@@ -5,20 +5,15 @@ import Product from "./ViewVendorProduct";
 //styling
 import profile from "../../../../styles/scss/profile.module.scss";
 const ViewVendorProducts = (props) => {
-  const [vendorProducts, setVendorProducts] = useState({
-    products: [],
-  });
+  const [vendorProducts, setVendorProducts] = useState([]);
   // const { cart, setCart } = props;
 
   const getVendorProducts = (id) => {
     axiosWithAuth()
       .get(`/vendors/${id}/products`)
       .then((response) => {
-        console.log(response);
-        setVendorProducts({
-          ...vendorProducts,
-          products: response.data,
-        });
+        console.log("viewvendorsProducts response", response);
+        setVendorProducts(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -27,21 +22,21 @@ const ViewVendorProducts = (props) => {
 
   useEffect(() => {
     getVendorProducts(props.vendorId);
-  }); // removed [] dependency
+  }, []); // removed [] dependency
 
   return (
     <div className={profile.products_container}>
       <div className={profile.products_wrapper}>
         <h1>Products</h1>
         <div className={profile.products_card_wrapper}>
-          {vendorProducts.products.map((product) => (
+          {vendorProducts.map((product) => (
             <Product
               product={product}
               key={product.id}
               vendorId={props.vendorId}
             />
           ))}
-          {vendorProducts.count === 0 && (
+          {vendorProducts.length === 0 && (
             <p className="no_products_content">
               There are no products to show right now.
             </p>

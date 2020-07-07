@@ -2,122 +2,51 @@ import React, { useState } from "react";
 
 //styling
 import registration from "../styles/scss/registration.module.scss";
-import {
-  CustomerConfirmation,
-  VendorConfirmation,
-  VendorDetails,
-  RegisterDetails,
-} from "../components/index";
+import { RegisterVendor, RegisterAll } from "../components/index";
 const Register = (props) => {
   // console.log('Register.js props: ', props);
 
-  const [userInfo, setUserInfo] = useState({
+  const [stepNum, setStepNum] = useState({
     step: 1,
-    email: "",
-    emailError: "",
-    password: "",
-    passwordError: "",
-    role: "",
-    roleError: "",
-    business_name: "",
-    business_nameError: "",
-    phone: "",
-    phoneError: "",
-    address: "",
-    city: "",
-    zipcode: "",
-    zipcodeError: "",
   });
+  const [vendorCheck, setVendorCheck] = useState(false);
 
   const nextStep = () => {
-    const { step } = userInfo;
-    setUserInfo({
-      ...userInfo,
+    const { step } = stepNum;
+    setStepNum({
       step: step + 1,
     });
   };
 
   const previousStep = () => {
-    const { step } = userInfo;
-    setUserInfo({
-      ...userInfo,
+    const { step } = stepNum;
+    setStepNum({
       step: step - 1,
     });
   };
 
-  const handleChange = (event) => {
-    setUserInfo({
-      ...userInfo,
-      [event.target.name]: event.target.value,
-      emailError: "",
-      passwordError: "",
-      roleError: "",
-      business_nameError: "",
-      phoneError: "",
-      zipcodeError: "",
-    });
-  };
-
   const userDetails = () => {
-    if (userInfo.step === 1) {
+    if (stepNum.step === 1) {
       return (
-        <RegisterDetails
-          values={userInfo}
-          handleChange={handleChange}
+        <RegisterAll
           nextStep={nextStep}
-          setUserInfo={setUserInfo}
           history={props.history}
+          setVendorCheck={setVendorCheck}
         />
       );
     }
   };
 
   const vendorDetails = () => {
-    if (userInfo.step === 2 && userInfo.role === "vendor") {
-      return (
-        <VendorDetails
-          values={userInfo}
-          handleChange={handleChange}
-          nextStep={nextStep}
-          previousStep={previousStep}
-          setUserInfo={setUserInfo}
-        />
-      );
+    if (stepNum.step === 2 && vendorCheck) {
+      return <RegisterVendor previousStep={previousStep} />;
     }
   };
 
-  // const vendorConfirmation = () => {
-  //   if (userInfo.step === 3) {
-  //     return (
-  //       <VendorConfirmation
-  //         values={userInfo}
-  //         previousStep={previousStep}
-  //         history={props.history}
-  //       />
-  //     );
-  //   }
-  // };
-
-  // const customerConfirmation = () => {
-  //   if (userInfo.step === 2 && userInfo.role === "customer") {
-  //     return (
-  //       <CustomerConfirmation
-  //         values={userInfo}
-  //         previousStep={previousStep}
-  //         history={props.history}
-  //       />
-  //     );
-  //   }
-  // };
-
-  console.log("something unique")
-  
   return (
     <div className={registration.container}>
       {userDetails()}
       {vendorDetails()}
-      {/* {vendorConfirmation()}
-      {customerConfirmation()} */}
     </div>
   );
 };

@@ -7,16 +7,20 @@ import { Provider as CartProvider } from "../contexts/TestCartContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import Login from "../pages/Login";
 
-test(`loads`, () => {
-  const tree = (
-    <Router>
-      <AuthProvider>
-        <CartProvider>
-          <Login />
-        </CartProvider>
-      </AuthProvider>
-    </Router>
-  );
-  const { getByRole, findByText } = render(tree);
-  findByText(/welcome back/i);
+describe("running tests on login", () => {
+  it(`loads`, () => {
+    const tree = (
+      <Router>
+        <AuthProvider>
+          <CartProvider>
+            <Login />
+          </CartProvider>
+        </AuthProvider>
+      </Router>
+    );
+    const { getByText, getAllByText } = render(tree);
+
+    expect(getByText("Welcome Back!")).toBeInTheDocument();
+    expect(getAllByText("Login")).toHaveLength(2);
+  });
 });
