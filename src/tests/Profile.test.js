@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 import About from "../components/Profile/Profile/About";
+import "@testing-library/jest-dom/extend-expect";
+import VendorProducts from "../components/Profile/Product/VendorProducts";
+import Bulletin from "../components/Profile/Bulletin/Bulletin";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
 describe("test that profile page", () => {
@@ -15,8 +18,31 @@ describe("test that profile page", () => {
     hours: "10am to 11pm",
     email: "dog@123.com",
   };
+  const dummyProducts = [
+    {
+      id: 1,
+      name: "bone",
+      price: 6.3,
+    },
+    {
+      id: 2,
+      name: "catnip",
+      price: 3.5,
+    },
+  ];
   it("testing that about component renders", () => {
     const { getByText } = render(<About vendorInfo={fakeData} />);
-    expect(getByText("Cat Face")).toBeInDocument();
+    let doggies = getByText("a store for dog goodies");
+    expect(doggies).toBeInTheDocument();
+  });
+  it("testing that VendorProducts component renders", () => {
+    const { getByText } = render(<VendorProducts products={dummyProducts} />);
+    let name = getByText("catnip");
+    let price = getByText("$3.5");
+    expect(name).toBeInTheDocument();
+    expect(price).toBeInTheDocument();
+  });
+  it("testing that Bulletin component renders", () => {
+    const { getByText } = render(<Bulletin />);
   });
 });
