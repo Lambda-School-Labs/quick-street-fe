@@ -23,7 +23,7 @@ import {
 const App = () => {
   return (
     <div>
-      <Route path="/orderreview/:id" component={OrderReview} />
+      <Route path="/orderreview/:id" render={OrderReview} />
       <Route path="/orderconfirmation" component={OrderConfirmation} />
       <Route path="/styling" component={Styling} />
       <Route exact path="/" component={Landing} />
