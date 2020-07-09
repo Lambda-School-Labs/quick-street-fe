@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import About from "../components/Profile/Profile/About";
 import "@testing-library/jest-dom/extend-expect";
 import VendorProducts from "../components/Profile/Product/VendorProducts";
+import { BrowserRouter as Router } from "react-router-dom";
+import ProfilePage from "../pages/ProfilePage";
 import Bulletin from "../components/Profile/Bulletin/Bulletin";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
@@ -45,4 +47,10 @@ describe("test that profile page", () => {
   it("testing that Bulletin component renders", () => {
     const { getByText } = render(<Bulletin />);
   });
+
+  // it("testing that the whole Profile page appears", () => {
+  //   const { getByTestId } = render(<ProfilePage />);
+  //   const profile = getByTestId("profile-page");
+  //   expect(profile).toBeInTheDocument();
+  // });
 });

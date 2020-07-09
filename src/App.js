@@ -14,7 +14,7 @@ import {
   Vendor, // ** Browsing Vendor Page
   Browse, // ** Browsing page (Map, Search)
   Landing, // ** Home Page
-  Profile, //** Vendors Editing Page */
+  ProfilePage, //** Vendors Editing Page */
   Styling, // ** Styling Template */
   Dashboard, // ** Dashboard Page **/
   OrderReview, // ** Order Review Page **/
@@ -30,7 +30,7 @@ const App = () => {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Switch>
-        <Route path="/profile" component={Profile} />
+        <Route path="/profile" component={ProfilePage} />
         <Route path="/browse/:id" component={Vendor} />
         <Route path="/browse" component={Browse} />
         <Route path="/dashboard" component={Dashboard} />

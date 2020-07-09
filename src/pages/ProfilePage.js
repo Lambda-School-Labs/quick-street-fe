@@ -20,7 +20,7 @@ import browse from "../styles/scss/browse.module.scss";
 
 //This is the VENDOR PROFILE PAGE!!!!
 
-const Profile = (props) => {
+const ProfilePage = (props) => {
   // It all starts here!...with vendorId from localStorage
   const [vendorId] = useState(localStorage.getItem("user_id")); // removed setVendorId from const
   const [vendorInfo, setVendorInfo] = useState({
@@ -119,7 +119,7 @@ const Profile = (props) => {
       <div style={{ backgroundColor: "#00B2ED" }} className={browse.temp_menu}>
         <Nav />
       </div>
-      <div className={profile.profile_container}>
+      <div className={profile.profile_container} data-testId="profile-page">
         <div className={`${profile.wrapper} ${banner.banner_wrapper}`}>
           <div
             className={`${profile.inner_container} ${banner.inner_banner_container}`}
@@ -127,7 +127,7 @@ const Profile = (props) => {
             <div className={banner.banner_text_btns}>
               <div className={banner.vendor_header_name}>
                 {editingName ? ( // <<<<<<<<<< turnary ?
-                  <React.Fragment>
+                  <div>
                     <input
                       className={banner.business_name_input}
                       onChange={(e) => {
@@ -152,9 +152,8 @@ const Profile = (props) => {
                         <i className="fa fa-save"></i>&nbsp; Save
                       </p>
                     </div>
-                  </React.Fragment>
+                  </div>
                 ) : (
-                  //<<<<<<< TURNARY input name or p tag
                   <h1
                     onClick={() => setEditingName(true)}
                     className={banner.business_name_text}
@@ -196,9 +195,7 @@ const Profile = (props) => {
               />
             </div>
           </div>
-          {/* Inner Banner Container */}
         </div>
-        {/* END BANNER WRAPPER */}
 
         <About
           vendorInfo={vendorInfo}
@@ -220,4 +217,4 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+export default ProfilePage;
