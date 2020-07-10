@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import ProfilePage from "../pages/ProfilePage";
 import Bulletin from "../components/Profile/Bulletin/Bulletin";
 import { render, cleanup, fireEvent } from "@testing-library/react";
+import VendorCategories from "../components/Profile/Profile/VendorCategories";
 
 describe("test that profile page", () => {
   const fakeData = {
@@ -52,6 +53,24 @@ describe("test that profile page", () => {
   it("testing that Bulletin component renders", () => {
     const { getByTestId } = render(<Bulletin />);
     const wrapper = getByTestId("bulletin-wrapper");
+    expect(wrapper).toBeInTheDocument();
+  });
+  it("testing that vendorCategories component renders", () => {
+    const dummyData = {
+      users_id: 7,
+      business_name: "the dog store",
+      phone: "555-555-1234",
+      address: "1234 Stanley Ave",
+      zipcode: 91206,
+      city: "glendale",
+      description: "a store for dog goodies",
+      vendor_category: "pets",
+      bulletin: "here is dog stuff to know",
+      hours: "10am to 11pm",
+      email: "dog@123.com",
+    };
+    const { getByTestId } = render(<VendorCategories vendorInfo={dummyData} />);
+    const wrapper = getByTestId("vendorcat-wrapper");
     expect(wrapper).toBeInTheDocument();
   });
 
