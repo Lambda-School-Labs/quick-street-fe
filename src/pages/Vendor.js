@@ -19,7 +19,7 @@ const Vendor = (props) => {
   // const [ cartModal, setCartModal ] = useState(false);
   console.log("vendor id", vendorId);
   return (
-    <div data-testId="vendor-page">
+    <div data-testid="vendor-page">
       <div style={{ backgroundColor: "#00B2ED" }} className={browse.temp_menu}>
         <Nav />
       </div>

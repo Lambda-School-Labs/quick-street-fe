@@ -33,4 +33,9 @@ describe("running tests on login", () => {
 
     expect(getByTestId("login-wrapper")).toBeInTheDocument();
   });
+  it(`full component renders`, () => {
+    const { getByTestId, getAllByText } = render(tree);
+
+    expect(getByTestId("login-wrapper")).toBeInTheDocument();
+  });
 });
