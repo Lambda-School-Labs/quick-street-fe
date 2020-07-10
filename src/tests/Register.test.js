@@ -17,5 +17,6 @@ test(`loads`, () => {
       </AuthProvider>
     </Router>
   );
-  const { getByRole, findByText } = render(tree);
+  const { getByTestId } = render(tree);
+  expect(getByTestId("register-page")).toBeInTheDocument();
 });

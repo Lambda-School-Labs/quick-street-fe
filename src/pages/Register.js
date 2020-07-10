@@ -44,7 +44,7 @@ const Register = (props) => {
   };
 
   return (
-    <div className={registration.container}>
+    <div className={registration.container} data-testid="register-page">
       {userDetails()}
       {vendorDetails()}
     </div>

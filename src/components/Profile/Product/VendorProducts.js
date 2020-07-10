@@ -54,7 +54,10 @@ const VendorProducts = ({
   };
 
   return (
-    <div className={`${profile.wrapper} ${v_products.products_wrapper}`}>
+    <div
+      className={`${profile.wrapper} ${v_products.products_wrapper}`}
+      data-testid="products-wrapper"
+    >
       <div
         className={`${profile.inner_container} ${v_products.products_inner_container}`}
       >

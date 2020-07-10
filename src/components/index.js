@@ -18,7 +18,7 @@ import vendorpost from "../components/Profile/Bulletin/VendorPost";
 import vendorpostlist from "../components/Profile/Bulletin/VendorPostList";
 
 // Profile  product components
-// import addproductform from "../components/Profile/Product/AddProductForm";
+
 import product from "../components/Profile/Product/Product";
 import vendorproducts from "../components/Profile/Product/VendorProducts";
 import editproduct from "../components/Profile/Product/EditProduct";
@@ -79,7 +79,6 @@ export const VendorPost = vendorpost;
 export const VendorPostList = vendorpostlist;
 
 // Profile product exports
-// export const AddProductForm = addproductform;
 export const Product = product;
 export const VendorProducts = vendorproducts;
 export const EditProduct = editproduct;
