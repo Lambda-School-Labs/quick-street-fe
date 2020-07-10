@@ -19,7 +19,11 @@ const Browse = (props) => {
           </p>
           <div className={browse.vendor_div_empty}>
             {noZipcodeArray.map((value, index) => (
-              <div className={browse.vendor_details_empty} key={index}>
+              <div
+                className={browse.vendor_details_empty}
+                data-testId="placeholder"
+                key={index}
+              >
                 <img
                   className={browse.placeholder_image}
                   src={rectangle}
@@ -41,7 +45,7 @@ const Browse = (props) => {
         </div>
       ) : (
         <p className={browse.vendor_count}>
-          Showing all ({props.vendors.count})
+          Showing all ({props.vendors.length})
         </p>
       )}
       <div className={browse.vendors_div}>

@@ -3,6 +3,9 @@
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/f465f0e60e277f116961/maintainability)](https://codeclimate.com/github/Lambda-School-Labs/quick-street-fe/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f465f0e60e277f116961/test_coverage)](https://codeclimate.com/github/Lambda-School-Labs/quick-street-fe/test_coverage)
+
 ## Contributors
 
 <!-- |                                       [Richard Lawson](https://github.com/lawsonarichard)                                       |                                           [Chao Ji](https://github.com/cjgodfather)                                           |                                    [Rashmi Poddar](https://github.com/rashmipoddar)                                     |                                      [Dominique Maack](https://github.com/dmaack)                                       |                                          [Greg Cameron](https://github.com/gsc229)                                          | [Luis Ocasio](https://github.com/LuisOcasio)                                                                                                                                                                                                   |
