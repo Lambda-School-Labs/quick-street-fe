@@ -37,15 +37,22 @@ describe("test that profile page", () => {
     let doggies = getByText("a store for dog goodies");
     expect(doggies).toBeInTheDocument();
   });
-  it("testing that VendorProducts component renders", () => {
+  it("testing that VendorProducts cards render", () => {
     const { getByText } = render(<VendorProducts products={dummyProducts} />);
     let name = getByText("catnip");
     let price = getByText("$3.5");
     expect(name).toBeInTheDocument();
     expect(price).toBeInTheDocument();
   });
+  it("testing that VendorProducts component renders", () => {
+    const { getByTestId } = render(<VendorProducts products={dummyProducts} />);
+    let wrapper = getByTestId("products-wrapper");
+    expect(wrapper).toBeInTheDocument();
+  });
   it("testing that Bulletin component renders", () => {
-    const { getByText } = render(<Bulletin />);
+    const { getByTestId } = render(<Bulletin />);
+    const wrapper = getByTestId("bulletin-wrapper");
+    expect(wrapper).toBeInTheDocument();
   });
 
   // it("testing that the whole Profile page appears", () => {

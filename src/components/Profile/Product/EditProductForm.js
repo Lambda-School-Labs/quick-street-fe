@@ -92,7 +92,10 @@ const EditProductForm = (props) => {
   return (
     <div className={editingProduct.edit_product_form_container}>
       <div className={editingProduct.edit_form_inner_container}>
-        <form className={editingProduct.edit_product_form}>
+        <form
+          className={editingProduct.edit_product_form}
+          data-testid="editproductform"
+        >
           <div className={editingProduct.input_wrapper}>
             <label htmlFor="name">Product Name: </label>
             <input
@@ -124,7 +127,7 @@ const EditProductForm = (props) => {
               <div>
                 <label
                   className={`form-check-label ${editingProduct.checkbox_label}`}
-                  for="defaultCheck1"
+                  htmlFor="defaultCheck1"
                 >
                   Gluten Free
                 </label>
@@ -144,7 +147,7 @@ const EditProductForm = (props) => {
               <div>
                 <label
                   className={`form-check-label ${editingProduct.checkbox_label}`}
-                  for="defaultCheck1"
+                  htmlFor="defaultCheck1"
                 >
                   Vegetarian
                 </label>
@@ -164,7 +167,7 @@ const EditProductForm = (props) => {
               <div>
                 <label
                   className={`form-check-label ${editingProduct.checkbox_label}`}
-                  for="defaultCheck1"
+                  htmlFor="defaultCheck1"
                 >
                   Vegan
                 </label>
@@ -184,7 +187,7 @@ const EditProductForm = (props) => {
               <div>
                 <label
                   className={`form-check-label ${editingProduct.checkbox_label}`}
-                  for="defaultCheck1"
+                  htmlFor="defaultCheck1"
                 >
                   Keto
                 </label>
@@ -204,7 +207,7 @@ const EditProductForm = (props) => {
               <div>
                 <label
                   className={`form-check-label ${editingProduct.checkbox_label}`}
-                  for="defaultCheck1"
+                  htmlFor="defaultCheck1"
                 >
                   Dairy Free
                 </label>
@@ -239,9 +242,9 @@ const EditProductForm = (props) => {
               onChange={handleChanges}
               name="unit"
               type="text"
-              class="custom-select custom-select-lg mb-3"
+              className="custom-select custom-select-lg mb-3"
             >
-              <option selected>Choose Unit</option>
+              <option defaultValue>Choose Unit</option>
               <option value="lb">lb</option>
               <option value="dozen">dozen</option>
               <option value="1/2 dozen">1/2 dozen</option>

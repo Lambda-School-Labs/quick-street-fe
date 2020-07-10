@@ -6,7 +6,6 @@ import { Provider as AuthProvider } from "../contexts/AuthContext";
 import { Provider as CartProvider } from "../contexts/TestCartContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import Register from "../pages/Register";
-import { ExpansionPanelActions } from "@material-ui/core";
 
 test(`loads`, () => {
   const tree = (
