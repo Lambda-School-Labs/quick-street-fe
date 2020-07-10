@@ -76,7 +76,7 @@ const Browse = (props) => {
         <Nav />
       </div>
 
-      <div className={browse.wrapper}>
+      <div data-testId="browse-wrapper" className={browse.wrapper}>
         <form className={browse.filter_container} onSubmit={handleSubmit}>
           <div className={browse.filter_wrapper}>
             {zipcode === "" && <p>Enter a location to start browsing</p>}

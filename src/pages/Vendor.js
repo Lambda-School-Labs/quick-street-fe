@@ -19,7 +19,7 @@ const Vendor = (props) => {
   // const [ cartModal, setCartModal ] = useState(false);
   console.log("vendor id", vendorId);
   return (
-    <React.Fragment>
+    <div data-testId="vendor-page">
       <div style={{ backgroundColor: "#00B2ED" }} className={browse.temp_menu}>
         <Nav />
       </div>
@@ -28,7 +28,7 @@ const Vendor = (props) => {
       <ViewVendorPosts vendorId={vendorId} />
       <button onClick={() => props.history.goBack()}>Back</button>
       <Footer />
-    </React.Fragment>
+    </div>
   );
 };
 
