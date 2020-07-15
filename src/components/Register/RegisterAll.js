@@ -31,8 +31,9 @@ const RegisterAll = (props) => {
         response.data.user.isVendor === "false"
       ) {
         console.log("user is customer?");
+        props.nextStep();
         // checkIfCart(response.data.id);
-        window.location.href = "browse";
+        // window.location.href = "browse";
       }
     } catch (error) {
       console.log("Error while creating a user", error.response);
