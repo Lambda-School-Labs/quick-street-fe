@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-const CustomerProfile = () => {
+import axiosWithAuth from "../../utils/axiosWithAuth";
+const CustomerForm = () => {
   const [formData, setFormData] = useState({
     customer_name: "",
     address: "",
@@ -13,8 +14,17 @@ const CustomerProfile = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Submitted Customer profile");
     console.log("formData", formData);
+    axiosWithAuth()
+      .post("/customers/profile", formData)
+      .then((res) => console.log("res from customer update", res))
+      .catch((err) => console.log(err));
+    setFormData({
+      customer_name: "",
+      address: "",
+      phone_number: "",
+      zip_code: "",
+    });
   };
   return (
     <div>
@@ -54,4 +64,4 @@ const CustomerProfile = () => {
   );
 };
 
-export default CustomerProfile;
+export default CustomerForm;
