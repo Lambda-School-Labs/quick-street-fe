@@ -58,7 +58,7 @@ const CustomerForm = () => {
           value={formData.zip_code}
           onChange={changeHandler}
         />
-        <button type="submit">Update</button>
+        <button type="submit">Add Your Info</button>
       </form>
     </div>
   );
