@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import CustomerProfile from "../components/CustomerProfile";
 import customerProfile from "../../styles/css/customer/customer_profile_page.css";
+import { Context as AuthContext } from "../../contexts/AuthContext";
+import { Link } from "react-router-dom";
 import {
   dashboard_icon,
   profile_icon,
@@ -10,30 +12,56 @@ import {
   logout,
 } from "../../assets/svgs/customerflow";
 const CustomerPage = () => {
+  const { signout } = useContext(AuthContext);
+
   return (
     <div className="page-wrapper">
       <div className="side-nav">
-        <img src={logo} alt="logo" />
+        <div className="logo-box">
+          <img src={logo} alt="logo" />
+        </div>
         <ul>
           <li>
-            <img src={dashboard_icon} alt="dashboard icon" />
-            Dashboard
+            <Link to="/customerHome">
+              <p>
+                <img src={dashboard_icon} alt="dashboard icon" />
+                Dashboard
+              </p>
+            </Link>
           </li>
           <li>
-            <img src={profile_icon} alt="dashboard icon" />
-            Profile
+            <Link to="/customerHome">
+              <p>
+                <img src={profile_icon} alt="dashboard icon" />
+                Profile
+              </p>
+            </Link>
           </li>
           <li>
-            <img src={orders} alt="orders icon" />
-            Orders
+            <Link to="/orders">
+              <p>
+                <img src={orders} alt="orders icon" />
+                Orders
+              </p>
+            </Link>
           </li>
           <li>
-            <img src={daily} alt="daily icon" />
-            Favorites
+            <Link to="/favorites">
+              <p>
+                <img src={daily} alt="daily icon" />
+                Favorites
+              </p>
+            </Link>
           </li>
         </ul>
-        <img src={logout} alt="logout img" />
-        <h3>Log out</h3>
+        <div className="logout-btn">
+          <Link to="/" onClick={() => signout()}>
+            <p>
+              <img src={logout} alt="logout img" />
+              Log out
+            </p>
+          </Link>
+        </div>
       </div>
       <div className="component-section">
         <CustomerProfile />
