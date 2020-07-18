@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import axiosWithAuth from "../../utils/axiosWithAuth";
 import CustomerProfile from "../components/CustomerProfile";
-import customerProfile from "../../styles/css/customer/customer_profile_page.css";
+import "../../styles/css/customer/customer_profile_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import {
   dashboard_icon,
   profile_icon,
@@ -11,14 +12,23 @@ import {
   logo,
   logout,
 } from "../../assets/svgs/customerflow";
+
 const CustomerPage = () => {
   const { signout } = useContext(AuthContext);
-
+  const [name, setName] = useState("");
+  useEffect(() => {
+    axiosWithAuth()
+      .get("/customers/me")
+      .then((res) => setName(res.data.customer_name))
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="page-wrapper">
       <div className="side-nav">
         <div className="logo-box">
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
         <ul>
           <li>
@@ -30,7 +40,7 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="/customerHome">
+            <Link to="/customerHome/profile">
               <p>
                 <img src={profile_icon} alt="dashboard icon" />
                 Profile
@@ -64,7 +74,16 @@ const CustomerPage = () => {
         </div>
       </div>
       <div className="component-section">
-        <CustomerProfile />
+        <Switch>
+          <Route exact path="/customerHome">
+            <h1 className="welcome-banner">
+              Welcome to the Customer Dashboard, {name}.
+            </h1>
+          </Route>
+          <Route path="/customerHome/profile">
+            <CustomerProfile name={name} setName={setName} />
+          </Route>
+        </Switch>
       </div>
     </div>
   );
