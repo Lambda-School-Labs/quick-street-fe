@@ -3,6 +3,7 @@ import React, { useState } from "react";
 //styling
 import registration from "../styles/scss/registration.module.scss";
 import { RegisterVendor, RegisterAll } from "../components/index";
+import CustomerForm from "../customer-flow/components/CustomerForm";
 const Register = (props) => {
   // console.log('Register.js props: ', props);
 
@@ -43,10 +44,17 @@ const Register = (props) => {
     }
   };
 
+  const customerForm = () => {
+    if (stepNum.step === 2 && !vendorCheck) {
+      return <CustomerForm previousStep={previousStep} nextStep={nextStep} />;
+    }
+  };
+
   return (
-    <div className={registration.container}>
+    <div className={registration.container} data-testid="register-page">
       {userDetails()}
       {vendorDetails()}
+      {customerForm()}
     </div>
   );
 };

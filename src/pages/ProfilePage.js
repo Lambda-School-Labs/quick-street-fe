@@ -119,7 +119,7 @@ const ProfilePage = (props) => {
       <div style={{ backgroundColor: "#00B2ED" }} className={browse.temp_menu}>
         <Nav />
       </div>
-      <div className={profile.profile_container} data-testId="profile-page">
+      <div className={profile.profile_container} data-testid="profile-page">
         <div className={`${profile.wrapper} ${banner.banner_wrapper}`}>
           <div
             className={`${profile.inner_container} ${banner.inner_banner_container}`}

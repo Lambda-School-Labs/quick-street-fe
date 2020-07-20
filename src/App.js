@@ -1,5 +1,5 @@
 import React from "react"; // removed useState
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Router } from "react-router-dom";
 import "./styles/scss/index.scss";
 // import UserContext from './contexts/UserContext';
 
@@ -19,6 +19,7 @@ import {
   Dashboard, // ** Dashboard Page **/
   OrderReview, // ** Order Review Page **/
 } from "./pages/index";
+import CustomerPage from "./customer-flow/components/CustomerPage";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
       <Route path="/login" component={Login} />
       <Switch>
         <Route path="/profile" component={ProfilePage} />
+        <Route path="/customerHome" component={CustomerPage} />
         <Route path="/browse/:id" component={Vendor} />
         <Route path="/browse" component={Browse} />
         <Route path="/dashboard" component={Dashboard} />

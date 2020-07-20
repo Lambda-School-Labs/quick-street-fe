@@ -56,7 +56,10 @@ const Bulletin = (props) => {
   }, []); // removed [] dependency
 
   return (
-    <div className={`${profile.wrapper} ${bulletin.bulletin_wrapper}`}>
+    <div
+      className={`${profile.wrapper} ${bulletin.bulletin_wrapper}`}
+      data-testid="bulletin-wrapper"
+    >
       <div
         className={`${profile.inner_container} ${bulletin.bulletin_inner_container}`}
       >

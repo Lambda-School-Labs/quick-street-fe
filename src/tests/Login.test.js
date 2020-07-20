@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-  render,
-  fireEvent,
-  waitForElement,
-  getByTestId,
-} from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Provider as AuthProvider } from "../contexts/AuthContext";
 import { Provider as CartProvider } from "../contexts/TestCartContext";
@@ -27,6 +22,11 @@ describe("running tests on login", () => {
 
     expect(getByText("Welcome Back!")).toBeInTheDocument();
     expect(getAllByText("Login")).toHaveLength(2);
+  });
+  it(`full component renders`, () => {
+    const { getByTestId, getAllByText } = render(tree);
+
+    expect(getByTestId("login-wrapper")).toBeInTheDocument();
   });
   it(`full component renders`, () => {
     const { getByTestId, getAllByText } = render(tree);

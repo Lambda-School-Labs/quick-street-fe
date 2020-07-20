@@ -21,7 +21,7 @@ const Browse = (props) => {
             {noZipcodeArray.map((value, index) => (
               <div
                 className={browse.vendor_details_empty}
-                data-testId="placeholder"
+                data-testid="placeholder"
                 key={index}
               >
                 <img

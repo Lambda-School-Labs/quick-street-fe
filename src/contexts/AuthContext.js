@@ -62,14 +62,10 @@ const signin = (dispatch) => async ({ email, password }) => {
     } else {
       console.log("user is customer?");
       checkIfCart(response.data.id);
-      window.location.href = "browse";
+      window.location.href = "customerHome";
     }
   } catch (error) {
     console.log(error.response);
-    dispatch({
-      type: "add_error",
-      payload: "There was an error logging you in. Try again later.",
-    });
   }
 };
 
