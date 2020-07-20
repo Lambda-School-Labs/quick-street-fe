@@ -44,7 +44,7 @@ useEffect(() => {
 
   useEffect(() => {
     axiosWithAuth()
-      .get("/orders/")
+      .get("/orders/me")
       .then((res) => {
         console.log("res from customer orders", res);
         setOrderData(res.data);
@@ -60,16 +60,24 @@ useEffect(() => {
     <div className="orders-wrapper">
       <h1 className="user-title">{customer.customer_name}'s Profile</h1>
       
-        {/* <div className="customer-info" onClick={editField}>
-          <p>Name</p>
-          <h3>{formData.customer_name}</h3>
-          <p>Address</p>
-          <h3>{formData.address}</h3>
-          <p>Phone Number</p>
-          <h3>{formData.phone_number}</h3>
-          <p>Zip Code</p>
-          <h3>{formData.zip_code}</h3>
-        </div> */}
+        <div className="order-info">
+          <p>Order #</p>
+          <h3>{orderData.id}</h3>
+
+
+          <p>Product Name</p>
+          <h3>{orderData.product_id}</h3>     
+          <p>Units</p>
+          {/* <h3>{orderData.address}</h3> */}
+          <p>Price</p>
+          <h3>{orderData.total_price}</h3>
+          
+          
+          <p>Total Price</p>
+          <h3>{orderData.total_price}</h3>
+          <p>Date</p>
+          <h3>{orderData.date_of_order}</h3>
+        </div>
       
     </div>
   );

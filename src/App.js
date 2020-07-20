@@ -34,7 +34,7 @@ const App = () => {
       <Switch>
         <Route path="/profile" component={ProfilePage} />
         <Route path="/customerHome" component={CustomerPage} />
-        <Route path="/orders" component={CustomerOrders} />
+        <Route path="/orders/me" component={CustomerOrders} />
         <Route path="/browse/:id" component={Vendor} />
         <Route path="/browse" component={Browse} />
         <Route path="/dashboard" component={Dashboard} />
