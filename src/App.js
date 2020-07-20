@@ -20,6 +20,7 @@ import {
   OrderReview, // ** Order Review Page **/
 } from "./pages/index";
 import CustomerPage from "./customer-flow/components/CustomerPage";
+import CustomerOrders from "./customer-flow/components/CustomerOrders";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
       <Switch>
         <Route path="/profile" component={ProfilePage} />
         <Route path="/customerHome" component={CustomerPage} />
+        <Route path="/orders/me" component={CustomerOrders} />
         <Route path="/browse/:id" component={Vendor} />
         <Route path="/browse" component={Browse} />
         <Route path="/dashboard" component={Dashboard} />

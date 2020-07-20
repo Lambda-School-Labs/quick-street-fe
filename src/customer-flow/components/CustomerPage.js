@@ -48,7 +48,7 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="/orders">
+            <Link to="/orders/me">
               <p>
                 <img src={orders} alt="orders icon" />
                 Orders
