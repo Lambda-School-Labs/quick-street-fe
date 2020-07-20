@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-const CustomerForm = () => {
+import "../../styles/css/customer/customer_profile.css";
+const CustomerForm = ({ name, setName }) => {
   const [formData, setFormData] = useState({
     customer_name: "",
     address: "",
@@ -21,6 +22,7 @@ const CustomerForm = () => {
       .then((res) => {
         console.log("res from customer update", res);
         editField();
+        setName(res.data.customer_name);
       })
       .catch((err) => console.log(err));
   };
@@ -40,46 +42,64 @@ const CustomerForm = () => {
   }
 
   return (
-    <div>
-      <h1> Your Profile</h1>
+    <div className="profile-wrapper">
+      <h1 className="user-title">{name}'s Profile</h1>
       {editing ? (
-        <form onSubmit={submitHandler}>
-          <label htmlFor="customer_name">Name</label>
-          <input
-            name="customer_name"
-            type="text"
-            value={formData.customer_name}
-            onChange={changeHandler}
-          />
-          <label htmlFor="address">Address</label>
-          <input
-            name="address"
-            type="text"
-            value={formData.address}
-            onChange={changeHandler}
-          />
-          <label htmlFor="phone_number">Phone Number</label>
-          <input
-            name="phone_number"
-            type="text"
-            value={formData.phone_number}
-            onChange={changeHandler}
-          />
-          <label htmlFor="zip_code">Zip Code</label>
-          <input
-            name="zip_code"
-            type="text"
-            value={formData.zip_code}
-            onChange={changeHandler}
-          />
-          <button type="submit">Update</button>
-          <button onClick={editField}>Cancel</button>
-        </form>
+        <div className="form-wrapper">
+          <div className="avatar-box">
+            <img
+              src="https://images.unsplash.com/photo-1500832333538-837287aad2b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80"
+              alt="moustached man in black and white"
+            />
+          </div>
+          <form className="customer-form" onSubmit={submitHandler}>
+            <label htmlFor="customer_name">Name</label>
+            <input
+              name="customer_name"
+              type="text"
+              value={formData.customer_name}
+              onChange={changeHandler}
+            />
+            <label htmlFor="address">Address</label>
+            <input
+              name="address"
+              type="text"
+              value={formData.address}
+              onChange={changeHandler}
+            />
+            <label htmlFor="phone_number">Phone Number</label>
+            <input
+              name="phone_number"
+              type="text"
+              value={formData.phone_number}
+              onChange={changeHandler}
+            />
+            <label htmlFor="zip_code">Zip Code</label>
+            <input
+              name="zip_code"
+              type="text"
+              value={formData.zip_code}
+              onChange={changeHandler}
+            />
+            <div className="button-drawer">
+              <button id="cancel-btn" onClick={editField}>
+                Cancel
+              </button>
+              <button id="sub-btn" type="submit">
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
       ) : (
-        <div onClick={editField}>
+        <div className="customer-info" onClick={editField}>
+          <p>Name</p>
           <h3>{formData.customer_name}</h3>
+          <p>Address</p>
           <h3>{formData.address}</h3>
+          <p>Phone Number</p>
           <h3>{formData.phone_number}</h3>
+          <p>Zip Code</p>
           <h3>{formData.zip_code}</h3>
         </div>
       )}
