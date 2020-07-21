@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import CustomerProfile from "../components/CustomerProfile";
+import CustomerOrders from "../components/CustomerOrders";
 import "../../styles/css/customer/customer_profile_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
@@ -48,7 +49,7 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="/orders/me">
+            <Link to="/customerHome/orders/me">
               <p>
                 <img src={orders} alt="orders icon" />
                 Orders
@@ -82,6 +83,9 @@ const CustomerPage = () => {
           </Route>
           <Route path="/customerHome/profile">
             <CustomerProfile name={name} setName={setName} />
+          </Route>
+          <Route path="/customerHome/orders/me">
+            <CustomerOrders name={name}/>
           </Route>
         </Switch>
       </div>
