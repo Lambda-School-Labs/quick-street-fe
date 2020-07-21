@@ -21,6 +21,7 @@ import {
 } from "./pages/index";
 import CustomerPage from "./customer-flow/components/CustomerPage";
 import CustomerOrders from "./customer-flow/components/CustomerOrders";
+import CustomerFavorites from "./customer-flow/components/CustomerFavorites";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/profile" component={ProfilePage} />
         <Route path="/customerHome" component={CustomerPage} />
         <Route path="/orders/me" component={CustomerOrders} />
+        <Route path="/customerFavorites/me" component={CustomerFavorites} />
         <Route path="/browse/:id" component={Vendor} />
         <Route path="/browse" component={Browse} />
         <Route path="/dashboard" component={Dashboard} />
