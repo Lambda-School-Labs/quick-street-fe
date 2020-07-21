@@ -184,7 +184,7 @@ const Nav = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/customerHome">Dashboard</Link>
       </MenuItem>
       {isVendor === "true" && (
         <MenuItem onClick={handleMenuClose}>
