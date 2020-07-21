@@ -8,7 +8,8 @@ import { Link, Route, Switch } from "react-router-dom";
 import {
   dashboard_icon,
   profile_icon,
-  daily,
+  favorite,
+  search,
   orders,
   logo,
   logout,
@@ -57,10 +58,18 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="/favorites">
+            <Link to="customerHome/favorites">
               <p>
-                <img src={daily} alt="daily icon" />
+                <img src={favorite} alt="daily icon" />
                 Favorites
+              </p>
+            </Link>
+          </li>
+          <li>
+            <Link to="/browse">
+              <p>
+                <img src={search} alt="magnifying glass icon" />
+                Search
               </p>
             </Link>
           </li>
@@ -85,7 +94,7 @@ const CustomerPage = () => {
             <CustomerProfile name={name} setName={setName} />
           </Route>
           <Route path="/customerHome/orders/me">
-            <CustomerOrders name={name}/>
+            <CustomerOrders name={name} />
           </Route>
         </Switch>
       </div>
