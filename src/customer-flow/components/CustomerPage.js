@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import CustomerProfile from "../components/CustomerProfile";
 import CustomerOrders from "../components/CustomerOrders";
+import CustomerFavorites from "../components/CustomerFavorites";
 import "../../styles/css/customer/customer_profile_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
@@ -58,7 +59,7 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="customerHome/favorites">
+            <Link to="customerHome/favorites/me">
               <p>
                 <img src={favorite} alt="daily icon" />
                 Favorites
@@ -95,6 +96,9 @@ const CustomerPage = () => {
           </Route>
           <Route path="/customerHome/orders/me">
             <CustomerOrders name={name} />
+          </Route>
+          <Route path="/customerHome/favorites/me">
+            <CustomerFavorites name={name} />
           </Route>
         </Switch>
       </div>
