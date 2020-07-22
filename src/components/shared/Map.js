@@ -44,7 +44,7 @@ const Map = ({ zipcode, setZipcode, width, height, target }) => {
     if (zipcode !== "") {
       getGeocode();
     }
-  }, [zipcode]);
+  }, []);
 
   useEffect(() => {
     axiosWithAuth()

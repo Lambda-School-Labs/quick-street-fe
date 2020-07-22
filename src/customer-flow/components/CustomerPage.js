@@ -3,6 +3,7 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import CustomerProfile from "../components/CustomerProfile";
 import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
+import CustomerSearch from "./CustomerSearch";
 import "../../styles/css/customer/customer_profile_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
@@ -67,7 +68,7 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="/browse">
+            <Link to="/customerHome/search">
               <p>
                 <img src={search} alt="magnifying glass icon" />
                 Search
@@ -99,6 +100,9 @@ const CustomerPage = () => {
           </Route>
           <Route path="/customerHome/favorites/me">
             <CustomerFavorites name={name} />
+          </Route>
+          <Route path="/customerHome/search">
+            <CustomerSearch />
           </Route>
         </Switch>
       </div>

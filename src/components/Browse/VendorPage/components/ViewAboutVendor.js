@@ -23,13 +23,28 @@ const ViewAboutVendor = (props) => {
 
   useEffect(() => {
     getVendor(props.vendorId);
+    console.log("this is the vendorId", props.vendorId);
   }, []); // removed [] dependency
 
+  const favoriteVendor = () => {
+    // let vendor = { vendor_id: props.vendorId };
+    let vendor = { vendor_id: props.vendorId };
+    axiosWithAuth()
+      .post("/customers/favorites/add", vendor)
+      .then((response) => {
+        console.log("successfully favorited the vendor page", response);
+      })
+      .catch((error) => {
+        console.log(error);
+        console.log(vendor);
+      });
+  };
   return (
     <>
       <div className={profile.banner_container}>
         <div className={profile.banner_wrapper}>
           <h1>{vendor.business_name}</h1>
+          <button onClick={() => favoriteVendor()}>Favorite</button>
           <CloudinaryContext cloudName="quickstlabs">
             <Image publicId={vendor.vendor_banner}>
               <Transformation
@@ -56,12 +71,12 @@ const ViewAboutVendor = (props) => {
           <div className={profile.column_right}>
             <h1>Location</h1>
             <p>The vendor can be found at {vendor.zipcode} area</p>
-            <Map
+            {/* <Map
               zipcode={vendor.zipcode}
               width={"90vw"}
               height="50vh"
               target={vendor.zipcode}
-            />
+            /> */}
           </div>
         </div>
       </div>
