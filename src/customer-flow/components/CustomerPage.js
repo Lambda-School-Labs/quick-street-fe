@@ -4,6 +4,7 @@ import CustomerProfile from "../components/CustomerProfile";
 import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
 import CustomerSearch from "./CustomerSearch";
+import { FavoritesContext } from "../../contexts/FavoritesContext";
 import "../../styles/css/customer/customer_profile_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
@@ -17,7 +18,10 @@ import {
   logout,
 } from "../../assets/svgs/customerflow";
 
+
+
 const CustomerPage = () => {
+  const {favorites, setFavorites} = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
   useEffect(() => {
@@ -25,7 +29,30 @@ const CustomerPage = () => {
       .get("/customers/me")
       .then((res) => setName(res.data.customer_name))
       .catch((err) => console.log(err));
+      getFavorites();
   }, []);
+
+  const createArr = () => {
+  favorites.forEach(e => {
+    setFavorites([...favorites, e])
+  })
+  }
+ // favorites ? createArr() : null
+
+
+  const getFavorites = () => {
+    axiosWithAuth().get("/auth/favorites")
+      .then(
+        res => {
+          setFavorites(res.data)
+        console.log("This should be favorites:", favorites)}
+      )
+      .catch(
+        err =>
+        console.log(err)
+      )
+  }
+
   return (
     <div className="page-wrapper">
       <div className="side-nav">
@@ -60,7 +87,7 @@ const CustomerPage = () => {
             </Link>
           </li>
           <li>
-            <Link to="customerHome/favorites/me">
+            <Link to="/customerHome/favorites/me">
               <p>
                 <img src={favorite} alt="daily icon" />
                 Favorites

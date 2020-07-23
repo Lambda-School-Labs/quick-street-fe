@@ -1,11 +1,13 @@
-import React from "react"; // removed useState
+import React, { useState } from "react"; // removed useState
 import { Route, Switch, Router } from "react-router-dom";
 import "./styles/scss/index.scss";
+
 // import UserContext from './contexts/UserContext';
 
 // Context
 import { Provider as AuthProvider } from "./contexts/AuthContext";
 import { Provider as CartProvider } from "./contexts/TestCartContext";
+import {  FavoritesContext } from "./contexts/FavoritesContext";
 
 import OrderConfirmation from "./components/OrderReview/OrderConfirmation";
 import {
@@ -23,7 +25,10 @@ import CustomerPage from "./customer-flow/components/CustomerPage";
 import CustomerOrders from "./customer-flow/components/CustomerOrders";
 import CustomerFavorites from "./customer-flow/components/CustomerFavorites";
 
+
+
 const App = () => {
+  const [favorites, setFavorites] = useState()
   return (
     <div>
       <Route path="/orderreview/:id" render={OrderReview} />
@@ -33,11 +38,11 @@ const App = () => {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Switch>
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/customerHome" component={CustomerPage} />
-        <Route path="/orders/me" component={CustomerOrders} />
-        <Route path="/customerFavorites/me" component={CustomerFavorites} />
-        <Route path="/browse/:id" component={Vendor} />
+        <FavoritesContext.Provider value={{favorites, setFavorites}}>
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/customerHome" component={CustomerPage} />
+          <Route path="/browse/:id" component={Vendor} />
+        </FavoritesContext.Provider>
         <Route path="/browse" component={Browse} />
         <Route path="/dashboard" component={Dashboard} />
       </Switch>
