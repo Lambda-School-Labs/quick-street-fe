@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Map from "../../../shared/Map";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
+import { FavoritesContext } from "../../../../contexts/FavoritesContext";
 // styling
 import profile from "../../../../styles/scss/profile.module.scss";
 // import { image } from '../../assets/rectangle.png';
@@ -8,6 +9,8 @@ import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 const ViewAboutVendor = (props) => {
   console.log("view about vendor", props.vendorId);
   const [vendor, setVendor] = useState({});
+  const {favorites, setFavorites} = useContext(FavoritesContext);
+
 
   const getVendor = (id) => {
     axiosWithAuth()
@@ -24,6 +27,7 @@ const ViewAboutVendor = (props) => {
   useEffect(() => {
     getVendor(props.vendorId);
     console.log("this is the vendorId", props.vendorId);
+    // if(props.vendorId)
   }, []); // removed [] dependency
 
   const favoriteVendor = () => {
