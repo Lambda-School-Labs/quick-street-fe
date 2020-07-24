@@ -1,5 +1,3 @@
-import React, { createContext } from 'react';
+import React, { createContext } from "react";
 
-
-
-export const FavoritesContext = createContext()
+export const FavoritesContext = createContext();

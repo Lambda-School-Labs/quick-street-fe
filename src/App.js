@@ -7,7 +7,7 @@ import "./styles/scss/index.scss";
 // Context
 import { Provider as AuthProvider } from "./contexts/AuthContext";
 import { Provider as CartProvider } from "./contexts/TestCartContext";
-import {  FavoritesContext } from "./contexts/FavoritesContext";
+import { FavoritesContext } from "./contexts/FavoritesContext";
 
 import OrderConfirmation from "./components/OrderReview/OrderConfirmation";
 import {
@@ -25,10 +25,8 @@ import CustomerPage from "./customer-flow/components/CustomerPage";
 import CustomerOrders from "./customer-flow/components/CustomerOrders";
 import CustomerFavorites from "./customer-flow/components/CustomerFavorites";
 
-
-
 const App = () => {
-  const [favorites, setFavorites] = useState()
+  const [favorites, setFavorites] = useState([]);
   return (
     <div>
       <Route path="/orderreview/:id" render={OrderReview} />
@@ -38,7 +36,7 @@ const App = () => {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Switch>
-        <FavoritesContext.Provider value={{favorites, setFavorites}}>
+        <FavoritesContext.Provider value={{ favorites, setFavorites }}>
           <Route path="/profile" component={ProfilePage} />
           <Route path="/customerHome" component={CustomerPage} />
           <Route path="/browse/:id" component={Vendor} />

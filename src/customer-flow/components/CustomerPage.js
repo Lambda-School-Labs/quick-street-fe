@@ -18,40 +18,29 @@ import {
   logout,
 } from "../../assets/svgs/customerflow";
 
-
-
 const CustomerPage = () => {
-  const {favorites, setFavorites} = useContext(FavoritesContext);
+  const { favorites, setFavorites } = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
+
   useEffect(() => {
     axiosWithAuth()
       .get("/customers/me")
       .then((res) => setName(res.data.customer_name))
       .catch((err) => console.log(err));
-      getFavorites();
+    getFavorites();
+    console.log("simplify array favorites", favorites);
   }, []);
 
-  const createArr = () => {
-  favorites.forEach(e => {
-    setFavorites([...favorites, e])
-  })
-  }
- // favorites ? createArr() : null
-
-
   const getFavorites = () => {
-    axiosWithAuth().get("/auth/favorites")
-      .then(
-        res => {
-          setFavorites(res.data)
-        console.log("This should be favorites:", favorites)}
-      )
-      .catch(
-        err =>
-        console.log(err)
-      )
-  }
+    axiosWithAuth()
+      .get("/auth/favorites")
+      .then((res) => {
+        setFavorites(res.data.map((item) => item.id));
+        console.log("This should be favorites:", res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="page-wrapper">

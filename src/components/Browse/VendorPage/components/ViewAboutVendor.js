@@ -8,9 +8,9 @@ import profile from "../../../../styles/scss/profile.module.scss";
 import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 const ViewAboutVendor = (props) => {
   console.log("view about vendor", props.vendorId);
+  const [isFavorite, setIsFavorite] = useState();
   const [vendor, setVendor] = useState({});
-  const {favorites, setFavorites} = useContext(FavoritesContext);
-
+  const { favorites, setFavorites } = useContext(FavoritesContext);
 
   const getVendor = (id) => {
     axiosWithAuth()
@@ -20,14 +20,16 @@ const ViewAboutVendor = (props) => {
         setVendor(response.data);
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
       });
   };
 
   useEffect(() => {
+    console.log("customerPage favorites:", favorites);
     getVendor(props.vendorId);
     console.log("this is the vendorId", props.vendorId);
-    // if(props.vendorId)
+    console.log("favorites on the vendor page", favorites);
+    checkFavorites();
   }, []); // removed [] dependency
 
   const favoriteVendor = () => {
@@ -37,18 +39,36 @@ const ViewAboutVendor = (props) => {
       .post("/customers/favorites/add", vendor)
       .then((response) => {
         console.log("successfully favorited the vendor page", response);
+        setFavorites([...favorites, props.vendorId]);
+        setIsFavorite(true);
       })
       .catch((error) => {
         console.log(error);
         console.log(vendor);
       });
   };
+  const checkFavorites = () => {
+    console.log("this is the vendor id", props.vendorId);
+    if (favorites.includes(+props.vendorId)) {
+      console.log("is this firing");
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+      console.log("did false fire?");
+    }
+  };
+
   return (
     <>
       <div className={profile.banner_container}>
         <div className={profile.banner_wrapper}>
           <h1>{vendor.business_name}</h1>
-          <button onClick={() => favoriteVendor()}>Favorite</button>
+          {isFavorite ? (
+            <h1>Favorited</h1>
+          ) : (
+            <button onClick={() => favoriteVendor()}>Favorite</button>
+          )}
+
           <CloudinaryContext cloudName="quickstlabs">
             <Image publicId={vendor.vendor_banner}>
               <Transformation
