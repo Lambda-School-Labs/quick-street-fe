@@ -6,7 +6,9 @@ import logoImg from "./Logo.svg";
 import logOut from "./log_out.svg";
 import favIcon from "./favorite.svg";
 import searchIcon from "./search.svg";
+import magIcon from "./magnify.svg";
 
+export const magGlass = magIcon;
 export const logout = logOut;
 export const search = searchIcon;
 export const favorite = favIcon;
