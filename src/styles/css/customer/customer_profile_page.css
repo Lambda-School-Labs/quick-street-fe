@@ -3,6 +3,8 @@ html {
   height: 100vh;
 }
 .page-wrapper {
+  font-family: Lato, sans-serif;
+  font-style: regular;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -21,8 +23,6 @@ html {
   width: 20%;
   height: 100vh;
   /* border: 1px solid red; */
-  font-family: Lato, sans-serif;
-  font-style: regular;
   font-size: 18px;
   min-width: 200px;
 }
