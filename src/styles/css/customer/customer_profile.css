@@ -22,15 +22,35 @@
     flex-direction: column;
   }
 }
-
+.customer-info {
+  padding: 30px;
+  background-color: #fffffe;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 50%;
+}
+.customer-info button {
+  height: 36px;
+  width: 97px;
+  border-radius: 200px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #21b787;
+  border: none;
+  text-align: center;
+}
 .customer-info p {
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
 }
 .customer-info h3 {
+  padding: 5px 0 20px 5px;
   font-size: 22px;
   font-weight: 300;
+}
+.edit-btn-box {
+  text-align: center;
 }
 
 .customer-form {
