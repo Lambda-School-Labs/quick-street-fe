@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import "../../styles/css/customer/customer_profile.css";
+import "../../styles/css/customer/customer_orders.css";
 
 const CustomerOrders = ({ orders, setOrders, name }) => {
   // const [customer, setCustomer] = useState({
@@ -24,6 +24,13 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
       .get("/orders/me")
       .then((res) => {
         console.log("res from customer orders", res);
+        for (let i=0; i<res.data.length; i++){
+          let date = res.data[i].date_of_order.split("T")[0];
+          console.log("date from order", date);
+          // setOrderData({...res, data[i].date_of_order: date})
+        }
+        // const date = item.date_of_order.split("T")[0];
+
         setOrderData(res.data);
       })
       .catch((err) => console.log(err));
@@ -40,21 +47,18 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
         <h1>You have no orders.</h1>
       ) : (
         orderData.map((item) => (
-          <div className="order-info">
-            <p>Order #</p>
-            <h3>{item.id}</h3>
+          <div className="order-wrapper">
+            <div className="order-info">
+              <p className="order-name">Order:</p>
+              {/* <h3>{item.id}</h3> */}
 
-            <p>Product Name</p>
-            <h3>{item.product_id}</h3>
-            <p>Units</p>
-            <h3>{item.address}</h3>
-            <p>Price</p>
-            <h3>{item.total_price}</h3>
-
-            <p>Total Price</p>
-            <h3>{item.total_price}</h3>
-            <p>Date</p>
-            <h3>{item.date_of_order}</h3>
+              <p>Product Name:</p>
+              <h3>{item.name}</h3>
+              <p>Total Price:</p>
+              <h3>{item.total_price}</h3>
+              <p>Date:</p>
+              <h3>{item.date_of_order}</h3>
+            </div>
           </div>
         ))
       )}
