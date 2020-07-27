@@ -92,7 +92,7 @@ const CustomerForm = ({ name, setName }) => {
           </form>
         </div>
       ) : (
-        <div className="customer-info" onClick={editField}>
+        <div className="customer-info">
           <p>Name</p>
           <h3>{formData.customer_name}</h3>
           <p>Address</p>
@@ -101,6 +101,9 @@ const CustomerForm = ({ name, setName }) => {
           <h3>{formData.phone_number}</h3>
           <p>Zip Code</p>
           <h3>{formData.zip_code}</h3>
+          <div className="edit-btn-box">
+            <button onClick={editField}>Edit</button>
+          </div>
         </div>
       )}
     </div>

@@ -5,7 +5,7 @@ import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
 import CustomerSearch from "./CustomerSearch";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
-import "../../styles/css/customer/customer_profile_page.css";
+import "../../styles/css/customer/customer_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
 import {
@@ -18,44 +18,50 @@ import {
   logout,
 } from "../../assets/svgs/customerflow";
 
-
-
 const CustomerPage = () => {
-  const {favorites, setFavorites} = useContext(FavoritesContext);
+  const { favorites, setFavorites } = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
+  const [mobile, setMobile] = useState(false);
+
   useEffect(() => {
     axiosWithAuth()
       .get("/customers/me")
       .then((res) => setName(res.data.customer_name))
       .catch((err) => console.log(err));
-      getFavorites();
+    getFavorites();
+    console.log("simplify array favorites", favorites);
   }, []);
 
-  const createArr = () => {
-  favorites.forEach(e => {
-    setFavorites([...favorites, e])
-  })
-  }
- // favorites ? createArr() : null
-
-
   const getFavorites = () => {
-    axiosWithAuth().get("/auth/favorites")
-      .then(
-        res => {
-          setFavorites(res.data)
-        console.log("This should be favorites:", favorites)}
-      )
-      .catch(
-        err =>
-        console.log(err)
-      )
-  }
+    axiosWithAuth()
+      .get("/auth/favorites")
+      .then((res) => {
+        setFavorites(res.data.map((item) => item.id));
+        console.log("This should be favorites:", res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="page-wrapper">
-      <div className="side-nav">
+      <div class="hamburger-menu">
+        <button
+          className={mobile ? null : "menu-btn"}
+          onClick={() => setMobile(!mobile)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button
+          onClick={() => setMobile(!mobile)}
+          className={mobile ? "open" : "closed"}
+        >
+          X
+        </button>
+      </div>
+      <div className={mobile ? "mini-sidebar side-nav" : "side-nav"}>
         <div className="logo-box">
           <Link to="/">
             <img src={logo} alt="logo" />
@@ -132,6 +138,7 @@ const CustomerPage = () => {
             <CustomerSearch />
           </Route>
         </Switch>
+        <p id="copyright">&copy; 2020 Market Avenue</p>
       </div>
     </div>
   );

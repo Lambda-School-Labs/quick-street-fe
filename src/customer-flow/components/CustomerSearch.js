@@ -6,16 +6,15 @@ import "../../styles/css/customer/customer_search.css";
 import { Link } from "react-router-dom";
 
 const CustomerSearch = () => {
-  const [zipcode, setZipcode] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [finalZip, setFinalZip] = useState("");
   const handleChange = (e) => {
-    setZipcode(e.target.value);
+    setSearchQuery(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFinalZip(zipcode);
-    getSearchResults(zipcode);
+    getSearchResults(searchQuery);
   };
 
   const getSearchResults = (zip) => {
@@ -25,14 +24,23 @@ const CustomerSearch = () => {
       .then((response) => {
         console.log("these are results.", response);
         setResults(response.data);
+        if (response.data.length > 0) {
+          console.log("new zip 2", response.data[0].zipcode);
+          setFinalZip(response.data[0].zipcode);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  const onEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSubmit(e);
+    }
+  };
   return (
     <section className="search-page">
-      <h1>Search</h1>
+      <h1 id="search-title">Search</h1>
 
       <form>
         <div className="search-form">
@@ -42,17 +50,18 @@ const CustomerSearch = () => {
           <div className="input-box">
             <img src={magGlass} alt="magnifying glass" onClick={handleSubmit} />
             <input
-              name="search"
-              placeholder="zip code"
+              name="searchQuery"
+              placeholder="search"
               onChange={handleChange}
-              value={zipcode}
+              onKeyPress={onEnter}
+              value={searchQuery}
             />
           </div>
         </div>
       </form>
       <div className="result-box">
         <div className="listings-box">
-          <h1>Results {results.length}</h1>
+          {/* <h1>Results {results.length}</h1> */}
           {results.length === 0 ? (
             <h1>No vendors found...</h1>
           ) : (
@@ -75,14 +84,11 @@ const CustomerSearch = () => {
                         }
                         alt="Banner Image"
                       ></img>
-                      <div>
+                      <div id="vendor-info-box">
                         <h1>{vendor.business_name}</h1>
-                        {/* <div className={browse.category}>
-              <p>{vendor.vendor_category}</p>
-            </div> */}
-                        <h2>{vendor.phone}</h2>
-                        <h2>{vendor.zipcode}</h2>
-                        <h2>{cat}</h2>
+                        <p>{vendor.phone}</p>
+                        <p>{vendor.zipcode}</p>
+                        <p>{cat}</p>
                       </div>
                     </div>
                   </Link>
@@ -91,14 +97,14 @@ const CustomerSearch = () => {
             </div>
           )}
         </div>
-        {/* <Map
+        <Map
           className="map-search"
-          zipcode={finalZip}
-          setZipcode={setZipcode}
+          zip={finalZip}
+          setFinalZip={setFinalZip}
           vendors={results}
           height={500}
-          width={"50%"}
-        /> */}
+          width={"40vw"}
+        />
       </div>
     </section>
   );

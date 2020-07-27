@@ -7,7 +7,7 @@ import "../../styles/css/map.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Map = ({ zipcode, setZipcode, width, height, target }) => {
+const Map = ({ zip, width, height, target, setFinalZip }) => {
   const [vendors, setVendors] = useState([]);
   const [tag, setTag] = useState(null);
   const [viewport, setViewport] = useState({
@@ -23,9 +23,10 @@ const Map = ({ zipcode, setZipcode, width, height, target }) => {
     "pk.eyJ1IjoiYnNoZXJ3b29kOSIsImEiOiJja2JrYWJhbDEwbWR4MnVxbGdnODV4NHBqIn0.MUDew7rv2_CqYXAPrkBOgA";
 
   const getGeocode = () => {
+    console.log("firing geocode");
     axios
       .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${zipcode}.json?access_token=${apiKey}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${zip}.json?access_token=${apiKey}`
       )
       .then((response) => {
         console.log("mapbox response", response);
@@ -35,16 +36,16 @@ const Map = ({ zipcode, setZipcode, width, height, target }) => {
           latitude: response.data.features[0].center[1],
           longitude: response.data.features[0].center[0],
         });
-        // console.log(response.data.results[0].geometry.location);
+        console.log(response.data.results);
       });
   };
 
   useEffect(() => {
-    console.log("zipcode", zipcode);
-    if (zipcode !== "") {
+    console.log("zipcode", zip);
+    if (zip !== "") {
       getGeocode();
     }
-  }, []);
+  }, [zip]);
 
   useEffect(() => {
     axiosWithAuth()
@@ -54,6 +55,7 @@ const Map = ({ zipcode, setZipcode, width, height, target }) => {
   }, []);
 
   useEffect(() => {
+    console.log("vendors on map", vendors);
     vendors.map((item) => {
       axios
         .get(
@@ -88,6 +90,7 @@ const Map = ({ zipcode, setZipcode, width, height, target }) => {
   useEffect(() => {
     console.log("vendors", vendors);
     console.log("vendorInfo", vendorInfo);
+    console.log("target", target);
   }, []);
   // removed , [mapDetails] dependency
   return (
@@ -124,7 +127,7 @@ const Map = ({ zipcode, setZipcode, width, height, target }) => {
               <FontAwesomeIcon
                 icon={faMapMarkerAlt}
                 size="3x"
-                style={{ color: "red" }}
+                style={{ color: "#21B787" }}
               />
             </Marker>
           ))

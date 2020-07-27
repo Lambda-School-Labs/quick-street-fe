@@ -2,11 +2,11 @@
   width: 100%;
   padding: 0 24px;
   box-sizing: border-box;
+  font-family: Lato, sans-serif;
 }
 .search-form {
   display: flex;
   flex-direction: column;
-
   width: 100%;
 }
 .search-form label {
@@ -37,19 +37,34 @@
 }
 
 .result-box {
+  margin-top: 10px;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-.map-search {
-  border: 1px solid red;
+@media (max-width: 1200px) {
+  .result-box {
+    flex-direction: column;
+  }
 }
+
 .listings-box {
+  padding-top: 20px;
   padding-right: 24px;
   width: 50%;
-  height: 500px;
   display: flex;
   flex-direction: column;
+}
+@media (max-width: 576px) {
+  .listings-box {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+@media (max-width: 1200px) {
+  .listings-box {
+    width: 100%;
+  }
 }
 
 .listing-card {
@@ -58,6 +73,7 @@
   background-color: #fffffe;
   margin-bottom: 40px;
 }
+
 .listing-card img {
   height: 130px;
   width: auto;
@@ -69,3 +85,45 @@
   text-decoration: none;
   color: #000000;
 }
+
+#search-title {
+  font-size: 36px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  font-weight: 700;
+}
+@media (max-width: 576px) {
+  #search-title {
+    padding-top: 30px;
+    margin-bottom: 10px;
+  }
+}
+#vendor-info-box {
+  padding: 5px 0 5px 20px;
+}
+#vendor-info-box h1 {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+#vendor-info-box p {
+  font-size: 16px;
+  font-style: normal;
+  line-height: 19px;
+  padding: 5px 0px;
+}
+
+/* // Phones (landscape view)
+$screen-phone-min: 320px;
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 1024px;
+
+// Large tablets and desktops
+$screen-xl-min: 1440px; */
