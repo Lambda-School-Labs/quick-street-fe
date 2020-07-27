@@ -55,6 +55,12 @@
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 576px) {
+  .listings-box {
+    width: 100%;
+    padding-right: 0;
+  }
+}
 @media (max-width: 1200px) {
   .listings-box {
     width: 100%;
@@ -67,6 +73,7 @@
   background-color: #fffffe;
   margin-bottom: 40px;
 }
+
 .listing-card img {
   height: 130px;
   width: auto;
@@ -84,6 +91,12 @@
   margin-top: 30px;
   margin-bottom: 50px;
   font-weight: 700;
+}
+@media (max-width: 576px) {
+  #search-title {
+    padding-top: 30px;
+    margin-bottom: 10px;
+  }
 }
 #vendor-info-box {
   padding: 5px 0 5px 20px;

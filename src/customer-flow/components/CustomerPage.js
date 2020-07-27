@@ -5,7 +5,7 @@ import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
 import CustomerSearch from "./CustomerSearch";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
-import "../../styles/css/customer/customer_profile_page.css";
+import "../../styles/css/customer/customer_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
 import {
@@ -22,6 +22,7 @@ const CustomerPage = () => {
   const { favorites, setFavorites } = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
+  const [mobile, setMobile] = useState(false);
 
   useEffect(() => {
     axiosWithAuth()
@@ -44,7 +45,23 @@ const CustomerPage = () => {
 
   return (
     <div className="page-wrapper">
-      <div className="side-nav">
+      <div class="hamburger-menu">
+        <button
+          className={mobile ? null : "menu-btn"}
+          onClick={() => setMobile(!mobile)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button
+          onClick={() => setMobile(!mobile)}
+          className={mobile ? "open" : "closed"}
+        >
+          X
+        </button>
+      </div>
+      <div className={mobile ? "mini-sidebar side-nav" : "side-nav"}>
         <div className="logo-box">
           <Link to="/">
             <img src={logo} alt="logo" />

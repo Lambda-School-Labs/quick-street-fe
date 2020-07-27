@@ -11,6 +11,11 @@
   margin-top: 40px;
   font-weight: 700;
 }
+@media (max-width: 576px) {
+  .user-title {
+    padding-top: 20px;
+  }
+}
 /* form wrapper area */
 .form-wrapper {
   display: flex;
@@ -20,6 +25,7 @@
 @media (max-width: 768px) {
   .form-wrapper {
     flex-direction: column;
+    margin-top: 0;
   }
 }
 .customer-info {
