@@ -121,6 +121,7 @@ const CustomerPage = () => {
             <CustomerSearch />
           </Route>
         </Switch>
+        <p id="copyright">&copy; 2020 Market Avenue</p>
       </div>
     </div>
   );

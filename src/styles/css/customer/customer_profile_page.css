@@ -59,6 +59,7 @@ html {
 }
 
 .component-section {
+  position: relative;
   background: #f8f9fa;
   width: 80%;
 }
@@ -70,9 +71,17 @@ html {
 }
 .logout-btn {
   cursor: pointer;
+  position: fixed;
 }
 .logout-btn p img {
   vertical-align: center;
   padding-bottom: 4px;
   padding-right: 5px;
+}
+#copyright {
+  font-size: 12px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }

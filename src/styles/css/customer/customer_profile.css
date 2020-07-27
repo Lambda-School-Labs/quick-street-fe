@@ -9,7 +9,7 @@
   font-size: 36px;
   margin-left: 30px;
   margin-top: 40px;
-  font-weight: bold;
+  font-weight: 700;
 }
 /* form wrapper area */
 .form-wrapper {
@@ -29,6 +29,11 @@
   margin-top: 50px;
   width: 50%;
 }
+@media (max-width: 768px) {
+  .customer-info {
+    width: 80%;
+  }
+}
 .customer-info button {
   height: 36px;
   width: 97px;
@@ -40,7 +45,7 @@
   text-align: center;
 }
 .customer-info p {
-  font-size: 18px;
+  font-size: 22px;
   line-height: 22px;
   font-weight: 700;
 }
@@ -113,6 +118,10 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
+}
+/* margin bottom is being set to 10px somewhere, this fixes that.  */
+p {
+  margin-bottom: 0px;
 }
 
 /* // Phones (landscape view)
