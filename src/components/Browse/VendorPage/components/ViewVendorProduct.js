@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
 import { Context as CartContext } from "../../../../contexts/TestCartContext";
 
+
 //stlying
-import { Image, Context, Transformation } from "cloudinary-react";
+import { Image, CloudinaryContext, Context, Transformation } from "cloudinary-react";
 import profile from "../../../../styles/scss/profile.module.scss";
 import modal from "../../../../styles/scss/browseModal.module.scss";
 import { CustomButton } from "../../../index";
@@ -12,6 +13,7 @@ import ModalCarousel2 from "./ModalCarousel2";
 
 const ViewVendorProduct = (props) => {
   console.log("vendorId on viewVendorProduct", props.vendorId);
+  console.log("what is in props", props)
   // const { state, addCartItem, addItemFromOtherVendor } = useContext(
   //   CartContext
   // );
@@ -32,6 +34,9 @@ const ViewVendorProduct = (props) => {
   const showHideModal = (bool) => {
     setShowModal(bool);
   };
+
+  let newImage = "product-images/"+props.product.public_id
+  console.log("newimage", newImage)
 
   // const handleAddToCart = () => {
   //   showHideModal(false);
@@ -93,6 +98,15 @@ const ViewVendorProduct = (props) => {
         </Context> */}
         <p className={profile.name}>{props.product.name}</p>
         <p className={profile.price}>${props.product.price}</p>
+        <CloudinaryContext cloudName="quickstlabs">
+        <Image
+          className={props.product.profile_product_image}
+          publicId={newImage}
+          //  && productImages[0].public_id}
+        >
+          <Transformation height="122" width="146" crop="fill" />
+        </Image>
+      </CloudinaryContext>
       </div>
 
       {/* <Modal showModal={showModal}>
