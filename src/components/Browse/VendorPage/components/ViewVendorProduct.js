@@ -10,6 +10,7 @@ import modal from "../../../../styles/scss/browseModal.module.scss";
 import { CustomButton } from "../../../index";
 import { Modal } from "../../../index";
 import ModalCarousel2 from "./ModalCarousel2";
+import {add} from "../../../../styles/css/vendor/vendor_product_page.css"
 
 const ViewVendorProduct = (props) => {
   console.log("vendorId on viewVendorProduct", props.vendorId);
@@ -34,6 +35,15 @@ const ViewVendorProduct = (props) => {
   const showHideModal = (bool) => {
     setShowModal(bool);
   };
+
+  const [cart, setCart] = useState([]);
+
+  const handleAdd = (e) => {
+    // e.preventDefault();
+    //INSERT CODE TO ADD ITEM TO CART.
+    setCart([...cart, props.product.id])
+    console.log("what is in the cart", cart)
+  }
 
   let newImage = "product-images/"+props.product.public_id
   console.log("newimage", newImage)
@@ -107,7 +117,9 @@ const ViewVendorProduct = (props) => {
           <Transformation height="122" width="146" crop="fill" />
         </Image>
       </CloudinaryContext>
+      <button className={add} onClick={()  => handleAdd()}>ADD to Cart</button>
       </div>
+
 
       {/* <Modal showModal={showModal}>
         <div className={modal.container}> */}
