@@ -24,14 +24,19 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
       .get("/orders/me")
       .then((res) => {
         console.log("res from customer orders", res);
-        for (let i=0; i<res.data.length; i++){
-          let date = res.data[i].date_of_order.split("T")[0];
-          console.log("date from order", date);
-          // setOrderData({...res, data[i].date_of_order: date})
-        }
+        // for (let i=0; i<res.data.length; i++){
+        //   let date = res.data[i].date_of_order.split("T")[0];
+        //   console.log("date from order", date);
+        //   setOrderData({...res, data[i].date_of_order: date})
+        // }
+        let newArr = res.data.map((item) => {
+          let date = item.date_of_order.split("T")[0];
+          // console.log("inner map item", item)
+          return { ...item, date_of_order: date };
+        });
+        console.log("new array", newArr);
         // const date = item.date_of_order.split("T")[0];
-
-        setOrderData(res.data);
+        setOrderData(newArr);
       })
       .catch((err) => console.log(err));
   }, []);

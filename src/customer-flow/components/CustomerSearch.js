@@ -97,14 +97,14 @@ const CustomerSearch = () => {
             </div>
           )}
         </div>
-        <Map
-          className="map-search"
-          zip={finalZip}
-          setFinalZip={setFinalZip}
-          vendors={results}
-          height={500}
-          width={"40vw"}
-        />
+        <div className="mapbox-container">
+          <Map
+            className="map-search"
+            zip={finalZip}
+            setFinalZip={setFinalZip}
+            vendors={results}
+          />
+        </div>
       </div>
     </section>
   );

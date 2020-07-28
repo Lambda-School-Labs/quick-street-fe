@@ -112,6 +112,9 @@
   line-height: 19px;
   padding: 5px 0px;
 }
+.mapbox-container {
+  width: 50%;
+}
 
 /* // Phones (landscape view)
 $screen-phone-min: 320px;

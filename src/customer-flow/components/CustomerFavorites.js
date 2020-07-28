@@ -3,27 +3,17 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_favorites.css";
 
 const CustomerFavorites = ({ name }) => {
+  const [favorites, setFavorites] = useState([]);
 
-  const [ favorites, setFavorites] = useState([]);
-
-//   const [editing, setEditing] = useState(false);
-
-//   const changeHandler = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const submitHandler = (e) => {
-//     e.preventDefault();
-//     console.log("formData", formData);
-//     axiosWithAuth()
-//       .put("/customers/profile/update", formData)
-//       .then((res) => {
-//         console.log("res from customer update", res);
-//         editField();
-//         setName(res.data.customer_name);
-//       })
-//       .catch((err) => console.log(err));
-//   };
+  const handleDelete = (favid) => {
+    axiosWithAuth()
+      .delete(`/customers/favorites/delete/${favid}`)
+      .then((res) => {
+        console.log("res from fav delete", res);
+        setFavorites(favorites.filter((item) => item.id !== favid));
+      })
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
     axiosWithAuth()
@@ -35,29 +25,25 @@ const CustomerFavorites = ({ name }) => {
       .catch((err) => console.log(err));
   }, []);
 
-//   function editField() {
-//     setEditing(!editing);
-//   }
+  //   function editField() {
+  //     setEditing(!editing);
+  //   }
 
   return (
     <div className="favorites-wrapper">
       <h1 className="user-title">{name}'s Favorites</h1>
 
-        <div className="customer-info">
-
-          {  favorites.map(item => (
-
+      <div className="customer-info">
+        {favorites.map((item) => (
           <div>
             <p className="vendor-title">Vendor Name:</p>
             <h3>{item.business_name}</h3>
             <p className="vendor-title">Vendor Category:</p>
             <h3>{item.vendor_category}</h3>
+            <button onClick={() => handleDelete(item.id)}>X</button>
           </div>
         ))}
-
-
-        </div>
-
+      </div>
     </div>
   );
 };

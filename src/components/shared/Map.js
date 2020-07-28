@@ -13,8 +13,8 @@ const Map = ({ zip, width, height, target, setFinalZip }) => {
   const [viewport, setViewport] = useState({
     latitude: 40.7622125,
     longitude: -111.9068791,
-    width: width,
-    height: height,
+    width: "100%",
+    height: 500,
     zoom: 10,
   });
   const [vendorInfo, setVendorInfo] = useState([]);
