@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import "../../styles/css/customer/customer_profile.css";
+import "../../styles/css/customer/customer_favorites.css";
 
 const CustomerFavorites = ({ name }) => {
 
@@ -41,21 +41,20 @@ const CustomerFavorites = ({ name }) => {
 
   return (
     <div className="favorites-wrapper">
-      <h1 className="user-title">{name}'s Profile</h1>
+      <h1 className="user-title">{name}'s Favorites</h1>
 
-        <div className="favorites-info">
+        <div className="customer-info">
 
           {  favorites.map(item => (
 
           <div>
-            <p>Vendor Name</p>
+            <p className="vendor-title">Vendor Name:</p>
             <h3>{item.business_name}</h3>
-            <p>Units</p>
+            <p className="vendor-title">Vendor Category:</p>
             <h3>{item.vendor_category}</h3>
-
           </div>
-
         ))}
+
 
         </div>
 
