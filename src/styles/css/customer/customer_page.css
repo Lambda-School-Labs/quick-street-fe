@@ -12,7 +12,6 @@ html {
   height: 100%;
 }
 .welcome-banner {
-  font-family: Lato, sans-serif;
   font-weight: 300;
   color: black;
   padding: 40px 30px;
@@ -60,6 +59,12 @@ html {
   border-right: 5px solid #21b787;
   font-weight: bold;
 }
+@media (max-width: 576px) {
+  .side-nav p:hover {
+    border-bottom: 5px solid #21b787;
+    border-right: none;
+  }
+}
 .side-nav li p img {
   vertical-align: center;
   padding-bottom: 4px;
@@ -87,15 +92,22 @@ html {
     min-height: 100vh;
   }
 }
+/* logout button issues */
 .logout-btn {
-  width: 100%;
+  width: 20%;
   position: absolute;
   bottom: 20px;
   padding-left: 15px;
-}
-.logout-btn {
   cursor: pointer;
   position: fixed;
+}
+
+@media (max-width: 576px) {
+  .logout-btn {
+    width: 144px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 .logout-btn p img {
   vertical-align: center;
@@ -180,4 +192,5 @@ html {
   border: none;
   background: inherit;
   font-size: 20px;
+  cursor: pointer;
 }
