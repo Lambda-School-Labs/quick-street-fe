@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_favorites.css";
+import  Table from "react-bootstrap/Table";
+import Button from 'react-bootstrap/Button'
 
 const CustomerFavorites = ({ name }) => {
   const [favorites, setFavorites] = useState([]);
@@ -33,19 +35,37 @@ const CustomerFavorites = ({ name }) => {
     <div className="favorites-wrapper">
       <h1 className="user-title">{name}'s Favorites</h1>
 
-      <div className="customer-info">
-        {favorites.map((item) => (
+      <div className="fav-info">
           <div>
-            <p className="vendor-title">Vendor Name:</p>
-            <h3>{item.business_name}</h3>
-            <p className="vendor-title">Vendor Category:</p>
-            <h3>{item.vendor_category}</h3>
-            <button onClick={() => handleDelete(item.id)}>X</button>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <td>Image</td>
+                  <td>Vendor</td>
+                  <td>Type</td>
+                  <td>Remove</td>
+                </tr>
+              </thead>
+
+              <tbody>
+              {favorites.map((item) => (
+                <tr>
+                  <td><img className="vendor-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRwtXhvRASVUoRwvqztf6c4dgxjNpiGtY0XvabJyraHKhLA2tT9Ls8lAxnxLCE&usqp=CAc" /></td>
+                  <td>{item.business_name}</td>
+                  <td>{item.vendor_category}</td>
+                  <td><Button variant="danger" onClick={() => handleDelete(item.id)}>X</Button></td>
+                  </tr>))}
+              </tbody>
+            </Table>
           </div>
-        ))}
+
       </div>
     </div>
   );
 };
 
 export default CustomerFavorites;
+
+{/* <button onClick={() => handleDelete(item.id)}>X</button> */}
+
+// {item.vendor_category}
