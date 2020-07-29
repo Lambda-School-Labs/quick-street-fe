@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
-// import { Context as CartContext } from "../../../../contexts/TestCartContext";
 import { CartContext } from "../../../../contexts/CartContext";
 
 //stlying
@@ -37,6 +36,37 @@ const ViewVendorProduct = (props) => {
 
   let newImage = "product-images/" + props.product.public_id;
   console.log("newimage", newImage);
+
+  return (
+    // <h1>Hello there</h1>
+    <>
+      <div
+        // onClick={() => showHideModal(true)}
+        className={profile.products_card}
+        key={props.product.id}
+      >
+        <p className={profile.name}>{props.product.name}</p>
+        <p className={profile.price}>${props.product.price}</p>
+        <CloudinaryContext cloudName="quickstlabs">
+          <Image
+            className={props.product.profile_product_image}
+            publicId={newImage}
+            //  && productImages[0].public_id}
+          >
+            <Transformation height="122" width="146" crop="fill" />
+          </Image>
+        </CloudinaryContext>
+        <button className={add} onClick={() => handleAdd()}>
+          ADD to Cart
+        </button>
+      </div>
+
+    </>
+  );
+};
+
+export default ViewVendorProduct;
+
 
   // const handleAddToCart = () => {
   //   showHideModal(false);
@@ -79,14 +109,6 @@ const ViewVendorProduct = (props) => {
   //     width: "50%",
   //   };
 
-  return (
-    // <h1>Hello there</h1>
-    <>
-      <div
-        // onClick={() => showHideModal(true)}
-        className={profile.products_card}
-        key={props.product.id}
-      >
         {/* <img className={profile.image} src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
         {/* <Context cloudName="quickstlabs">
           <Image
@@ -96,108 +118,89 @@ const ViewVendorProduct = (props) => {
             <Transformation height="122" width="146" crop="fill" />
           </Image>
         </Context> */}
-        <p className={profile.name}>{props.product.name}</p>
-        <p className={profile.price}>${props.product.price}</p>
-        <CloudinaryContext cloudName="quickstlabs">
-          <Image
-            className={props.product.profile_product_image}
-            publicId={newImage}
-            //  && productImages[0].public_id}
-          >
-            <Transformation height="122" width="146" crop="fill" />
-          </Image>
-        </CloudinaryContext>
-        <button className={add} onClick={() => handleAdd()}>
-          ADD to Cart
-        </button>
+
+
+{/* <Modal showModal={showModal}>
+  <div className={modal.container}> */}
+{/* <div className={modal.column_left} style={modalLeftStyle}>
+      {/* <img src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
+{/* <ModalCarousel images={images} /> */}
+{/* <ModalCarousel2 images={images} />
+    </div> */}
+{/* <div className={modal.column_right}>
+      <div className={modal.row}>
+        <h1>{props.product.name}</h1>
+      </div>
+      <div className={modal.row}>
+        <div className={modal.tags}>
+          <ul>
+            {props.product.diet_category.map((diet, index) => (
+              <div key={index}>
+                <li>{diet}</li>
+              </div>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className={modal.row}>
+        <h2>{props.product.description}</h2>
       </div>
 
-      {/* <Modal showModal={showModal}>
-        <div className={modal.container}> */}
-      {/* <div className={modal.column_left} style={modalLeftStyle}>
-            {/* <img src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
-      {/* <ModalCarousel images={images} /> */}
-      {/* <ModalCarousel2 images={images} />
-          </div> */}
-      {/* <div className={modal.column_right}>
-            <div className={modal.row}>
-              <h1>{props.product.name}</h1>
-            </div>
-            <div className={modal.row}>
-              <div className={modal.tags}>
-                <ul>
-                  {props.product.diet_category.map((diet, index) => (
-                    <div key={index}>
-                      <li>{diet}</li>
-                    </div>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className={modal.row}>
-              <h2>{props.product.description}</h2>
-            </div>
+      <div className={modal.row_price}>
+        <h1>${props.product.price}</h1>
+      </div>
 
-            <div className={modal.row_price}>
-              <h1>${props.product.price}</h1>
-            </div>
-
-            <div className={modal.row_quantity}>
-              <h3>Quantity: </h3>
-              <input
-                name="quantity"
-                type="number"
-                value={quantity}
-                onChange={handleChange}
-                min="1"
-                max="10"
-              />
-            </div>
-            <div className={modal.button_wrapper}>
-              <div className={modal.button_left}>
-                <CustomButton
-                  styleClass="red-full"
-                  onClick={() => showHideModal(false)}
-                >
-                  Close
-                </CustomButton>
-              </div>
-              <div className={modal.button_right}>
-                <CustomButton styleClass="green-full" onClick={handleAddToCart}>
-                  Add To Cart
-                </CustomButton>
-              </div>
-            </div>
-          </div>
+      <div className={modal.row_quantity}>
+        <h3>Quantity: </h3>
+        <input
+          name="quantity"
+          type="number"
+          value={quantity}
+          onChange={handleChange}
+          min="1"
+          max="10"
+        />
+      </div>
+      <div className={modal.button_wrapper}>
+        <div className={modal.button_left}>
+          <CustomButton
+            styleClass="red-full"
+            onClick={() => showHideModal(false)}
+          >
+            Close
+          </CustomButton>
         </div>
-        <div class={modal.overlay} id={modal.overlay}></div>
-      </Modal>
-
-      <Modal showModal={messageModal}>
-        <div className={modal.change_vendor_container}>
-          <h1>Cart not empty</h1>
-          <h3>Cart contains items from a different vendor.</h3>
-          <h3>Empty the cart and add this item?</h3>
-
-          <div className={modal.button_wrapper}>
-            <div className={modal.button_left}>
-              <CustomButton
-                styleClass="green-full"
-                onClick={() => setMessageModal(false)}
-              >
-                Cancel
-              </CustomButton>
-            </div>
-            <div className={modal.button_right}>
-              <CustomButton styleClass="red-full" onClick={handleEmptyCart}>
-                Empty Cart
-              </CustomButton>
-            </div>
-          </div>
+        <div className={modal.button_right}>
+          <CustomButton styleClass="green-full" onClick={handleAddToCart}>
+            Add To Cart
+          </CustomButton>
         </div>
-      </Modal> */}
-    </>
-  );
-};
+      </div>
+    </div>
+  </div>
+  <div class={modal.overlay} id={modal.overlay}></div>
+</Modal>
 
-export default ViewVendorProduct;
+<Modal showModal={messageModal}>
+  <div className={modal.change_vendor_container}>
+    <h1>Cart not empty</h1>
+    <h3>Cart contains items from a different vendor.</h3>
+    <h3>Empty the cart and add this item?</h3>
+
+    <div className={modal.button_wrapper}>
+      <div className={modal.button_left}>
+        <CustomButton
+          styleClass="green-full"
+          onClick={() => setMessageModal(false)}
+        >
+          Cancel
+        </CustomButton>
+      </div>
+      <div className={modal.button_right}>
+        <CustomButton styleClass="red-full" onClick={handleEmptyCart}>
+          Empty Cart
+        </CustomButton>
+      </div>
+    </div>
+  </div>
+</Modal> */}

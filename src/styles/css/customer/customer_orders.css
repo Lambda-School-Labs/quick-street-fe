@@ -11,11 +11,8 @@
     margin-top: 40px;
     font-weight: bold;
   }
-  /* form wrapper area */
+
   .order-wrapper {
-    /* display: flex;
-    flex-direction: rev; */
-    /* justify-content: space-around; */
     padding: 30px 30px;
     margin-top: 70px;
     border: 1px solid #6b6b67;
@@ -30,7 +27,7 @@
   .order-info {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .order-name {
@@ -63,17 +60,3 @@
     border-radius: 50%;
   }
   
-  /* // Phones (landscape view)
-  $screen-phone-min: 320px;
-  
-  // Small tablets and large smartphones (landscape view)
-  $screen-sm-min: 576px;
-  
-  // Small tablets (portrait view)
-  $screen-md-min: 768px;
-  
-  // Tablets and small desktops
-  $screen-lg-min: 1024px;
-  
-  // Large tablets and desktops
-  $screen-xl-min: 1440px; */
