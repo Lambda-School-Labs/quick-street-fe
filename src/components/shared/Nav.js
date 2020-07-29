@@ -21,7 +21,7 @@ import List from "@material-ui/core/List";
 // import Button from '@material-ui/core/Button';
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { Context as AuthContext } from "../../contexts/AuthContext.js";
-import {CartContext}  from "../../contexts/CartContext";
+import { CartContext } from "../../contexts/CartContext";
 // import Modal from './Modal';
 import ShoppingCartItems from "./ShoppingCart/ShoppingCartItems";
 import Drawer from "@material-ui/core/Drawer";
@@ -123,6 +123,7 @@ const useStyles = makeStyles((theme) => ({
 const Nav = () => {
   const { signout } = useContext(AuthContext);
   const { cart } = useContext(CartContext);
+
   const classes = useStyles();
   const token = localStorage.getItem("token");
   const isVendor = localStorage.getItem("isVendor");

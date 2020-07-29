@@ -1,53 +1,42 @@
 import React, { useState, useEffect, useContext } from "react";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
 // import { Context as CartContext } from "../../../../contexts/TestCartContext";
-import {CartContext} from '../../../../contexts/CartContext';
-
+import { CartContext } from "../../../../contexts/CartContext";
 
 //stlying
-import { Image, CloudinaryContext, Context, Transformation } from "cloudinary-react";
+import {
+  Image,
+  CloudinaryContext,
+  Context,
+  Transformation,
+} from "cloudinary-react";
 import profile from "../../../../styles/scss/profile.module.scss";
 import modal from "../../../../styles/scss/browseModal.module.scss";
 import { CustomButton } from "../../../index";
 import { Modal } from "../../../index";
 import ModalCarousel2 from "./ModalCarousel2";
-import {add} from "../../../../styles/css/vendor/vendor_product_page.css"
+import { add } from "../../../../styles/css/vendor/vendor_product_page.css";
 
 const ViewVendorProduct = (props) => {
-  const {cart, setCart} = useContext(CartContext);
-  
+  const { cart, setCart } = useContext(CartContext);
+
   console.log("vendorId on viewVendorProduct", props.vendorId);
-  console.log("what is in props", props)
-  // const { state, addCartItem, addItemFromOtherVendor } = useContext(
-  //   CartContext
-  // );
-  // const cart = state.cart;
-  // console.log('cart in the vendor product page', cart);
-  const vendorId = props.vendorId;
-  // const [images, setImages] = useState([{}]);
-  const [quantity, setQuantity] = useState("1");
-  const [showModal, setShowModal] = useState(false);
-  const [messageModal, setMessageModal] = useState(false);
+  console.log("view vendor props, not only the id?", props.product);
 
-  const customerId = localStorage.getItem("user_id");
-
-  const handleChange = (event) => {
-    setQuantity(event.target.value);
+  const handleAdd = () => {
+    setCart([
+      ...cart,
+      {
+        id: props.product.id,
+        name: props.product.name,
+        price: props.product.price,
+      },
+    ]);
+    console.log("what is in the cart", cart);
   };
 
-  const showHideModal = (bool) => {
-    setShowModal(bool);
-  };
-
-  const handleAdd = (e) => {
-    // e.preventDefault();
-    //INSERT CODE TO ADD ITEM TO CART.
-    setCart([...cart, props.product.id])
-    console.log("what is in the cart", cart)
-  }
-
-  let newImage = "product-images/"+props.product.public_id
-  console.log("newimage", newImage)
+  let newImage = "product-images/" + props.product.public_id;
+  console.log("newimage", newImage);
 
   // const handleAddToCart = () => {
   //   showHideModal(false);
@@ -94,7 +83,7 @@ const ViewVendorProduct = (props) => {
     // <h1>Hello there</h1>
     <>
       <div
-        onClick={() => showHideModal(true)}
+        // onClick={() => showHideModal(true)}
         className={profile.products_card}
         key={props.product.id}
       >
@@ -110,17 +99,18 @@ const ViewVendorProduct = (props) => {
         <p className={profile.name}>{props.product.name}</p>
         <p className={profile.price}>${props.product.price}</p>
         <CloudinaryContext cloudName="quickstlabs">
-        <Image
-          className={props.product.profile_product_image}
-          publicId={newImage}
-          //  && productImages[0].public_id}
-        >
-          <Transformation height="122" width="146" crop="fill" />
-        </Image>
-      </CloudinaryContext>
-      <button className={add} onClick={()  => handleAdd()}>ADD to Cart</button>
+          <Image
+            className={props.product.profile_product_image}
+            publicId={newImage}
+            //  && productImages[0].public_id}
+          >
+            <Transformation height="122" width="146" crop="fill" />
+          </Image>
+        </CloudinaryContext>
+        <button className={add} onClick={() => handleAdd()}>
+          ADD to Cart
+        </button>
       </div>
-
 
       {/* <Modal showModal={showModal}>
         <div className={modal.container}> */}
