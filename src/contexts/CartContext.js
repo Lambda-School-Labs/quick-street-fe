@@ -1,32 +1,32 @@
-import React, { createContext, useState } from 'react';
+import { createContext } from 'react';
 
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
+// export const CartProvider = ({ children }) => {
 
-  const [ cart, setCart ] = useState({
-    products: []
-  });
+//   const [ cart, setCart ] = useState({
+//     products: []
+//   });
 
-  console.log('products in cart are', cart.products);
+//   console.log('products in cart are', cart.products);
 
-  const addToCart = (item) => {
-    console.log(item);
-    localStorage.setItem('cart', JSON.stringify({ ...cart, products: [...cart.products, item]}));
-    const cartItems = localStorage.getItem('cart');
-    console.log('cart items in local storage', cartItems);
-    setCart({ ...cart, products: [...cart.products, item]});
-  }
+//   const addToCart = (item) => {
+//     console.log(item);
+//     localStorage.setItem('cart', JSON.stringify({ ...cart, products: [...cart.products, item]}));
+//     const cartItems = localStorage.getItem('cart');
+//     console.log('cart items in local storage', cartItems);
+//     setCart({ ...cart, products: [...cart.products, item]});
+//   }
 
-  const removeFromCart = (item) => {
-    // console.log(item);
-    setCart(cart.filter(cartItem => item.id !== cartItem.id));
-  }
+//   const removeFromCart = (item) => {
+//     // console.log(item);
+//     setCart(cart.filter(cartItem => item.id !== cartItem.id));
+//   }
 
-  return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
-      {children}
-    </CartContext.Provider>
-  )
+//   return (
+//     <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+//       {children}
+//     </CartContext.Provider>
+//   )
 
-}
+// }
