@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
-import { Context as CartContext } from "../../../../contexts/TestCartContext";
+// import { Context as CartContext } from "../../../../contexts/TestCartContext";
+import {CartContext} from '../../../../contexts/CartContext';
 
 
 //stlying
@@ -13,6 +14,8 @@ import ModalCarousel2 from "./ModalCarousel2";
 import {add} from "../../../../styles/css/vendor/vendor_product_page.css"
 
 const ViewVendorProduct = (props) => {
+  const {cart, setCart} = useContext(CartContext);
+  
   console.log("vendorId on viewVendorProduct", props.vendorId);
   console.log("what is in props", props)
   // const { state, addCartItem, addItemFromOtherVendor } = useContext(
@@ -35,8 +38,6 @@ const ViewVendorProduct = (props) => {
   const showHideModal = (bool) => {
     setShowModal(bool);
   };
-
-  const [cart, setCart] = useState([]);
 
   const handleAdd = (e) => {
     // e.preventDefault();
