@@ -8,7 +8,9 @@ import favIcon from "./favorite.svg";
 import searchIcon from "./search.svg";
 import magIcon from "./magnify.svg";
 import shopCart from "./cart.svg";
+import backArrow from "./back_arrow.svg";
 
+export const arrow = backArrow;
 export const cart = shopCart;
 export const magGlass = magIcon;
 export const logout = logOut;

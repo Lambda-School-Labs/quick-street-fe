@@ -1,0 +1,38 @@
+.cart-page {
+  display: flex;
+}
+.cart-page .mk-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.cart-page .left-cart-wrapper {
+  position: relative;
+  width: 70%;
+  background: #fffffe;
+  height: 100vh;
+}
+.cart-page .right-cart-wrapper {
+  width: 30%;
+  background: #21b787;
+  height: 100vh;
+  min-width: 300px;
+}
+.cart-page .back-arrow {
+  position: absolute;
+  font-size: 16px;
+  top: 18px;
+  right: 16px;
+  line-height: 19px;
+}
+.cart-page .back-arrow a {
+  text-decoration: none;
+  color: black;
+}
+.cart-page .back-arrow img {
+  padding-bottom: 2px;
+  padding-right: 5px;
+}
+.cart-page .left-content {
+  text-align: center;
+}

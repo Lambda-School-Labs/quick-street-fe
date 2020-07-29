@@ -75,7 +75,7 @@ const CustomerSearch = () => {
                 }
 
                 return (
-                  <Link to={`/browse/${vendor.id}`}>
+                  <Link to={`/customerHome/browse/${vendor.id}`}>
                     <div className="listing-card" key={vendor.id}>
                       <img
                         className="vendor_banner_image"

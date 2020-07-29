@@ -6,7 +6,6 @@ import Product from "./ViewVendorProduct";
 import profile from "../../../../styles/scss/profile.module.scss";
 const ViewVendorProducts = (props) => {
   const [vendorProducts, setVendorProducts] = useState([]);
-  // const { cart, setCart } = props;
 
   const getVendorProducts = (id) => {
     axiosWithAuth()

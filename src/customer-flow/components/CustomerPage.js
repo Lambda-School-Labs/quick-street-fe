@@ -5,6 +5,7 @@ import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
 import CustomerSearch from "./CustomerSearch";
 import ShoppingSlidein from "./ShoppingSlidein";
+import { Vendor } from "../../pages/index";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
 import "../../styles/css/customer/customer_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
@@ -20,7 +21,7 @@ import {
   cart,
 } from "../../assets/svgs/customerflow";
 
-const CustomerPage = () => {
+const CustomerPage = (props) => {
   const { favorites, setFavorites } = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
@@ -154,6 +155,9 @@ const CustomerPage = () => {
           </Route>
           <Route path="/customerHome/search">
             <CustomerSearch />
+          </Route>
+          <Route path="/customerHome/browse/:id">
+            <Vendor {...props} />
           </Route>
         </Switch>
         <p id="copyright">&copy; 2020 Market Avenue</p>
