@@ -3,9 +3,7 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_orders.css";
 
 const CustomerOrders = ({ orders, setOrders, name }) => {
-  // const [customer, setCustomer] = useState({
-  //     customer_name: ""
-  // })
+
   console.log("is this the name?", name);
   const [orderData, setOrderData] = useState([]);
 
@@ -24,26 +22,15 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
       .get("/orders/me")
       .then((res) => {
         console.log("res from customer orders", res);
-        // for (let i=0; i<res.data.length; i++){
-        //   let date = res.data[i].date_of_order.split("T")[0];
-        //   console.log("date from order", date);
-        //   setOrderData({...res, data[i].date_of_order: date})
-        // }
         let newArr = res.data.map((item) => {
           let date = item.date_of_order.split("T")[0];
-          // console.log("inner map item", item)
           return { ...item, date_of_order: date };
         });
         console.log("new array", newArr);
-        // const date = item.date_of_order.split("T")[0];
         setOrderData(newArr);
       })
       .catch((err) => console.log(err));
   }, []);
-
-  //   function editField() {
-  //     setEditing(!editing);
-  //   }
 
   return (
     <div className="orders-wrapper">
@@ -54,15 +41,14 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
         orderData.map((item) => (
           <div className="order-wrapper">
             <div className="order-info">
-              <p className="order-name">Order:</p>
-              {/* <h3>{item.id}</h3> */}
-
-              <p>Product Name:</p>
-              <h3>{item.name}</h3>
-              <p>Total Price:</p>
-              <h3>{item.total_price}</h3>
-              <p>Date:</p>
-              <h3>{item.date_of_order}</h3>
+              <div><p>Date:</p>
+              <h3>{item.date_of_order}</h3></div>
+              <div><p >Order #:</p>
+              <h3>{item.id}</h3></div>
+              <div><p>Total Price:</p>
+              <h3>${item.total_price}</h3></div>
+              <div><p>Vendor Name:</p>
+              <h3>{item.business_name}</h3></div>
             </div>
           </div>
         ))
