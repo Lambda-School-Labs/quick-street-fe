@@ -3,6 +3,7 @@ html {
   height: 100vh;
 }
 .page-wrapper {
+  overflow: hidden;
   position: relative;
   font-family: Lato, sans-serif;
   font-style: regular;
@@ -128,7 +129,7 @@ html {
 }
 @media (max-width: 576px) {
   .menu-btn {
-    display: inline-block;
+    display: block;
     position: absolute;
     top: 20px;
     left: 20px;
@@ -140,11 +141,6 @@ html {
     z-index: 999;
   }
 }
-@media (min-width: 577px) {
-  .menu-btn {
-    display: none;
-  }
-}
 
 .hamburger-menu span {
   display: block;
@@ -153,32 +149,34 @@ html {
   margin: 7px auto;
   border-bottom: 3px solid #21b787;
 }
-
-.mini-sidebar {
+/* mobile navigation drawer */
+.mobile-nav {
   display: block;
   width: 100%;
   min-width: 300px;
-  position: fixed;
+  /* transform: translateX(0); */
+  /* transition: all 0.3s ease-in-out; */
+  position: absolute;
   min-height: 100vh;
   z-index: 998;
 }
+
 @media (min-width: 576px) {
-  .mini-sidebar {
+  .mobile-nav {
     display: none;
-    animation: slide 3s forwards;
   }
 }
 
-.mini-sidebar ul {
+.mobile-nav ul {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.mini-sidebar li {
+.mobile-nav li {
   text-align: left;
   font-size: 30px;
 }
-.mini-sidebar .logout-btn {
+.mobile-nav .logout-btn {
   font-size: 30px;
 }
 .closed {
@@ -186,11 +184,50 @@ html {
 }
 .open {
   position: absolute;
-  right: 10px;
-  top: 10px;
+  left: 28px;
+  top: 28px;
   z-index: 999;
   border: none;
   background: inherit;
   font-size: 20px;
   cursor: pointer;
 }
+
+.cart-icon {
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  z-index: 998;
+  cursor: pointer;
+}
+/* #toggle-cart {
+  display: none;
+  position: absolute;
+  right: 30px;
+  top: 28px;
+  width: 30px;
+  height: 30px;
+  z-index: 999;
+}
+.label-cart {
+  z-index: 999;
+} */
+.cart-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  background: #21b787;
+  z-index: 999;
+}
+.cart-on {
+  transform: translateX(0);
+  transition: all 0.5s ease-in-out;
+}
+.cart-off {
+  transform: translateX(100%);
+  transition: all 0.5s ease-in-out;
+}
+/* input[type="checkbox"]:checked ~ .cart-wrapper {
+  display: block;
+} */

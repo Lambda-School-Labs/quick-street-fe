@@ -7,7 +7,9 @@ import logOut from "./log_out.svg";
 import favIcon from "./favorite.svg";
 import searchIcon from "./search.svg";
 import magIcon from "./magnify.svg";
+import shopCart from "./cart.svg";
 
+export const cart = shopCart;
 export const magGlass = magIcon;
 export const logout = logOut;
 export const search = searchIcon;

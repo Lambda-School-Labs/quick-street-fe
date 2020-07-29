@@ -4,6 +4,7 @@ import CustomerProfile from "../components/CustomerProfile";
 import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
 import CustomerSearch from "./CustomerSearch";
+import ShoppingSlidein from "./ShoppingSlidein";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
 import "../../styles/css/customer/customer_page.css";
 import { Context as AuthContext } from "../../contexts/AuthContext";
@@ -16,6 +17,7 @@ import {
   orders,
   logo,
   logout,
+  cart,
 } from "../../assets/svgs/customerflow";
 
 const CustomerPage = () => {
@@ -23,6 +25,7 @@ const CustomerPage = () => {
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
 
   useEffect(() => {
     axiosWithAuth()
@@ -43,8 +46,23 @@ const CustomerPage = () => {
       .catch((err) => console.log(err));
   };
 
+  const handleSidebar = () => {
+    setSidebar(!sidebar);
+  };
   return (
     <div className="page-wrapper">
+      <img
+        src={cart}
+        alt="shopping cart icon"
+        className="cart-icon"
+        onClick={handleSidebar}
+      />
+      <div
+        className={sidebar ? "cart-wrapper cart-on" : "cart-wrapper cart-off"}
+      >
+        <ShoppingSlidein handleSidebar={handleSidebar} />
+      </div>
+
       <div class="hamburger-menu">
         <button
           className={mobile ? null : "menu-btn"}
@@ -61,7 +79,7 @@ const CustomerPage = () => {
           X
         </button>
       </div>
-      <div className={mobile ? "mini-sidebar side-nav" : "side-nav"}>
+      <div className={mobile ? "mobile-nav side-nav" : "side-nav"}>
         <div className="logo-box">
           <Link to="/">
             <img src={logo} alt="logo" />
