@@ -30,6 +30,7 @@ const ViewVendorProducts = (props) => {
         <div className={profile.products_card_wrapper}>
           {vendorProducts.map((product) => (
             <Product
+              vendor={props.vendor}
               product={product}
               key={product.id}
               vendorId={props.vendorId}

@@ -1,12 +1,11 @@
 // ** Vendor customer facing page ** //
 
-import React from "react";
+import React, { useState } from "react";
+import axiosWithAuth from "../utils/axiosWithAuth";
 import {
   ViewAboutVendor,
   ViewVendorProducts,
   ViewVendorPosts,
-  Footer,
-  Nav,
 } from "../components/index"; // removed ShoppingCartItems, Modal,
 import "../styles/scss/OldcustomerFacingVendorProfile.scss";
 
@@ -16,10 +15,27 @@ import browse from "../styles/scss/browse.module.scss";
 
 const Vendor = (props) => {
   const vendorId = props.location.pathname.match(/([^/]*$)/g)[0];
+  const [vendor, setVendor] = useState({});
+  const getVendor = (id) => {
+    axiosWithAuth()
+      .get(`/vendors/${id}`)
+      .then((response) => {
+        console.log("vendor information", response.data);
+        setVendor(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  console.log("VENDOR DATA BEFORE RETURN", vendor);
   return (
     <div data-testid="vendor-page">
-      <ViewAboutVendor vendorId={vendorId} />
-      <ViewVendorProducts vendorId={vendorId} />
+      <ViewAboutVendor
+        getVendor={getVendor}
+        vendor={vendor}
+        vendorId={vendorId}
+      />
+      <ViewVendorProducts vendor={vendor} vendorId={vendorId} />
       <ViewVendorPosts vendorId={vendorId} />
       {/* <button onClick={() => props.history.goBack()}>Back</button> */}
     </div>
