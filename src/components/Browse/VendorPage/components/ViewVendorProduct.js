@@ -21,11 +21,14 @@ const ViewVendorProduct = (props) => {
 
   console.log("vendorId on viewVendorProduct", props.vendorId);
   console.log("view vendor props, not only the id?", props.product);
+  console.log("vendor props", props.vendor);
 
   const handleAdd = () => {
     setCart([
       ...cart,
       {
+        business_name: props.vendor.business_name,
+        avatar: props.product.public_id,
         id: props.product.id,
         name: props.product.name,
         price: props.product.price,
@@ -60,74 +63,84 @@ const ViewVendorProduct = (props) => {
           ADD to Cart
         </button>
       </div>
-
     </>
   );
 };
 
 export default ViewVendorProduct;
 
+// const handleAddToCart = () => {
+//   showHideModal(false);
+//   if (cart.items.length === 0 || cart.items[0].item.vendor === vendorId) {
+//     addCartItem({
+//       productId: props.product._id,
+//       price: props.product.price,
+//       quantity: quantity,
+//       customerId: customerId,
+//     });
+//   } else {
+//     setMessageModal(true);
+//   }
+// };
 
-  // const handleAddToCart = () => {
-  //   showHideModal(false);
-  //   if (cart.items.length === 0 || cart.items[0].item.vendor === vendorId) {
-  //     addCartItem({
-  //       productId: props.product._id,
-  //       price: props.product.price,
-  //       quantity: quantity,
-  //       customerId: customerId,
-  //     });
-  //   } else {
-  //     setMessageModal(true);
-  //   }
-  // };
+// const handleEmptyCart = () => {
+//   setMessageModal(false);
+//   addItemFromOtherVendor({
+//     cartId: cart._id,
+//     customerId,
+//     productId: props.product.id,
+//     price: props.product.price,
+//     quantity: quantity,
+//   });
+// };
 
-  // const handleEmptyCart = () => {
-  //   setMessageModal(false);
-  //   addItemFromOtherVendor({
-  //     cartId: cart._id,
-  //     customerId,
-  //     productId: props.product.id,
-  //     price: props.product.price,
-  //     quantity: quantity,
-  //   });
-  // };
+//   useEffect(() => {
+//     axiosWithAuth()
+//       .get(`/images/${props.product.id}/product-images`)
+//       .then((response) => {
+//         console.log("ViewVendorProducts.js response", response);
+//         setImages(response.data.data);
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   }, []);
 
-  //   useEffect(() => {
-  //     axiosWithAuth()
-  //       .get(`/images/${props.product.id}/product-images`)
-  //       .then((response) => {
-  //         console.log("ViewVendorProducts.js response", response);
-  //         setImages(response.data.data);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }, []);
+//   const modalLeftStyle = {
+//     width: "50%",
+//   };
 
-  //   const modalLeftStyle = {
-  //     width: "50%",
-  //   };
-
-        {/* <img className={profile.image} src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
-        {/* <Context cloudName="quickstlabs">
+{
+  /* <img className={profile.image} src={images[0] ? images[0].secure_url : ""} alt="img" /> */
+}
+{
+  /* <Context cloudName="quickstlabs">
           <Image
             className={profile.image}
             publicId={images[0] && images[0].public_id}
           >
             <Transformation height="122" width="146" crop="fill" />
           </Image>
-        </Context> */}
+        </Context> */
+}
 
-
-{/* <Modal showModal={showModal}>
-  <div className={modal.container}> */}
-{/* <div className={modal.column_left} style={modalLeftStyle}>
-      {/* <img src={images[0] ? images[0].secure_url : ""} alt="img" /> */}
-{/* <ModalCarousel images={images} /> */}
-{/* <ModalCarousel2 images={images} />
-    </div> */}
-{/* <div className={modal.column_right}>
+{
+  /* <Modal showModal={showModal}>
+  <div className={modal.container}> */
+}
+{
+  /* <div className={modal.column_left} style={modalLeftStyle}>
+      {/* <img src={images[0] ? images[0].secure_url : ""} alt="img" /> */
+}
+{
+  /* <ModalCarousel images={images} /> */
+}
+{
+  /* <ModalCarousel2 images={images} />
+    </div> */
+}
+{
+  /* <div className={modal.column_right}>
       <div className={modal.row}>
         <h1>{props.product.name}</h1>
       </div>
@@ -203,4 +216,5 @@ export default ViewVendorProduct;
       </div>
     </div>
   </div>
-</Modal> */}
+</Modal> */
+}
