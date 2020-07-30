@@ -10,9 +10,9 @@ const ShoppingCart = () => {
   const { cart, setCart, subtotal, setSubtotal } = useContext(CartContext);
   const [cartTotal, setCartTotal] = useState({});
   const sumValues = (obj) => Object.values(obj).reduce((a, b) => a + b, 0);
+  let theTotal = 0;
   let newArray = cart.map((item) => {
     let count = cart.filter((el) => el.id === item.id).length;
-    console.log("ITEM COUNT", item.count);
     return { ...item, count: count };
   });
 
@@ -24,15 +24,52 @@ const ShoppingCart = () => {
       unique = unique.filter((e) => e !== item.name);
     }
   });
-  console.log("cart madness.", newArray);
-  console.log("UNIQUE", unique);
+  // console.log("cart madness.", newArray);
   console.log("BEHOLD THE NEW CART", newCart);
   console.log("cart contents on shopping cart page", cart);
-  useEffect(() => {
-    if (cart.length !== 0) {
-      setSubtotal(sumValues(cartTotal));
-    }
-  }, [cartTotal]);
+
+const sumCart = (obj) => {
+  for (let i=0; i<obj.length; i++){
+    theTotal += parseFloat(obj[i].price);
+  }
+  console.log("NEW CART TOTAL CALCULATION", theTotal);
+}
+// sumCart(cart)
+console.log("each cart total", cartTotal)
+console.log('the SUB TOTAL', subtotal)
+
+  // useEffect(() => {
+  //   if (cart.length !== 0) {
+  //     setSubtotal(sumValues(cartTotal));
+  //   }
+  // }, [cartTotal]);
+
+useEffect(()=>{
+  if (cart.length !== 0) {
+    setSubtotal(sumValues(cartTotal));
+  }
+  sumCart(cart)
+  setSubtotal(theTotal)
+}, [cartTotal])
+
+  // useEffect(()=>{
+  //   (async() =>{
+  //     const newTotal = await(sumCart(cart))
+  //     console.log("newTOTAL", newTotal)
+  //     // setSubtotal(newTotal)
+  //   })();
+  // }, [theTotal])
+
+
+  // useEffect(()=>{
+  //   (async () => {
+  //     const newTotal = await(sumValues(cartTotal))
+  //     setSubtotal(newTotal)
+  //   })();
+  // }, [cartTotal])
+
+
+
   return (
     <div className="cart-page">
       <section className="left-cart-wrapper">
@@ -47,6 +84,7 @@ const ShoppingCart = () => {
             back to products
           </Link>
         </div>
+        {/* <div className='subtotal'>SUBTOTAL: {subtotal}</div> */}
         <div className="left-content">
           {newCart.length > 0 ? (
             newCart.map((item) => (

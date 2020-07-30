@@ -5,17 +5,31 @@ const ShoppingCartItem = ({ item, cartTotal, setCartTotal }) => {
   const [count, setCount] = useState(item.count);
   const [itemTotal, setItemTotal] = useState(count * item.price);
   let newImage = "product-images/" + item.avatar;
-  console.log("newimage", newImage);
+  
   const addToCount = () => {
     setCount(count + 1);
   };
+
   const subtractCount = () => {
-    setCount(count - 1);
+    if(count>0){
+      setCount(count - 1);
+    } else {
+      return count
+    }
   };
-  useEffect(() => {
-    setItemTotal(count * item.price);
-    setCartTotal({ ...cartTotal, [item.name]: itemTotal });
+  // useEffect(() => {
+  //   setItemTotal(count * item.price);
+  //   setCartTotal({ ...cartTotal, [item.name]: itemTotal });
+  // }, [count]);
+
+  useEffect(()=> {
+    (async () => {
+      const newTotal = await (count * item.price);
+      setItemTotal(newTotal)
+      setCartTotal({...cartTotal, [item.name]: itemTotal})
+    })();
   }, [count]);
+
   return (
     <div>
       <CloudinaryContext cloudName="quickstlabs">

@@ -7,15 +7,15 @@ import profile from "../../../../styles/scss/profile.module.scss";
 // import { image } from '../../assets/rectangle.png';
 import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 const ViewAboutVendor = (props) => {
-  console.log("view about vendor", props.vendorId);
+  // console.log("view about vendor", props.vendorId);
   const [isFavorite, setIsFavorite] = useState();
   const { favorites, setFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    console.log("customerPage favorites:", favorites);
+    // console.log("customerPage favorites:", favorites);
     props.getVendor(props.vendorId);
-    console.log("this is the vendorId", props.vendorId);
-    console.log("favorites on the vendor page", favorites);
+    // console.log("this is the vendorId", props.vendorId);
+    // console.log("favorites on the vendor page", favorites);
     checkFavorites();
   }, []); // removed [] dependency
 
@@ -35,9 +35,9 @@ const ViewAboutVendor = (props) => {
       });
   };
   const checkFavorites = () => {
-    console.log("this is the vendor id", props.vendorId);
+    // console.log("this is the vendor id", props.vendorId);
     if (favorites.includes(+props.vendorId)) {
-      console.log("is this firing");
+      // console.log("is this firing");
       setIsFavorite(true);
     } else {
       setIsFavorite(false);

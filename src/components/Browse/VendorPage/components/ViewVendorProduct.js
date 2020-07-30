@@ -19,9 +19,9 @@ import { add } from "../../../../styles/css/vendor/vendor_product_page.css";
 const ViewVendorProduct = (props) => {
   const { cart, setCart } = useContext(CartContext);
 
-  console.log("vendorId on viewVendorProduct", props.vendorId);
-  console.log("view vendor props, not only the id?", props.product);
-  console.log("vendor props", props.vendor);
+  // console.log("vendorId on viewVendorProduct", props.vendorId);
+  // console.log("view vendor props, not only the id?", props.product);
+  // console.log("vendor props", props.vendor);
 
   const handleAdd = () => {
     setCart([
@@ -34,11 +34,10 @@ const ViewVendorProduct = (props) => {
         price: props.product.price,
       },
     ]);
-    console.log("what is in the cart", cart);
   };
 
   let newImage = "product-images/" + props.product.public_id;
-  console.log("newimage", newImage);
+
 
   return (
     // <h1>Hello there</h1>

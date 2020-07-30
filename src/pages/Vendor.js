@@ -20,14 +20,14 @@ const Vendor = (props) => {
     axiosWithAuth()
       .get(`/vendors/${id}`)
       .then((response) => {
-        console.log("vendor information", response.data);
+        // console.log("vendor information", response.data);
         setVendor(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  console.log("VENDOR DATA BEFORE RETURN", vendor);
+  // console.log("VENDOR DATA BEFORE RETURN", vendor);
   return (
     <div data-testid="vendor-page">
       <ViewAboutVendor
