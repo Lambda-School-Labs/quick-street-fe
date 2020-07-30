@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { logo, arrow, cart } from "../../assets/svgs/customerflow";
 import { CartContext } from "../../contexts/CartContext";
+import ShoppingCartItem from "./ShoppingCartItem";
 import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 import "../../styles/css/customer/shopping_cart.css";
 
 const ShoppingCart = () => {
-  const { cart, setCart, price, setPrice } = useContext(CartContext);
+  const { cart, setCart, subtotal, setSubtotal } = useContext(CartContext);
+  const [cartTotal, setCartTotal] = useState({});
+  const sumValues = (obj) => Object.values(obj).reduce((a, b) => a + b, 0);
   let newArray = cart.map((item) => {
     let count = cart.filter((el) => el.id === item.id).length;
     console.log("ITEM COUNT", item.count);
@@ -25,6 +28,11 @@ const ShoppingCart = () => {
   console.log("UNIQUE", unique);
   console.log("BEHOLD THE NEW CART", newCart);
   console.log("cart contents on shopping cart page", cart);
+  useEffect(() => {
+    if (cart.length !== 0) {
+      setSubtotal(sumValues(cartTotal));
+    }
+  }, [cartTotal]);
   return (
     <div className="cart-page">
       <section className="left-cart-wrapper">
@@ -41,36 +49,22 @@ const ShoppingCart = () => {
         </div>
         <div className="left-content">
           {newCart.length > 0 ? (
-            newCart.map((item) => {
-              let newImage = "product-images/" + item.avatar;
-              console.log("newimage", newImage);
-              return (
-                <div>
-                  <CloudinaryContext cloudName="quickstlabs">
-                    <Image
-                      // className={props.product.profile_product_image}
-                      publicId={newImage}
-                      //  && productImages[0].public_id}
-                    >
-                      <Transformation height="122" width="146" crop="fill" />
-                    </Image>
-                  </CloudinaryContext>
-                  <p>{item.name}</p>
-                  <p>{item.business_name}</p>
-                  <p>{item.price}</p>
-                  <button>+</button>
-                  <p>{item.count}</p>
-                  <button>-</button>
-                </div>
-              );
-            })
+            newCart.map((item) => (
+              <ShoppingCartItem
+                item={item}
+                setSubtotal={setSubtotal}
+                setCartTotal={setCartTotal}
+                cartTotal={cartTotal}
+              />
+            ))
           ) : (
             <h1>Shopping Cart is empty</h1>
           )}
         </div>
       </section>
       <section className="right-cart-wrapper">
-        <h1>Subtotal: ${price.toFixed(2)} </h1>
+        <h1>Subtotal: ${subtotal.toFixed(2)} </h1>
+        {/* <h1>CartTotal: {}</h1> */}
         <p>Taxes(where applicable) added at checkout</p>
         <button className="checkout-btn">Checkout</button>
       </section>

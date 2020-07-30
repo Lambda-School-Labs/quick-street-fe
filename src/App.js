@@ -30,10 +30,10 @@ import ShoppingCart from "./customer-flow/components/ShoppingCart";
 const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
-  const [price, setPrice] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
   return (
     <div>
-      <CartContext.Provider value={{ cart, setCart, price, setPrice }}>
+      <CartContext.Provider value={{ cart, setCart, subtotal, setSubtotal }}>
         <Route path="/orderreview/:id" render={OrderReview} />
         <Route path="/orderconfirmation" component={OrderConfirmation} />
         <Route path="/styling" component={Styling} />
