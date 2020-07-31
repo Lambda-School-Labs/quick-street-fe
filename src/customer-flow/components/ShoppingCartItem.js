@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 
-const ShoppingCartItem = ({ item, cartTotal, setCartTotal }) => {
-  const [count, setCount] = useState(item.count);
-  const [itemTotal, setItemTotal] = useState(count * item.price);
+const ShoppingCartItem = ({ item, addToCount, subtractCount }) => {
+  let itemTotal = item.count * item.price;
+  let count = item.count;
+
+  //cloudinary vars
   let newImage = "product-images/" + item.avatar;
   console.log("newimage", newImage);
-  const addToCount = () => {
-    setCount(count + 1);
-  };
-  const subtractCount = () => {
-    setCount(count - 1);
-  };
-  useEffect(() => {
-    setItemTotal(count * item.price);
-    setCartTotal({ ...cartTotal, [item.name]: itemTotal });
-  }, [count]);
+
   return (
     <div>
       <CloudinaryContext cloudName="quickstlabs">
@@ -30,9 +23,9 @@ const ShoppingCartItem = ({ item, cartTotal, setCartTotal }) => {
       <p>{item.name}</p>
       <p>{item.business_name}</p>
       <p>{item.price}</p>
-      <button onClick={addToCount}>+</button>
+      <button onClick={() => addToCount(item)}>+</button>
       <p>{count}</p>
-      <button onClick={subtractCount}>-</button>
+      <button onClick={() => subtractCount(item)}>-</button>
       <p>{itemTotal.toFixed(2)}</p>
     </div>
   );

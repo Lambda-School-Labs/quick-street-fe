@@ -3,7 +3,6 @@ import { Route, Switch, Router } from "react-router-dom";
 import "./styles/scss/index.scss";
 
 // import UserContext from './contexts/UserContext';
-
 // Context
 import { Provider as AuthProvider } from "./contexts/AuthContext";
 import { Provider as CartProvider } from "./contexts/TestCartContext";
@@ -30,10 +29,41 @@ import ShoppingCart from "./customer-flow/components/ShoppingCart";
 const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [cart, setCart] = useState([]);
-  const [subtotal, setSubtotal] = useState(0);
+  const addOrSubtractCart = (obj, op = "add") => {
+    let duplicate = cart.findIndex((item) => item.name === obj.name);
+    let newCart = [...cart];
+    console.log("duplicate", duplicate);
+    if (duplicate > -1) {
+      if (op === "add") {
+        newCart[duplicate].count += 1;
+      } else {
+        newCart[duplicate].count -= 1;
+        if (newCart[duplicate].count === 0) {
+          newCart = newCart.filter((el, i) => i !== duplicate);
+        }
+      }
+      return setCart([...newCart]);
+    }
+    obj.count = 1;
+    newCart.push(obj);
+    return setCart([...newCart]);
+  };
+
+  let subtotal = 0;
+  cart.forEach((item) => {
+    subtotal += item.count * item.price;
+  });
+  const addToCount = (item) => {
+    addOrSubtractCart(item);
+  };
+  const subtractCount = (item) => {
+    addOrSubtractCart(item, "subract");
+  };
   return (
     <div>
-      <CartContext.Provider value={{ cart, setCart, subtotal, setSubtotal }}>
+      <CartContext.Provider
+        value={{ cart, subtotal, addToCount, subtractCount }}
+      >
         <Route path="/orderreview/:id" render={OrderReview} />
         <Route path="/orderconfirmation" component={OrderConfirmation} />
         <Route path="/styling" component={Styling} />
@@ -44,7 +74,6 @@ const App = () => {
           <FavoritesContext.Provider value={{ favorites, setFavorites }}>
             <Route path="/profile" component={ProfilePage} />
             <Route path="/customerHome" component={CustomerPage} />
-            {/* <Route path="/browse/:id" component={Vendor} /> */}
             <Route path="/shopping-cart" component={ShoppingCart} />
             <Route exact path="/browse" component={Browse} />
           </FavoritesContext.Provider>
