@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import {Link, NavLink, Route} from 'react-router-dom';
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_favorites.css";
 import  Table from "react-bootstrap/Table";
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+
 
 const CustomerFavorites = ({ name }) => {
   const [favorites, setFavorites] = useState([]);
+  console.log('FAVORITES', favorites)
 
   const handleDelete = (favid) => {
     axiosWithAuth()
@@ -26,6 +29,7 @@ const CustomerFavorites = ({ name }) => {
       })
       .catch((err) => console.log(err));
   }, []);
+
 
   //   function editField() {
   //     setEditing(!editing);
@@ -51,7 +55,7 @@ const CustomerFavorites = ({ name }) => {
               {favorites.map((item) => (
                 <tr>
                   <td><img className="vendor-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRwtXhvRASVUoRwvqztf6c4dgxjNpiGtY0XvabJyraHKhLA2tT9Ls8lAxnxLCE&usqp=CAc" /></td>
-                  <td>{item.business_name}</td>
+                  <td><Link to={`/customerHome/browse/${item.vid}`}>{item.business_name}</Link></td>
                   <td>{item.vendor_category}</td>
                   <td><Button variant="danger" onClick={() => handleDelete(item.id)}>X</Button></td>
                   </tr>))}
