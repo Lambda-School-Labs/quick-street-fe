@@ -17,23 +17,20 @@ import ModalCarousel2 from "./ModalCarousel2";
 import { add } from "../../../../styles/css/vendor/vendor_product_page.css";
 
 const ViewVendorProduct = (props) => {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, addToCount } = useContext(CartContext);
 
   console.log("vendorId on viewVendorProduct", props.vendorId);
   console.log("view vendor props, not only the id?", props.product);
   console.log("vendor props", props.vendor);
 
   const handleAdd = () => {
-    setCart([
-      ...cart,
-      {
-        business_name: props.vendor.business_name,
-        avatar: props.product.public_id,
-        id: props.product.id,
-        name: props.product.name,
-        price: props.product.price,
-      },
-    ]);
+    addToCount({
+      business_name: props.vendor.business_name,
+      avatar: props.product.public_id,
+      id: props.product.id,
+      name: props.product.name,
+      price: props.product.price,
+    });
     console.log("what is in the cart", cart);
   };
 
