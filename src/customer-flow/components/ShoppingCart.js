@@ -4,7 +4,6 @@ import { logo, arrow } from "../../assets/svgs/customerflow";
 import { CartContext } from "../../contexts/CartContext";
 import ShoppingCartItem from "./ShoppingCartItem";
 import axiosWithAuth from '../../utils/axiosWithAuth';
-
 import "../../styles/css/customer/shopping_cart.css";
 
 const ShoppingCart = () => {
@@ -30,7 +29,6 @@ const ShoppingCart = () => {
   console.log("IN THE CART", cart)
   console.log("TOKEN", localStorage.getItem("user_id"))
   // console.log("BUSINESS", cart[0].business_name)
-
   return (
     <div className="cart-page">
       <section className="left-cart-wrapper">
