@@ -19,9 +19,9 @@ import { add } from "../../../../styles/css/vendor/vendor_product_page.css";
 const ViewVendorProduct = (props) => {
   const { cart, addToCount } = useContext(CartContext);
 
-  console.log("vendorId on viewVendorProduct", props.vendorId);
-  console.log("view vendor props, not only the id?", props.product);
-  console.log("vendor props", props.vendor);
+  // console.log("vendorId on viewVendorProduct", props.vendorId);
+  // console.log("view vendor props, not only the id?", props.product);
+  // console.log("vendor props", props.vendor);
 
   const handleAdd = () => {
     addToCount({
@@ -35,7 +35,7 @@ const ViewVendorProduct = (props) => {
   };
 
   let newImage = "product-images/" + props.product.public_id;
-  console.log("newimage", newImage);
+
 
   return (
     // <h1>Hello there</h1>

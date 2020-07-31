@@ -26,7 +26,7 @@ const ViewVendorPosts = (props) => {
     axiosWithAuth()
       .get(`/vendors/${id}/posts`)
       .then((response) => {
-        console.log("vendor posts", response);
+        // console.log("vendor posts", response);
         setVendorPost([...vendorPost, response.data]);
       })
       .catch((error) => {
@@ -36,7 +36,7 @@ const ViewVendorPosts = (props) => {
 
   useEffect(() => {
     getVendorPosts(props.vendorId);
-    console.log("view posts", props.vendorId);
+    // console.log("view posts", props.vendorId);
   }, []);
 
   return (
