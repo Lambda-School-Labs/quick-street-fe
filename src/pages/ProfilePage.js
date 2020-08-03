@@ -46,7 +46,7 @@ const ProfilePage = (props) => {
     axiosWithAuth()
       .get(`/vendors/me`)
       .then((response) => {
-        // console.log("Here is the response data", response.data);
+        console.log("Here is the response data", response.data);
         setVendorInfo(response.data);
         /* setBannerInfo(vendorInfo.data.data.vendor_banner); */
         // console.log(
@@ -114,6 +114,9 @@ const ProfilePage = (props) => {
       });
   };
 
+  let newImage = "product-images/" + vendorInfo.public_id;
+  console.log("image id", newImage)
+
   return (
     <React.Fragment>
       <div style={{ backgroundColor: "#00B2ED" }} className={browse.temp_menu}>
@@ -166,10 +169,10 @@ const ProfilePage = (props) => {
 
             <div className={banner.vendor_banner_image_container}>
               {vendorInfo.vendor_banner !== `no-photo.jpg` ? (
-                <CloudinaryContext cloudName="db7cuh33j">
+                <CloudinaryContext cloudName="quickstlabs">
                   <Image
                     className={banner.vendor_banner_image}
-                    publicId={vendorInfo.vendor_banner}
+                    publicId={newImage}
                   >
                     <Transformation
                       gravity="center"
@@ -179,6 +182,19 @@ const ProfilePage = (props) => {
                     />
                   </Image>
                 </CloudinaryContext>
+
+                // <CloudinaryContext cloudName="">
+                // <Image 
+
+                // publicId={newImage}>
+                //   <Transformation
+                //     gravity="center"
+                //     height="318"
+                //     width="1062"
+                //     crop="fill"
+                //   />
+                // </Image>
+                // </CloudinaryContext>
               ) : (
                 <img
                   className="vendor_banner_image"
@@ -218,3 +234,5 @@ const ProfilePage = (props) => {
 };
 
 export default ProfilePage;
+
+
