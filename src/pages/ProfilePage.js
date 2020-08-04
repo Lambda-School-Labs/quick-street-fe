@@ -178,23 +178,10 @@ const ProfilePage = (props) => {
                       gravity="center"
                       height="500"
                       width="1800"
-                      crop="fill"
+                      crop="limit"
                     />
                   </Image>
                 </CloudinaryContext>
-
-                // <CloudinaryContext cloudName="">
-                // <Image 
-
-                // publicId={newImage}>
-                //   <Transformation
-                //     gravity="center"
-                //     height="318"
-                //     width="1062"
-                //     crop="fill"
-                //   />
-                // </Image>
-                // </CloudinaryContext>
               ) : (
                 <img
                   className="vendor_banner_image"

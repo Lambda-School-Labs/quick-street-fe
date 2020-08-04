@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
+import {Redirect} from 'react-router-dom';
+
 const CustomerForm = () => {
   const [formData, setFormData] = useState({
     customer_name: "",
@@ -7,6 +9,8 @@ const CustomerForm = () => {
     phone_number: "",
     zip_code: "",
   });
+
+  const [home, setHome] = useState(false);
 
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,10 +28,13 @@ const CustomerForm = () => {
       address: "",
       phone_number: "",
       zip_code: "",
-    });
+    })
+    setHome(true);
+    ;
   };
   return (
     <div>
+      {home ? <Redirect to="/customerhome" /> : null}
       <h1> Customer Profile</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="customer_name">Name</label>
