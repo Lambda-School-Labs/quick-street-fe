@@ -3,32 +3,35 @@ import { Link } from "react-router-dom";
 import { logo, arrow } from "../../assets/svgs/customerflow";
 import { CartContext } from "../../contexts/CartContext";
 import ShoppingCartItem from "./ShoppingCartItem";
-import axiosWithAuth from '../../utils/axiosWithAuth';
+import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/shopping_cart.css";
 
 const ShoppingCart = () => {
   const { subtotal, cart, addToCount, subtractCount } = useContext(CartContext);
-  const customer = localStorage.getItem("user_id")
+  const customer = localStorage.getItem("user_id");
 
-  
   const submitOrder = () => {
     const date = Date(Date.now());
     const newDate = date.toString();
-    console.log("data", subtotal, customer, cart[0].business_name, date)
+    console.log("data", subtotal, customer, cart[0].business_name, date);
     axiosWithAuth()
-    .post("/orders/submit", {"subtotal":subtotal, "user_id":customer, "business_name":cart[0].business_name, "date_of_order":newDate})
-    .then(res => {
-      console.log("data", subtotal, customer, cart[0].business_name)
-      console.log("order submitted")
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }
+      .post("/orders/submit", {
+        subtotal: subtotal,
+        user_id: customer,
+        business_name: cart[0].business_name,
+        date_of_order: newDate,
+      })
+      .then((res) => {
+        console.log("data", subtotal, customer, cart[0].business_name);
+        console.log("order submitted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  console.log("IN THE CART", cart)
-  console.log("TOKEN", localStorage.getItem("user_id"))
-  // console.log("BUSINESS", cart[0].business_name)
+  console.log("IN THE CART", cart);
+  console.log("TOKEN", localStorage.getItem("user_id"));
   return (
     <div className="cart-page">
       <section className="left-cart-wrapper">
@@ -43,25 +46,31 @@ const ShoppingCart = () => {
             back to products
           </Link>
         </div>
-        <div className='subtotal'>SUBTOTAL: {subtotal}</div>
         <div className="left-content">
           {cart.length > 0 ? (
-            cart.map((item) => (
-              <ShoppingCartItem
-                item={item}
-                addToCount={addToCount}
-                subtractCount={subtractCount}
-              />
-            ))
+            <div className="left-inner-content">
+              {cart.map((item) => (
+                <ShoppingCartItem
+                  item={item}
+                  addToCount={addToCount}
+                  subtractCount={subtractCount}
+                />
+              ))}
+            </div>
           ) : (
-            <h1>Shopping Cart is empty</h1>
+            <div className="empty-cart">
+              <h1>Your Shopping Cart is empty!</h1>
+              <Link to="/customerHome/search">Start Shopping</Link>
+            </div>
           )}
         </div>
       </section>
       <section className="right-cart-wrapper">
         <h1>Subtotal: ${subtotal.toFixed(2)} </h1>
         <p>Taxes(where applicable) added at checkout</p>
-        <button className="checkout-btn" onClick={() => submitOrder()}>Order IT</button>
+        <button className="checkout-btn" onClick={() => submitOrder()}>
+          Order
+        </button>
       </section>
     </div>
   );

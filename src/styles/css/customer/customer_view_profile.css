@@ -1,0 +1,17 @@
+.vendor_banner {
+}
+.vendor_banner button {
+  background: inherit;
+  border: none;
+  cursor: pointer;
+  padding: 0px 0px;
+}
+.product-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.product-grid {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}

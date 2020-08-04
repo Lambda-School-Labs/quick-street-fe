@@ -92,19 +92,27 @@ const CustomerForm = ({ name, setName }) => {
           </form>
         </div>
       ) : (
-        <div className="customer-info">
-          <p>Name</p>
-          <h3>{formData.customer_name}</h3>
-          <p>Address</p>
-          <h3>{formData.address}</h3>
-          <p>Phone Number</p>
-          <h3>{formData.phone_number}</h3>
-          <p>Zip Code</p>
-          <h3>{formData.zip_code}</h3>
-          <div className="edit-btn-box">
-            <button onClick={editField}>Edit</button>
+        <section>
+          <div className="avatar-box float">
+            <img
+              src="https://images.unsplash.com/photo-1500832333538-837287aad2b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80"
+              alt="moustached man in black and white"
+            />
           </div>
-        </div>
+          <div className="customer-info">
+            <p>Name</p>
+            <h3>{formData.customer_name}</h3>
+            <p>Address</p>
+            <h3>{formData.address}</h3>
+            <p>Phone Number</p>
+            <h3>{formData.phone_number}</h3>
+            <p>Zip Code</p>
+            <h3>{formData.zip_code}</h3>
+            <div className="edit-btn-box">
+              <button onClick={editField}>Edit</button>
+            </div>
+          </div>
+        </section>
       )}
     </div>
   );

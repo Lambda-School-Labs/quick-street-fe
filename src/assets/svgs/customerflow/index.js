@@ -9,7 +9,9 @@ import searchIcon from "./search.svg";
 import magIcon from "./magnify.svg";
 import shopCart from "./cart.svg";
 import backArrow from "./back_arrow.svg";
+import unfaved from "./favoriteEmpty.svg";
 
+export const favEmpty = unfaved;
 export const arrow = backArrow;
 export const cart = shopCart;
 export const magGlass = magIcon;
