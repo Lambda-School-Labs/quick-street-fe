@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {Link, NavLink, Route} from 'react-router-dom';
+import { Link, NavLink, Route } from "react-router-dom";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_favorites.css";
-import  Table from "react-bootstrap/Table";
-import Button from 'react-bootstrap/Button';
-
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 
 const CustomerFavorites = ({ name }) => {
   const [favorites, setFavorites] = useState([]);
-  console.log('FAVORITES', favorites)
+  console.log("FAVORITES", favorites);
 
   const handleDelete = (favid) => {
     axiosWithAuth()
@@ -25,11 +24,19 @@ const CustomerFavorites = ({ name }) => {
       .get("/customers/favorites/me")
       .then((res) => {
         console.log("res from customer favorites", res);
-        setFavorites(res.data);
+        let uniqueName = new Set([]);
+        let newArray = res.data.filter((item) => {
+          if (!uniqueName.has(item.business_name)) {
+            uniqueName.add(item.business_name);
+            return true;
+          }
+          return false;
+        });
+        setFavorites(newArray);
+        localStorage.setItem("favs", newArray);
       })
       .catch((err) => console.log(err));
-  }, []);
-
+  }, [setFavorites]);
 
   //   function editField() {
   //     setEditing(!editing);
@@ -40,29 +47,45 @@ const CustomerFavorites = ({ name }) => {
       <h1 className="user-title">{name}'s Favorites</h1>
 
       <div className="fav-info">
-          <div>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <td>Image</td>
-                  <td>Vendor</td>
-                  <td>Type</td>
-                  <td>Remove</td>
-                </tr>
-              </thead>
+        <div>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <td>Image</td>
+                <td>Vendor</td>
+                <td>Type</td>
+                <td>Remove</td>
+              </tr>
+            </thead>
 
-              <tbody>
+            <tbody>
               {favorites.map((item) => (
                 <tr>
-                  <td><img className="vendor-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRwtXhvRASVUoRwvqztf6c4dgxjNpiGtY0XvabJyraHKhLA2tT9Ls8lAxnxLCE&usqp=CAc" /></td>
-                  <td><Link to={`/customerHome/browse/${item.vid}`}>{item.business_name}</Link></td>
+                  <td>
+                    <img
+                      className="vendor-img"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRwtXhvRASVUoRwvqztf6c4dgxjNpiGtY0XvabJyraHKhLA2tT9Ls8lAxnxLCE&usqp=CAc"
+                    />
+                  </td>
+                  <td>
+                    <Link to={`/customerHome/browse/${item.vid}`}>
+                      {item.business_name}
+                    </Link>
+                  </td>
                   <td>{item.vendor_category}</td>
-                  <td><Button variant="danger" onClick={() => handleDelete(item.id)}>X</Button></td>
-                  </tr>))}
-              </tbody>
-            </Table>
-          </div>
-
+                  <td>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      X
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </div>
     </div>
   );
@@ -70,6 +93,8 @@ const CustomerFavorites = ({ name }) => {
 
 export default CustomerFavorites;
 
-{/* <button onClick={() => handleDelete(item.id)}>X</button> */}
+{
+  /* <button onClick={() => handleDelete(item.id)}>X</button> */
+}
 
 // {item.vendor_category}
