@@ -16,6 +16,12 @@ const CustomerForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("user_id")
+
+  console.log("token", token)
+  console.log("user id", user_id)
+
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("formData", formData);

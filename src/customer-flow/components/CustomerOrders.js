@@ -27,7 +27,7 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
           return { ...item, date_of_order: date };
         });
         console.log("new array", newArr);
-        setOrderData(newArr);
+        setOrderData(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -46,7 +46,7 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
               <div><p >Order #:</p>
               <h3>{item.id}</h3></div>
               <div><p>Total Price:</p>
-              <h3>${item.total_price}</h3></div>
+              <h3>${item.subtotal}</h3></div>
               <div><p>Vendor Name:</p>
               <h3>{item.business_name}</h3></div>
             </div>
