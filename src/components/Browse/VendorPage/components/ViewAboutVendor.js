@@ -39,7 +39,6 @@ const ViewAboutVendor = (props) => {
   const checkFavorites = () => {
     // console.log("this is the vendor id", props.vendorId);
     if (favorites.includes(+props.vendorId)) {
-      // console.log("is this firing");
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
