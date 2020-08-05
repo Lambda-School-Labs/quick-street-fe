@@ -4,6 +4,11 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_favorites.css";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import {
+  Image,
+  CloudinaryContext,
+  Transformation,
+} from "cloudinary-react";
 
 const CustomerFavorites = ({ name }) => {
   const [favorites, setFavorites] = useState([]);
@@ -32,8 +37,14 @@ const CustomerFavorites = ({ name }) => {
           }
           return false;
         });
-        setFavorites(newArray);
-        localStorage.setItem("favs", newArray);
+        console.log("newArray", newArray)
+        let newPid = newArray.map(pid => {
+          // console.log("PUBLIC ID", pid.public_id)
+          let image = "product-images/" + pid.public_id;
+          return{...pid, public_id: image}
+        })
+        // console.log("NEW PID", newPid)
+        setFavorites(newPid);
       })
       .catch((err) => console.log(err));
   }, [setFavorites]);
@@ -42,6 +53,8 @@ const CustomerFavorites = ({ name }) => {
   //     setEditing(!editing);
   //   }
 
+console.log("favorites before map", favorites)
+  
   return (
     <div className="favorites-wrapper">
       <h1 className="user-title">{name}'s Favorites</h1>
@@ -62,10 +75,11 @@ const CustomerFavorites = ({ name }) => {
               {favorites.map((item) => (
                 <tr>
                   <td>
-                    <img
-                      className="vendor-img"
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRwtXhvRASVUoRwvqztf6c4dgxjNpiGtY0XvabJyraHKhLA2tT9Ls8lAxnxLCE&usqp=CAc"
-                    />
+                  <CloudinaryContext cloudName="quickstlabs">
+                    <Image publicId={item.public_id}>
+                      <Transformation height="75" width="75" crop="fill" />
+                    </Image>
+                  </CloudinaryContext>
                   </td>
                   <td>
                     <Link to={`/customerHome/browse/${item.vid}`}>
