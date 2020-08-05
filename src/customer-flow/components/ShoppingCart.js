@@ -11,15 +11,15 @@ const ShoppingCart = () => {
   const customer = localStorage.getItem("user_id");
 
   const submitOrder = () => {
-    const date = Date(Date.now());
+    const date = new Date().toLocaleString().split(',')[0]
     const newDate = date.toString();
     console.log("data", subtotal, customer, cart[0].business_name, date);
     axiosWithAuth()
       .post("/orders/submit", {
-        subtotal: subtotal,
-        user_id: customer,
-        business_name: cart[0].business_name,
-        date_of_order: newDate,
+        "subtotal": subtotal,
+        "user_id": customer,
+        "business_name": cart[0].business_name,
+        "date_of_order": newDate,
       })
       .then((res) => {
         console.log("data", subtotal, customer, cart[0].business_name);
