@@ -178,9 +178,11 @@ const Nav = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/customerHome">Dashboard</Link>
-      </MenuItem>
+      {isVendor !== "true" && (
+        <MenuItem onClick={handleMenuClose}>
+          <Link to="/customerHome">Dashboard</Link>
+        </MenuItem>
+      )}
       {isVendor === "true" && (
         <MenuItem onClick={handleMenuClose}>
           <Link to={`/profile`}>Profile</Link>
