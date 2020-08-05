@@ -9,7 +9,7 @@ import {
   Context,
   Transformation,
 } from "cloudinary-react";
-import profile from "../../../../styles/scss/profile.module.scss";
+import "../../../../styles/css/customer/customer_view_profile.css";
 import modal from "../../../../styles/scss/browseModal.module.scss";
 import { CustomButton } from "../../../index";
 import { Modal } from "../../../index";
@@ -36,26 +36,25 @@ const ViewVendorProduct = (props) => {
 
   let newImage = "product-images/" + props.product.public_id;
 
-
   return (
     // <h1>Hello there</h1>
     <>
       <div
         // onClick={() => showHideModal(true)}
-        className={profile.products_card}
+        className="vendor-product-cards"
         key={props.product.id}
       >
-        <p className={profile.name}>{props.product.name}</p>
-        <p className={profile.price}>${props.product.price}</p>
         <CloudinaryContext cloudName="quickstlabs">
           <Image
             className={props.product.profile_product_image}
             publicId={newImage}
             //  && productImages[0].public_id}
           >
-            <Transformation height="122" width="146" crop="fill" />
+            <Transformation height="210" width="280" crop="fill" />
           </Image>
         </CloudinaryContext>
+        <p>{props.product.name}</p>
+        <p>${props.product.price}</p>
         <button className={add} onClick={() => handleAdd()}>
           ADD to Cart
         </button>

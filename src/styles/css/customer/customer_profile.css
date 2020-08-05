@@ -129,6 +129,11 @@
 p {
   margin-bottom: 0px;
 }
+.float {
+  position: absolute;
+  top: 140px;
+  left: 20px;
+}
 
 /* // Phones (landscape view)
 $screen-phone-min: 320px;

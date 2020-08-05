@@ -4,6 +4,7 @@ import axiosWithAuth from "../../../../utils/axiosWithAuth";
 
 // styling
 import profile from "../../../../styles/scss/profile.module.scss";
+// import "../../../../styles/css/customer/customer_view_profile.css";
 
 const ViewVendorPosts = (props) => {
   const [vendorPost, setVendorPost] = useState([]);

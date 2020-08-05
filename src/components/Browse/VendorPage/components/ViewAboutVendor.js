@@ -3,9 +3,11 @@ import Map from "../../../shared/Map";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
 import { FavoritesContext } from "../../../../contexts/FavoritesContext";
 // styling
-import profile from "../../../../styles/scss/profile.module.scss";
+// import profile from "../../../../styles/scss/profile.module.scss";
 // import { image } from '../../assets/rectangle.png';
+import "../../../../styles/css/customer/customer_view_profile.css";
 import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
+import { favorite, favEmpty } from "../../../../assets/svgs/customerflow";
 const ViewAboutVendor = (props) => {
   // console.log("view about vendor", props.vendorId);
   const [isFavorite, setIsFavorite] = useState();
@@ -47,13 +49,15 @@ const ViewAboutVendor = (props) => {
 
   return (
     <>
-      <div className={profile.banner_container}>
-        <div className={profile.banner_wrapper}>
+      <div className="view-vendor-wrapper">
+        <div className="vendor_banner">
           <h1>{props.vendor.business_name}</h1>
           {isFavorite ? (
-            <h1>Favorited</h1>
+            <img src={favorite} alt="magnifying glass icon" />
           ) : (
-            <button onClick={() => favoriteVendor()}>Favorite</button>
+            <button onClick={() => favoriteVendor()}>
+              <img src={favEmpty} alt="magnifying glass icon" />
+            </button>
           )}
 
           <CloudinaryContext cloudName="quickstlabs">
@@ -68,9 +72,9 @@ const ViewAboutVendor = (props) => {
           </CloudinaryContext>
         </div>
       </div>
-      <div className={profile.about_container}>
-        <div className={profile.about_wrapper}>
-          <div className={profile.column_left}>
+      <div>
+        <div>
+          <div>
             <h1>About Us</h1>
             <p>{props.vendor.description}</p>
             <h1>Hours of Operation</h1>
@@ -79,7 +83,7 @@ const ViewAboutVendor = (props) => {
             <p>{props.vendor.phone}</p>
             <p>{props.vendor.email}</p>
           </div>
-          <div className={profile.column_right}>
+          <div>
             <h1>Location</h1>
             <p>The vendor can be found at {props.vendor.zipcode} area</p>
             {/* <Map

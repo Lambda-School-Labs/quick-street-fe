@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../../../utils/axiosWithAuth";
 import Product from "./ViewVendorProduct";
 //styling
-import profile from "../../../../styles/scss/profile.module.scss";
+import "../../../../styles/css/customer/customer_view_profile.css";
+// import profile from "../../../../styles/scss/profile.module.scss";
 const ViewVendorProducts = (props) => {
   const [vendorProducts, setVendorProducts] = useState([]);
 
@@ -24,10 +25,10 @@ const ViewVendorProducts = (props) => {
   }, []); // removed [] dependency
 
   return (
-    <div className={profile.products_container}>
-      <div className={profile.products_wrapper}>
+    <div className="view-vendor-products">
+      <div className="product-wrapper">
         <h1>Products</h1>
-        <div className={profile.products_card_wrapper}>
+        <div className="product-grid">
           {vendorProducts.map((product) => (
             <Product
               vendor={props.vendor}
@@ -37,9 +38,7 @@ const ViewVendorProducts = (props) => {
             />
           ))}
           {vendorProducts.length === 0 && (
-            <p className="no_products_content">
-              There are no products to show right now.
-            </p>
+            <p>There are no products to show right now.</p>
           )}
         </div>
       </div>
