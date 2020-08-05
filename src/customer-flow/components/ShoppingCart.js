@@ -41,7 +41,7 @@ const ShoppingCart = () => {
           </Link>
         </div>
         <div className="back-arrow">
-          <Link to="/customerHome">
+          <Link to="/customerHome/search">
             <img src={arrow} alt="backwards arrow" />
             back to products
           </Link>
