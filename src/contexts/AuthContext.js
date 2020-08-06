@@ -63,7 +63,7 @@ const signin = (dispatch) => async ({ email, password }) => {
     } else {
       console.log("user is customer?");
       checkIfCart(response.data.id);
-      window.location.href = "customerHome";
+      window.location.href = "customerHome/search";
     }
   } catch (error) {
     console.log(error.response);
