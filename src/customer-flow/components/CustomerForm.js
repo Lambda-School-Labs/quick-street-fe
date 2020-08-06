@@ -40,7 +40,7 @@ const CustomerForm = () => {
   };
   return (
     <div>
-      {home ? <Redirect to="/customerhome" /> : null}
+      {home ? <Redirect to="/customerhome/search" /> : null}
       <h1> Customer Profile</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="customer_name">Name</label>
