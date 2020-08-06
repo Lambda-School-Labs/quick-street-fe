@@ -1,18 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_profile.css";
+
+//TESTING
+import banner from "../../styles/scss/vendor/a_vendors_banner.module.scss";
+
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import {
+  Image,
+  CloudinaryContext,
+  Context,
+  Transformation,
+} from "cloudinary-react";
+import { Avatar } from "@material-ui/core";
+
+
 const CustomerForm = ({ name, setName }) => {
   const [formData, setFormData] = useState({
     customer_name: "",
     address: "",
     phone_number: "",
     zip_code: "",
+    public_id: ""
   });
   const [editing, setEditing] = useState(false);
 
   const changeHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  // const [pictureUpdate, setPictureUpdate] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,24 +52,111 @@ const CustomerForm = ({ name, setName }) => {
       .then((res) => {
         console.log("res from customer update", res);
         setFormData(res.data);
+        setNewImage("product-images/" + res.data.public_id)
       })
       .catch((err) => console.log(err));
   }, []);
 
+  const myWidget = window.cloudinary.createUploadWidget(
+    {
+      cloudName: "quickstlabs",
+      uploadPreset: "product-images",
+      sources: [
+        "local",
+        "url",
+        "camera",
+        "image_search",
+        "facebook",
+        "dropbox",
+        "instagram",
+      ],
+      showAdvancedOptions: true,
+      cropping: true, // if true multiple must be false, set to false [set multiple to true] to upload multiple files
+      multiple: false,
+      defaultSource: "local",
+      styles: {
+        palette: {
+          window: "#FFFFFF",
+          sourceBg: "#00B2ED",
+          windowBorder: "#E1F6FA",
+          tabIcon: "#2B3335",
+          inactiveTabIcon: "#555a5f",
+          menuIcons: "#5B5F63",
+          link: "#00769D",
+          action: "#21B787",
+          inProgress: "#00769D",
+          complete: "#21B787",
+          error: "#E92323",
+          textDark: "#2B3335",
+          textLight: "#FFFFFF",
+        },
+        fonts: {
+          default: null,
+          "'Poppins', sans-serif": {
+            url: "https://fonts.googleapis.com/css?family=Poppins",
+            active: true,
+          },
+        },
+      },
+    },
+
+    async (error, result) => {
+      if (!error && result && result.event === "success") {
+        const banner_info = await result.info;
+        const correctBannerData = banner_info.public_id.split("/",2)
+        console.log("profile DATA", correctBannerData)
+        axiosWithAuth()
+          .put(`/customers/${formData.users_id}/profile-picture`, {"public_id": correctBannerData[1]})
+          .then(res => {
+            console.log('PUT customer profile upload res: ', res);
+            setNewImage("product-images/" + correctBannerData[1])
+            setFormData({...formData, "public_id": correctBannerData[1]})
+            // setPictureUpdate([]);
+          })
+          .catch((err) => {
+            console.log('PUT VendorProfile.js Upload widget err', err);
+          });
+
+      }
+    }
+  );
+
+
+
+
   function editField() {
     setEditing(!editing);
   }
+
+  const uploadPicture = (e) => {
+    e.preventDefault();
+    myWidget.open();
+  };
+
+  const [newImage, setNewImage] = useState("product-images/" + formData.public_id);
+   
 
   return (
     <div className="profile-wrapper">
       <h1 className="user-title">{name}'s Profile</h1>
       {editing ? (
         <div className="form-wrapper">
-          <div className="avatar-box">
-            <img
-              src="https://images.unsplash.com/photo-1500832333538-837287aad2b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80"
-              alt="moustached man in black and white"
-            />
+          <div className="avatar-box" >
+            
+          <CloudinaryContext cloudName="quickstlabs" >
+          <Image publicId={newImage} >
+            <Transformation height="100" width="100" crop="fill" />
+          </Image>
+        </CloudinaryContext>
+
+        <div className={banner.customer_avatar_upload}>
+          <FontAwesomeIcon
+          id={banner.upload}
+          className={banner.icon}
+          icon={faUpload}
+          onClick={uploadPicture}/>
+        </div>
+            
           </div>
           <form className="customer-form" onSubmit={submitHandler}>
             <label htmlFor="customer_name">Name</label>
@@ -94,10 +200,19 @@ const CustomerForm = ({ name, setName }) => {
       ) : (
         <section>
           <div className="avatar-box float">
-            <img
-              src="https://images.unsplash.com/photo-1500832333538-837287aad2b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1834&q=80"
-              alt="moustached man in black and white"
-            />
+          <CloudinaryContext cloudName="quickstlabs">
+          <Image publicId={newImage}>
+            <Transformation height="100" width="100" crop="fill" />
+          </Image>
+        </CloudinaryContext>
+        {/* <div className={banner.customer_avatar_upload}>
+          <FontAwesomeIcon
+          id={banner.upload}
+          className={banner.icon}
+          icon={faUpload}
+          onClick={uploadPicture}/>
+          </div> */}
+
           </div>
           <div className="customer-info">
             <p>Name</p>
@@ -119,3 +234,23 @@ const CustomerForm = ({ name, setName }) => {
 };
 
 export default CustomerForm;
+
+
+
+
+        // axiosWithAuth()
+        //   .put(
+        //     `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,
+        //     // `/vendors/${vendorId}`,
+        //     {
+        //       ...vendorInfo,
+        //       vendor_banner: `${banner_info.public_id}`,
+        //     }
+        //   )
+        //   .then((res) => {
+        //     console.log("This is the response from banner upload", res);
+        //     setBannerInfo(banner_info.public_id);
+        //   })
+        //   .catch((err) => {
+        //     console.log("PUT VendorProfile.js Upload widget err", err);
+        //   });

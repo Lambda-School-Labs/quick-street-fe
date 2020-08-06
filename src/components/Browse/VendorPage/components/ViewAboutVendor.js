@@ -14,12 +14,9 @@ const ViewAboutVendor = (props) => {
   const { favorites, setFavorites } = useContext(FavoritesContext);
 
   useEffect(() => {
-    // console.log("customerPage favorites:", favorites);
     props.getVendor(props.vendorId);
-    // console.log("this is the vendorId", props.vendorId);
-    // console.log("favorites on the vendor page", favorites);
     checkFavorites();
-  }, []); // removed [] dependency
+  }, []);
 
   const favoriteVendor = () => {
     // let vendor = { vendor_id: props.vendorId };

@@ -7,16 +7,6 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
   console.log("is this the name?", name);
   const [orderData, setOrderData] = useState([]);
 
-  // useEffect(() => {
-  //     axiosWithAuth()
-  //       .get("/customers/me")
-  //       .then((res) => {
-  //         console.log("res from customer update", res.data);
-  //         setCustomer(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }, []);
-
   useEffect(() => {
     axiosWithAuth()
       .get("/orders/me")
