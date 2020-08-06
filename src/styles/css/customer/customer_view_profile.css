@@ -1,6 +1,26 @@
-.vendor_banner {
+.view-vendor-wrapper {
+  position: relative;
 }
-.vendor_banner button {
+.vendor-banner {
+  height: 200px;
+  z-index: 2;
+  position: relative;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 40px;
+  align-items: center;
+}
+.vendor-banner h1 {
+  font-size: 36px;
+  padding-bottom: 14px;
+  font-weight: bolder;
+}
+.vendor-banner p {
+  font-size: 16px;
+}
+.vendor-about .add-favs button {
   background: inherit;
   border: none;
   cursor: pointer;
@@ -14,4 +34,36 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+.vendor-cloud-img {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+.vendor-cloud-img img {
+  display: inline-block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.vendor-back-arrow {
+  font-size: 16px;
+  line-height: 19px;
+  padding-right: 30px;
+}
+.vendor-back-arrow a {
+  text-decoration: none;
+  color: black;
+}
+.vendor-back-arrow img {
+  padding-bottom: 2px;
+  padding-right: 5px;
+}
+/* favorite button and back to products button */
+.add-favs {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-left: 20px;
 }

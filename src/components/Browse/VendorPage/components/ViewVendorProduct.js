@@ -3,17 +3,8 @@ import axiosWithAuth from "../../../../utils/axiosWithAuth";
 import { CartContext } from "../../../../contexts/CartContext";
 
 //stlying
-import {
-  Image,
-  CloudinaryContext,
-  Context,
-  Transformation,
-} from "cloudinary-react";
+import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 import "../../../../styles/css/customer/customer_view_profile.css";
-import modal from "../../../../styles/scss/browseModal.module.scss";
-import { CustomButton } from "../../../index";
-import { Modal } from "../../../index";
-import ModalCarousel2 from "./ModalCarousel2";
 import { add } from "../../../../styles/css/vendor/vendor_product_page.css";
 
 const ViewVendorProduct = (props) => {
