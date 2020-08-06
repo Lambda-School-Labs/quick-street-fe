@@ -13,7 +13,7 @@ import unfaved from "./favoriteEmpty.svg";
 
 export const favEmpty = unfaved;
 export const arrow = backArrow;
-export const cart = shopCart;
+export const cartIcon = shopCart;
 export const magGlass = magIcon;
 export const logout = logOut;
 export const search = searchIcon;

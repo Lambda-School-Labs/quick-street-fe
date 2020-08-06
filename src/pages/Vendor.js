@@ -36,7 +36,7 @@ const Vendor = (props) => {
         vendorId={vendorId}
       />
       <ViewVendorProducts vendor={vendor} vendorId={vendorId} />
-      <ViewVendorPosts vendorId={vendorId} />
+      {/* <ViewVendorPosts vendorId={vendorId} /> */}
       {/* <button onClick={() => props.history.goBack()}>Back</button> */}
     </div>
   );

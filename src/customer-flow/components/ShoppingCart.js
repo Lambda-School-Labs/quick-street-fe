@@ -11,15 +11,15 @@ const ShoppingCart = () => {
   const customer = localStorage.getItem("user_id");
 
   const submitOrder = () => {
-    const date = new Date().toLocaleString().split(',')[0]
+    const date = new Date().toLocaleString().split(",")[0];
     const newDate = date.toString();
     console.log("data", subtotal, customer, cart[0].business_name, date);
     axiosWithAuth()
       .post("/orders/submit", {
-        "subtotal": subtotal,
-        "user_id": customer,
-        "business_name": cart[0].business_name,
-        "date_of_order": newDate,
+        subtotal: subtotal,
+        user_id: customer,
+        business_name: cart[0].business_name,
+        date_of_order: newDate,
       })
       .then((res) => {
         console.log("data", subtotal, customer, cart[0].business_name);
@@ -30,8 +30,8 @@ const ShoppingCart = () => {
       });
   };
 
-  console.log("IN THE CART", cart);
-  console.log("TOKEN", localStorage.getItem("user_id"));
+  // console.log("IN THE CART", cart);
+  // console.log("TOKEN", localStorage.getItem("user_id"));
   return (
     <div className="cart-page">
       <section className="left-cart-wrapper">

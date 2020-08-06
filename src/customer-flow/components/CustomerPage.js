@@ -8,6 +8,7 @@ import ShoppingSlidein from "./ShoppingSlidein";
 import { Vendor } from "../../pages/index";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
 import "../../styles/css/customer/customer_page.css";
+import { CartContext } from "../../contexts/CartContext";
 import { Context as AuthContext } from "../../contexts/AuthContext";
 import { Link, Route, Switch } from "react-router-dom";
 import {
@@ -18,10 +19,11 @@ import {
   orders,
   logo,
   logout,
-  cart,
+  cartIcon,
 } from "../../assets/svgs/customerflow";
 
 const CustomerPage = (props) => {
+  const { cart } = useContext(CartContext);
   const { favorites, setFavorites } = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
@@ -52,8 +54,13 @@ const CustomerPage = (props) => {
   };
   return (
     <div className="page-wrapper">
+      {cart.length > 0 ? (
+        <p className="notification" onClick={handleSidebar}>
+          {cart.length}
+        </p>
+      ) : null}
       <img
-        src={cart}
+        src={cartIcon}
         alt="shopping cart icon"
         className="cart-icon"
         onClick={handleSidebar}

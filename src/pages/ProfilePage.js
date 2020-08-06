@@ -115,7 +115,7 @@ const ProfilePage = (props) => {
   };
 
   let newImage = "product-images/" + vendorInfo.public_id;
-  console.log("image id", newImage)
+  console.log("image id", newImage);
 
   return (
     <React.Fragment>
@@ -221,5 +221,3 @@ const ProfilePage = (props) => {
 };
 
 export default ProfilePage;
-
-
