@@ -39,20 +39,13 @@ const ProfilePage = (props) => {
   const [reloadProducts, setReloadProducts] = useState(false);
   const [editAbout, setEditAbout] = useState(false);
   // const [editBusinessName, setEditBusinessName] = useState(false);
-  //console.log('Profile.js vendorInfo: ', vendorInfo);
 
   useEffect(() => {
-    //console.log('USEEFFECT 1 Profile.js');
     axiosWithAuth()
       .get(`/vendors/me`)
       .then((response) => {
-        console.log("Here is the response data", response.data);
         setVendorInfo(response.data);
-        /* setBannerInfo(vendorInfo.data.data.vendor_banner); */
-        // console.log(
-        //   "GET useEffect Profile.js setVendorInfo(response)",
-        //   response
-        // );
+
       })
       .catch((error) => {
         console.log("ERROR Profile.js GET vendors/:vendorId error: ", error);
@@ -60,31 +53,26 @@ const ProfilePage = (props) => {
   }, [vendorId]);
 
   useEffect(() => {
-    //console.log('USEEFFECT 2 Profile.js');
+  
     axiosWithAuth()
       .get(`/vendors/me/products`)
       .then((response) => {
-        console.log("GET Profile.js /vendors/me/products response", response);
+
         setProducts(response.data);
       })
       .catch((error) => {
         console.log(
-          "ERROR Profile.js GET fetchProducts() vendors/:vendorId/products error: ",
           error
         );
       });
   }, [vendorId, reloadProducts, setReloadProducts]);
 
-  // const editName = () => {
-  //   setEditBusinessName(!editBusinessName);
-  // };
+
 
   const saveName = () => {
-    console.log("Savename vendorinfo", vendorInfo);
     axiosWithAuth()
       .put(`/vendors/me/update`, vendorInfo)
       .then((res) => {
-        console.log(`update vendor info`, res);
         setVendorInfo(res.data[0]);
       })
       .catch((err) => {
@@ -93,7 +81,6 @@ const ProfilePage = (props) => {
   };
 
   const editProfile = () => {
-    // console.log(`edit profile clicked`);
     setEditAbout(!editAbout);
   };
 
@@ -102,11 +89,9 @@ const ProfilePage = (props) => {
       e.preventDefault();
     }
 
-    console.log("SAVE PROFILE vendorInfo", vendorInfo);
     axiosWithAuth()
       .put(`/vendors/me/update`, vendorInfo)
       .then((res) => {
-        console.log(`Profile.js saveProfile()`, res);
         setVendorInfo(res.data[0]);
       })
       .catch((err) => {
@@ -115,7 +100,6 @@ const ProfilePage = (props) => {
   };
 
   let newImage = "product-images/" + vendorInfo.public_id;
-  console.log("image id", newImage);
 
   return (
     <React.Fragment>
@@ -148,7 +132,6 @@ const ProfilePage = (props) => {
                       onClick={() => {
                         setEditingName(false);
                         saveName();
-                        console.log("CLICKED");
                       }}
                     >
                       <p className={`${banner.save_changes}`}>

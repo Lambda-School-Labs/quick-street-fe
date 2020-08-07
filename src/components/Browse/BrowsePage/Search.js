@@ -7,7 +7,6 @@ import placeholder from "../../../assets/images/Profile/placeholder.png";
 
 const Browse = (props) => {
   //really not sure what this page is doing.
-  // console.log('props from the search page is', props);
   const noZipcodeArray = [1, 2, 3, 4, 5, 6];
 
   return (

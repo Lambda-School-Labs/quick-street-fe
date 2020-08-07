@@ -10,7 +10,6 @@ const AboutForm = ({ editAbout, vendorInfo, info, setVendorInfo }) => (
 //   const changeHandler = (e) => {
 //     if (editAbout) {
 //       setVendorInfo({ ...vendorInfo, [e.target.name]: e.target.value });
-//       // console.log('CHANGE HANDLER VendorABout');
 //     }
 //   };
 
@@ -23,8 +22,6 @@ const AboutForm = ({ editAbout, vendorInfo, info, setVendorInfo }) => (
 //   //   }
 //   // };
 
-//   // console.log('info', info);
-//   // console.log(`vendor info`, vendorInfo);
 //   return (
 //     <div>
 //       <form className={about.vendor_info_form}>

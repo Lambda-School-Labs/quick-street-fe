@@ -11,14 +11,12 @@ import {
 } from "cloudinary-react";
 
 const CustomerFavorites = ({ name }) => {
-  const [favorites, setFavorites] = useState([]);
-  console.log("FAVORITES", favorites);
+  const [favorites, setFavorites] = useState([]);;
 
   const handleDelete = (favid) => {
     axiosWithAuth()
       .delete(`/customers/favorites/delete/${favid}`)
       .then((res) => {
-        console.log("res from fav delete", res);
         setFavorites(favorites.filter((item) => item.id !== favid));
       })
       .catch((err) => console.log(err));
@@ -28,7 +26,6 @@ const CustomerFavorites = ({ name }) => {
     axiosWithAuth()
       .get("/customers/favorites/me")
       .then((res) => {
-        console.log("res from customer favorites", res);
         let uniqueName = new Set([]);
         let newArray = res.data.filter((item) => {
           if (!uniqueName.has(item.business_name)) {
@@ -37,13 +34,10 @@ const CustomerFavorites = ({ name }) => {
           }
           return false;
         });
-        console.log("newArray", newArray)
         let newPid = newArray.map(pid => {
-          // console.log("PUBLIC ID", pid.public_id)
           let image = "product-images/" + pid.public_id;
           return{...pid, public_id: image}
         })
-        // console.log("NEW PID", newPid)
         setFavorites(newPid);
       })
       .catch((err) => console.log(err));

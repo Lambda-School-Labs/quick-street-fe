@@ -8,7 +8,6 @@ import { Map, Search, Nav, Footer, CustomButton } from "../components/index"; //
 import browse from "../styles/scss/browse.module.scss";
 
 const Browse = (props) => {
-  // console.log('The browse props are', props);
 
   const [zipcode, setZipcode] = useState("");
   const [query, setQuery] = useState([]);
@@ -21,22 +20,8 @@ const Browse = (props) => {
     setCustomerZip(event.target.value);
   };
 
-  //   const handleQueryChange = (event) => {
-  //     console.log(event.target.value);
-
-  //     if (!query.includes(event.target.value)) {
-  //       setQuery([...query, event.target.value]);
-  //     } else {
-  //       setQuery(query.filter((el) => el !== event.target.value));
-  //     }
-  //   };
-
-  // console.log(`query`, query);
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const query = new URLSearchParams(props.location.search);
-    // console.log("query", query);
     setZipcode(customerZip);
     getSearchResults(customerZip);
     // query.set("zip", customerZip);
@@ -46,13 +31,11 @@ const Browse = (props) => {
 
   const getSearchResults = (zip) => {
     //   const queryString = query.join("&");
-    //   console.log(queryString);
     let newObj = { data: zip };
     axiosWithAuth()
       // .get(`/vendors/radius/${zip}/5/?${queryString}`)
       .post(`vendors/all/places`, newObj)
       .then((response) => {
-        console.log(response);
         setVendors(response.data);
       })
       .catch((error) => {

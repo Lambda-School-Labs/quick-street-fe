@@ -6,15 +6,11 @@ const changeDateFormat = (date) => {
   if (!date) {
     return "N/A";
   } else {
-    // console.log("This is the date.", date);
     let resultingDate = "";
     const yearMonthArray = date.split("-");
-    // console.log(yearMonthArray);
     const dayArray = yearMonthArray[2].split("T");
-    // console.log(dayArray);
     resultingDate =
       yearMonthArray[1] + "/" + dayArray[0] + "/" + yearMonthArray[0];
-    // console.log(resultingDate);
     return resultingDate;
   }
 };

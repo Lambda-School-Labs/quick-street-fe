@@ -18,7 +18,6 @@ const ViewVendorProduct = (props) => {
       name: props.product.name,
       price: props.product.price,
     });
-    console.log("what is in the cart", cart);
   };
 
   let newImage = "product-images/" + props.product.public_id;

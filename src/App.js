@@ -33,7 +33,6 @@ const App = () => {
   const addOrSubtractCart = (obj, op = "add") => {
     let duplicate = cart.findIndex((item) => item.name === obj.name);
     let newCart = [...cart];
-    console.log("duplicate", duplicate);
     if (duplicate > -1) {
       if (op === "add") {
         newCart[duplicate].count += 1;

@@ -10,11 +10,9 @@ import "../../styles/css/customer/shopping_cart.css";
 const ShoppingCart = ({history}) => {
   const { setCart, subtotal, cart, addToCount, subtractCount } = useContext(CartContext);
   const customer = localStorage.getItem("user_id");
-  console.log("HISTORY:", history);
   const submitOrder = () => {
     const date = new Date().toLocaleString().split(",")[0];
     const newDate = date.toString();
-    console.log("data", subtotal, customer, cart[0].business_name, date);
     axiosWithAuth()
       .post("/orders/submit", {
         subtotal: subtotal,
@@ -23,8 +21,6 @@ const ShoppingCart = ({history}) => {
         date_of_order: newDate,
       })
       .then((res) => {
-        console.log("data", subtotal, customer, cart[0].business_name);
-        console.log("order submitted");
         history.push("/confirmation");
 
         setCart([]);
@@ -34,8 +30,6 @@ const ShoppingCart = ({history}) => {
       });
   };
 
-  // console.log("IN THE CART", cart);
-  // console.log("TOKEN", localStorage.getItem("user_id"));
   return (
     <div className="cart-page">
       <section className="left-cart-wrapper">

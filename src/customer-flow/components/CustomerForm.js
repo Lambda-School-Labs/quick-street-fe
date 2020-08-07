@@ -19,15 +19,11 @@ const CustomerForm = () => {
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("user_id")
 
-  console.log("token", token)
-  console.log("user id", user_id)
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
     axiosWithAuth()
       .post("/customers/profile", formData)
-      .then((res) => console.log("res from customer update", res))
       .catch((err) => console.log(err));
     setFormData({
       customer_name: "",

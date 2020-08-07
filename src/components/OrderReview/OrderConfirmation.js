@@ -12,8 +12,6 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 const OrderConfirmation = () => {
   const [orderObj, setOrderObj] = useState("");
   const customerId = localStorage.getItem("user_id");
-  console.log("customerID in orderconfirmation", customerId);
-  //const { state, setOrders } = useContext(OrderContext); // context??
 
   useEffect(() => {
     axiosWithAuth()
@@ -22,7 +20,6 @@ const OrderConfirmation = () => {
         const length = res.data.orders.length;
         const lastOrder = res.data.orders[length - 1];
         setOrderObj(lastOrder);
-        console.log("last order", lastOrder);
       });
   }); // removed [] dependency
 

@@ -90,8 +90,6 @@ const Login = (props) => {
             <CustomButton
               onClick={() => {
                 if (validateLogin()) {
-                  console.log("email", email);
-                  console.log("password", password);
                   signin({ email, password });
                 }
               }}

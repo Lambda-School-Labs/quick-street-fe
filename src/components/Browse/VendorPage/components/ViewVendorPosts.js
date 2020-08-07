@@ -13,7 +13,6 @@ const ViewVendorPosts = (props) => {
     if (!date) {
       return "N/A";
     } else {
-      console.log("This is the date.", date);
       let resultingDate = "";
       const yearMonthArray = date.split("-");
       const dayArray = yearMonthArray[2].split("T");
@@ -27,7 +26,6 @@ const ViewVendorPosts = (props) => {
     axiosWithAuth()
       .get(`/vendors/${id}/posts`)
       .then((response) => {
-        // console.log("vendor posts", response);
         setVendorPost([...vendorPost, response.data]);
       })
       .catch((error) => {
@@ -37,7 +35,6 @@ const ViewVendorPosts = (props) => {
 
   useEffect(() => {
     getVendorPosts(props.vendorId);
-    // console.log("view posts", props.vendorId);
   }, []);
 
   return (

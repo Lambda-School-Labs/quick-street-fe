@@ -8,7 +8,6 @@ import "../../styles/css/customer/shopping_cart.css";
 
 const Confirmation = ({ orders, setOrders }) => {
 
-  console.log("is this the name?");
   const [orderData, setOrderData] = useState(
   {"business_name": "",
   "date_of_order": "",
@@ -20,19 +19,15 @@ const Confirmation = ({ orders, setOrders }) => {
     axiosWithAuth()
       .get("/orders/me")
       .then((res) => {
-        console.log("res from customer orders", res);
         let newArr = res.data.map((item) => {
           let date = item.date_of_order.split("T")[0];
           return { ...item, date_of_order: date };
         });
-        console.log("new array", newArr);
-        console.log("This is res.data-1", res.data[res.data.length-1]);
         setOrderData(res.data[res.data.length-1]);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  // console.log(orderData[-1]);
 
   return (
     <div>

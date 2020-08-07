@@ -35,7 +35,6 @@ const CustomerForm = ({ name, setName }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("formData", formData);
     axiosWithAuth()
       .put("/customers/profile/update", formData)
       .then((res) => {
@@ -50,7 +49,6 @@ const CustomerForm = ({ name, setName }) => {
     axiosWithAuth()
       .get("/customers/me")
       .then((res) => {
-        console.log("res from customer update", res);
         setFormData(res.data);
         setNewImage("product-images/" + res.data.public_id)
       })
@@ -104,11 +102,9 @@ const CustomerForm = ({ name, setName }) => {
       if (!error && result && result.event === "success") {
         const banner_info = await result.info;
         const correctBannerData = banner_info.public_id.split("/",2)
-        console.log("profile DATA", correctBannerData)
         axiosWithAuth()
           .put(`/customers/${formData.users_id}/profile-picture`, {"public_id": correctBannerData[1]})
           .then(res => {
-            console.log('PUT customer profile upload res: ', res);
             setNewImage("product-images/" + correctBannerData[1])
             setFormData({...formData, "public_id": correctBannerData[1]})
             // setPictureUpdate([]);
@@ -234,23 +230,3 @@ const CustomerForm = ({ name, setName }) => {
 };
 
 export default CustomerForm;
-
-
-
-
-        // axiosWithAuth()
-        //   .put(
-        //     `https://quickstlabs.herokuapp.com/api/v1.0/vendors/${vendorId}`,
-        //     // `/vendors/${vendorId}`,
-        //     {
-        //       ...vendorInfo,
-        //       vendor_banner: `${banner_info.public_id}`,
-        //     }
-        //   )
-        //   .then((res) => {
-        //     console.log("This is the response from banner upload", res);
-        //     setBannerInfo(banner_info.public_id);
-        //   })
-        //   .catch((err) => {
-        //     console.log("PUT VendorProfile.js Upload widget err", err);
-        //   });

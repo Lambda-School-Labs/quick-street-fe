@@ -12,7 +12,6 @@ const ViewVendorProducts = (props) => {
     axiosWithAuth()
       .get(`/vendors/${id}/products`)
       .then((response) => {
-        // console.log("viewvendorsProducts response", response);
         setVendorProducts(response.data);
       })
       .catch((error) => {

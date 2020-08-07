@@ -12,8 +12,6 @@ const EditProductForm = (props) => {
   // this state is for pre selecting checkboxes
   const [dietsOnFile, setDietsOnFile] = useState([]);
   // const [unitOnFile, setUnitOnFile] = useState([]);
-  console.log("product.diet_category: ", product.diet_category);
-  console.log("dietsOnFile", dietsOnFile);
 
   useEffect(() => {
     setDietsOnFile(product.diet_category);
@@ -21,11 +19,9 @@ const EditProductForm = (props) => {
 
   const updateVendorDiets = (diets) => {
     const vendorId = localStorage.getItem("user_id");
-    console.log("updateVendorDiets() diets", diets);
     axiosWithAuth()
       .put(`/vendors/${vendorId}`, { diet_category: diets })
       .then((results) => {
-        console.log("PUT EditProd.Form updateVendorDiets()", results);
       })
       .catch((error) => console.log(error));
   };
@@ -39,15 +35,11 @@ const EditProductForm = (props) => {
 
   const handleSelect = (e) => {
     if (e.target.checked) {
-      console.log("Checked!", e.target.checked);
       if (product.diet_category.indexOf(e.target.value) === -1) {
         const updatedProduct = {
           ...product,
           [e.target.name]: [...product[e.target.name], e.target.value],
         };
-        console.log("UPDATED DIETS", updatedProduct.diet_category);
-        console.log("NOTHING HERE WITH VALUE: ", e.target.value);
-        console.log("ADDING: ", e.target.value);
         setProduct({
           ...product,
           [e.target.name]: [...product[e.target.name], e.target.value],
@@ -61,11 +53,9 @@ const EditProductForm = (props) => {
 
     if (!e.target.checked) {
       if (product.diet_category.indexOf(e.target.value) !== -1) {
-        console.log("REMOVING VALUE: ", e.target.value);
         let newArray = product.diet_category.filter((item) => {
           return item !== e.target.value;
         });
-        console.log("NEW ARRAY WILL BE: ", newArray);
         setProduct({
           ...product,
           [e.target.name]: newArray,
