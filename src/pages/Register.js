@@ -5,7 +5,6 @@ import registration from "../styles/scss/registration.module.scss";
 import { RegisterVendor, RegisterAll } from "../components/index";
 import CustomerForm from "../customer-flow/components/CustomerForm";
 const Register = (props) => {
-  // console.log('Register.js props: ', props);
 
   const [stepNum, setStepNum] = useState({
     step: 1,

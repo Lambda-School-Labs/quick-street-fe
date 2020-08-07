@@ -22,16 +22,9 @@ const EditProduct = (props) => {
   const [reloadingImages, setReloadingImages] = useState(false);
 
   useEffect(() => {
-    // console.log("product id", props.product_id);
-    //console.log('USEEFFECT 4 EditProducts.js GET /products/:prodcutId')
-    // loading images popup on (off in next useEffect)
-    // setLoadingImages(true);
-    // get product (details)
     axiosWithAuth()
       .get(`/products/${props.product_id}`)
-      .then((response) => {
-        console.log("RESPONSE Product data", response);
-        // console.log(response);
+      .then((response) => {;
         setProduct(response.data);
       })
       .catch((error) => {
@@ -39,21 +32,6 @@ const EditProduct = (props) => {
       });
   }, [reloadingImages]); // removed , [] dependency
 
-  // useEffect(() => {
-  //   // get all images of same product in previous request.
-  //   //console.log('USEEFFECT 5 EditProducts.js GET /products/:prodcutId/product-images')
-  //   axiosWithAuth()
-  //     /* ${props.product_id} */
-  //     .get(`/products/${props.product_id}/product-images`)
-  //     .then((response) => {
-  //       setImages(response.data.data);
-  //       // loading popup off
-  //       setLoadingImages(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }); // removed ,  [reloadingImages] dependency
 
   const delHover = (imgId, span, inOut) => {
     if (inOut === "in") {
@@ -83,12 +61,10 @@ const EditProduct = (props) => {
       setDetailsSaved(false);
     }, 1500);
 
-    console.log("PUT subitProd.Details payload: ", { ...product });
 
     axiosWithAuth()
       .put(`/products/${product.id}`, { ...product })
       .then((res) => {
-        console.log("PUT res EditProduct.js submitProd.Details: res ", res);
       })
       .catch((err) => {
         console.log(
@@ -116,12 +92,10 @@ const EditProduct = (props) => {
       props.setEditingProd(false);
     }, 2000);
 
-    console.log("PUT Edit.P saveAllAndClose payload: ", { ...product });
 
     axiosWithAuth()
       .put(`/products/${product.id}`, { ...product })
       .then((res) => {
-        console.log("PUT res EditProduct.js submitProd.Details: res ", res);
       })
       .catch((err) => {
         console.log(
@@ -134,14 +108,8 @@ const EditProduct = (props) => {
   };
 
   const deleteImage = (image_id) => {
-    console.log("EditProduct.js delteImage image_id", image_id);
 
     const vendorId = { vendorId: product.vendor._id };
-    console.log("EditProduct.js delteImage vendorId = ", vendorId);
-    console.log(
-      "EditProduct.js delteImage  product.vendor._id: ",
-      product.vendor._id
-    );
     axiosWithAuth()
       .delete(`/product-images/${image_id}`, { data: vendorId })
       .then((res) => {
@@ -159,16 +127,13 @@ const EditProduct = (props) => {
 
   const deleteProduct = async () => {
     // const vendorId = { vendorId: product.vendor.id };
-    console.log(props.product_id);
     await axiosWithAuth()
       .delete(`/products/${props.product_id}`)
       .then((response) => {
-        console.log("DELETE EditProduct.js deleteProduct :", response);
         setReloadProducts(!reloadProducts);
         setProductDeleted(true);
 
         setTimeout(function () {
-          console.log("goose goose");
           setProductDeleted(false);
           props.setEditingProd(false);
         }, 1000);

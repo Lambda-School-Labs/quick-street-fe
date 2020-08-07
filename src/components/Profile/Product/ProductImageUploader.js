@@ -45,7 +45,6 @@ const ProductImageUploader = (props) => {
     },
     async (error, result) => {
       if (!error && result && result.event === 'success') {
-        // console.log('result info from upload', result.info)
         const image_info = await result.info;
         const correct_fields = {
           vendorId,
@@ -71,30 +70,12 @@ const ProductImageUploader = (props) => {
           path: image_info.path,
           thumbnail_url: image_info.thumbnail_url
         }
-        console.log('ProductImageUploader.js resut.info: ', image_info);
-        // console.log('ProductImageUploader.js productId ', productId);
-        // console.log("product id from correct fields", correct_fields.product)
-        // console.log('ProductImageUploader.js vendorId ', vendorId);
-        // console.log("public id info from correct fields", correct_fields.public_id)
         const correctImageData = correct_fields.public_id.split("/",2)
-        console.log("new image data", correctImageData[1])
-
-        // try{
-        //   const imageData = await axiosWithAuth()
-        //   .put(`/products/${productId}/product-images`, {"public_id":correctImageData[1]})
-        //   .then(res => {
-            
-        //   })
-        //   console.log("updated image data?", imageData.config.public_id)
-        // } catch (err) {
-        //   console.log(err)
-        // }
 
 
         axiosWithAuth()
           .put(`/products/${productId}/product-images`, {"public_id": correctImageData[1]})
           .then(res => {
-            console.log('PUT ProductImagesUploader res: ', res);
             setReloadingImages(!reloadingImages)
           })
           .catch((err) => {

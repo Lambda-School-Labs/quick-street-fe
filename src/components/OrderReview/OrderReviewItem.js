@@ -38,7 +38,6 @@ const OrderReviewItem = ({ product }) => {
 		axiosWithAuth()
 			.get(`/vendors/${product.item.vendor}`)
 			.then((response) => {
-				// console.log(response);
 				setVendor(response.data.data.business_name);
 			})
 			.catch((error) => {

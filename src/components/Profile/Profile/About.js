@@ -30,7 +30,6 @@ const About = ({
       ...vendorInfo,
       [e.target.name]: e.target.value,
     });
-    console.log(vendorInfo);
   };
 
   return (
@@ -63,7 +62,6 @@ const About = ({
                       onClick={(e) => {
                         setEditingNow(null);
                         saveProfile(e);
-                        console.log("saveProfile() Profile.js info_content p ");
                       }}
                     >
                       <i className="fa fa-save"></i>&nbsp;save
@@ -191,7 +189,6 @@ const About = ({
                       onClick={(e) => {
                         setEditingNow(null);
                         saveProfile(e);
-                        console.log("saveProfile() Profile.js info_content p ");
                       }}
                     >
                       <i className="fa fa-save"></i>&nbsp;save
@@ -243,7 +240,6 @@ const About = ({
                       onClick={(e) => {
                         setEditingNow(null);
                         saveProfile(e);
-                        console.log("saveProfile() Profile.js info_content p ");
                       }}
                     >
                       <i className="fa fa-save"></i>&nbsp;save
@@ -325,7 +321,6 @@ const About = ({
                       onClick={(e) => {
                         setEditingNow(null);
                         saveProfile(e);
-                        console.log("saveProfile() Profile.js info_content p ");
                       }}
                     >
                       <i className="fa fa-save"></i>&nbsp;save

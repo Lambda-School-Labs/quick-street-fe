@@ -36,7 +36,6 @@ const CustomerPage = (props) => {
       .then((res) => setName(res.data.customer_name))
       .catch((err) => console.log(err));
     getFavorites();
-    console.log("simplify array favorites", favorites);
   }, []);
 
   const getFavorites = () => {
@@ -44,7 +43,6 @@ const CustomerPage = (props) => {
       .get("/auth/favorites")
       .then((res) => {
         setFavorites(res.data.map((item) => item.id));
-        console.log("This should be favorites:", res.data);
       })
       .catch((err) => console.log(err));
   };

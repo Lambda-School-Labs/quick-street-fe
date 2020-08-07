@@ -22,10 +22,8 @@ const CustomerSearch = () => {
     axiosWithAuth()
       .post(`vendors/all/places`, newObj)
       .then((response) => {
-        console.log("these are results.", response);
         setResults(response.data);
         if (response.data.length > 0) {
-          console.log("new zip 2", response.data[0].zipcode);
           setFinalZip(response.data[0].zipcode);
         }
       })

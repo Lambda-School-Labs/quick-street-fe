@@ -5,16 +5,12 @@ import { Context as CartContext } from '../contexts/TestCartContext';
 
 const StripeCheckoutButton = ({ price, customerId, history }) => {
 	const { state, deleteAndAddCart } = useContext(CartContext);
-	console.log('are you there', history);
 	let cart = state.cart;
-	console.log('do i get a cart id', cart);
 
 	const priceForStripe = price * 100;
 	const publishableKey = 'pk_test_h1PiAqFdpVJpFn9xYKA1JEX7008fXbJlqI';
 
 	const onToken = (token) => {
-		console.log(token);
-		//alert('Payment Succesful!');
 
 		cart = cart._id;
 		axiosWithAuth()
@@ -24,8 +20,6 @@ const StripeCheckoutButton = ({ price, customerId, history }) => {
 				currency: 'usd'
 			})
 			.then((res) => {
-				console.log('response from successful token', res);
-				// clear cart state
 
 				deleteAndAddCart({ customerId, cartId: cart });
 				// show confirmation

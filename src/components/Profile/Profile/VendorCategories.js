@@ -5,17 +5,14 @@ import profile from "../../../styles/scss/vendor/a_vendors_about.module.scss";
 import axiosWithAuth from "../../../utils/axiosWithAuth";
 const VendorCategories = ({ vendorInfo, setVendorInfo }) => {
   let { vendor_category } = vendorInfo;
-  console.log("vendor_category", vendor_category);
   const [categoriesOnFile, setCategoriesOnFile] = useState(vendor_category);
 
-  console.log("categoriesOnFile: ", categoriesOnFile);
   useEffect(() => {
     setCategoriesOnFile(vendor_category);
   }, [vendor_category]);
 
   const updateVendorCategory = (catgories) => {
     const vendorId = localStorage.getItem("user_id");
-    console.log("updateVendorCatgories() catgories", catgories);
     axiosWithAuth()
       .put(`/vendors/${vendorId}`, { vendor_category: catgories })
       .then((results) => {
@@ -26,10 +23,7 @@ const VendorCategories = ({ vendorInfo, setVendorInfo }) => {
 
   const handleSelect = (e) => {
     if (e.target.checked) {
-      console.log("Checked!", e.target.checked);
       if (vendor_category.indexOf(e.target.value) === -1) {
-        console.log("NOTHING HERE WITH VALUE: ", e.target.value);
-        console.log("ADDING: ", e.target.value);
         const newCategories = [...categoriesOnFile, e.target.value];
         setCategoriesOnFile([...categoriesOnFile, e.target.value]);
         updateVendorCategory(newCategories);
@@ -44,11 +38,9 @@ const VendorCategories = ({ vendorInfo, setVendorInfo }) => {
 
     if (!e.target.checked) {
       if (categoriesOnFile.indexOf(e.target.value) !== -1) {
-        console.log("REMOVING VALUE: ", e.target.value);
         let newCategories = categoriesOnFile.filter((item) => {
           return item !== e.target.value;
         });
-        console.log("NEW ARRAY WILL BE: ", newCategories);
         setCategoriesOnFile(newCategories);
         updateVendorCategory(newCategories);
         setVendorInfo({

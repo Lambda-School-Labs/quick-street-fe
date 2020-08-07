@@ -19,11 +19,9 @@ const authReducer = (state, action) => {
 };
 
 const checkIfCart = (customerId) => {
-  console.log("checkIfCart function is being called");
   axiosWithAuth()
     .get(`/customers/${customerId}/cart`)
     .then((response) => {
-      // console.log('Response when checking if a cart exists', response);
       window.location.href = "browse";
     })
     .catch((err) => {
@@ -35,11 +33,9 @@ const checkIfCart = (customerId) => {
 };
 
 const createCart = (customerId) => {
-  console.log("createCart function is being called");
   axiosWithAuth()
     .post(`/customers/${customerId}/cart`)
     .then((response) => {
-      // console.log('Response after creating a cart', response);
       window.location.href = "browse";
     })
     .catch((err) => {
@@ -53,15 +49,12 @@ const signin = (dispatch) => async ({ email, password }) => {
       email,
       password,
     });
-    console.log(response);
     localStorage.setItem("token", response.data.token);
     localStorage.setItem("user_id", response.data.id);
     localStorage.setItem("isVendor", response.data.isVendor);
     if ((response.status === 200) & response.data.isVendor) {
-      console.log("You are logged in");
       window.location.href = `profile/${response.data.id}`;
     } else {
-      console.log("user is customer?");
       checkIfCart(response.data.id);
       window.location.href = "customerHome/search";
     }

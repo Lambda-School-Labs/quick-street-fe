@@ -16,8 +16,6 @@ const Bulletin = (props) => {
     axiosWithAuth()
       .get(`/vendors/me/posts`)
       .then((res) => {
-        // console.log(res.data.data);
-        // console.log("posts data", res.data);
         setPosts(res.data);
       });
   };
@@ -34,7 +32,6 @@ const Bulletin = (props) => {
 
   const postSubmit = (e) => {
     e.preventDefault();
-    console.log("posts content", post.content);
     axiosWithAuth()
       .post(`/vendors/me/posts`, {
         title: "test title",
@@ -42,7 +39,6 @@ const Bulletin = (props) => {
         date: post.date,
       })
       .then((res) => {
-        console.log("response to posts", res);
         getPosts();
       })
       .catch((err) => console.log("error posting post"));

@@ -10,12 +10,10 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
     axiosWithAuth()
       .get("/orders/me")
       .then((res) => {
-        console.log("res from customer orders", res);
         let newArr = res.data.map((item) => {
           let date = item.date_of_order.split("T")[0];
           return { ...item, date_of_order: date };
-        });
-        console.log("new array", newArr);
+        });;
         setOrderData(res.data);
       })
       .catch((err) => console.log(err));

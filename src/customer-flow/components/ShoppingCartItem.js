@@ -8,7 +8,6 @@ const ShoppingCartItem = ({ item, addToCount, subtractCount }) => {
 
   //cloudinary vars
   let newImage = "product-images/" + item.avatar;
-  console.log("newimage", newImage);
 
   return (
     <div className="product-card">
