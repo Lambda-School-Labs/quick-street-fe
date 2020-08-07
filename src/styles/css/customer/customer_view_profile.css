@@ -49,7 +49,6 @@
 .vendor-back-arrow {
   font-size: 16px;
   line-height: 19px;
-  padding-right: 30px;
 }
 .vendor-back-arrow a {
   text-decoration: none;
@@ -59,11 +58,34 @@
   padding-bottom: 2px;
   padding-right: 5px;
 }
+.vendor-about {
+  padding: 0 28px;
+}
 /* favorite button and back to products button */
 .add-favs {
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
-  padding-left: 20px;
+}
+.view-vendor-products {
+  display: flex;
+  flex-direction: column;
+}
+.product-wrapper {
+  padding: 0 28px;
+}
+.product-wrapper h1 {
+  text-align: center;
+}
+.product-grid {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-gap: 28px;
+}
+
+/* vendor product cards */
+.vendor-product-cards img {
+  width: 282px;
+  height: 211px;
 }
