@@ -54,6 +54,7 @@ const ViewAboutVendor = (props) => {
   };
   let newImage = "product-images/" + props.vendor.public_id;
   console.log("image id", newImage);
+  console.log("PROPS IMAGE", props.vendor.public_id);
   return (
     <>
       <div className="view-vendor-wrapper">

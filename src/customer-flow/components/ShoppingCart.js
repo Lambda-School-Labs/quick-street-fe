@@ -7,7 +7,7 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/shopping_cart.css";
 
 const ShoppingCart = () => {
-  const { subtotal, cart, addToCount, subtractCount } = useContext(CartContext);
+  const { setCart, subtotal, cart, addToCount, subtractCount } = useContext(CartContext);
   const customer = localStorage.getItem("user_id");
 
   const submitOrder = () => {
@@ -24,6 +24,7 @@ const ShoppingCart = () => {
       .then((res) => {
         console.log("data", subtotal, customer, cart[0].business_name);
         console.log("order submitted");
+        setCart([]);
       })
       .catch((error) => {
         console.log(error);
@@ -70,6 +71,7 @@ const ShoppingCart = () => {
         <p>Taxes(where applicable) added at checkout</p>
         <button className="checkout-btn" onClick={() => submitOrder()}>
         <Link to="/customerHome/confirmation">Order</Link>
+
         </button>
       </section>
     </div>
