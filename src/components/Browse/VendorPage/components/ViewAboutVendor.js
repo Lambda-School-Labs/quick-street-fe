@@ -106,16 +106,17 @@ const ViewAboutVendor = (props) => {
         <h1>Contact</h1>
         <p>{props.vendor.phone}</p>
         <p>{props.vendor.email}</p>
-      </div>
-      <div>
-        <h1>Location</h1>
-        <p>The vendor can be found at {props.vendor.zipcode} area</p>
-        {/* <Map
+
+        <div>
+          <h1>Location</h1>
+          <p>The vendor can be found at {props.vendor.zipcode} area</p>
+          {/* <Map
               zipcode={vendor.zipcode}
               width={"90vw"}
               height="50vh"
               target={vendor.zipcode}
             /> */}
+        </div>
       </div>
     </>
   );
