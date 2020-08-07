@@ -69,7 +69,7 @@ const ShoppingCart = () => {
         <h1>Subtotal: ${subtotal.toFixed(2)} </h1>
         <p>Taxes(where applicable) added at checkout</p>
         <button className="checkout-btn" onClick={() => submitOrder()}>
-          Order
+        <Link to="/customerHome/confirmation">Order</Link>
         </button>
       </section>
     </div>

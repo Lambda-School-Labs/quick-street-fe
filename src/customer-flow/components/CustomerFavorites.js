@@ -54,7 +54,7 @@ const CustomerFavorites = ({ name }) => {
   //   }
 
 console.log("favorites before map", favorites)
-  
+
   return (
     <div className="favorites-wrapper">
       <h1 className="user-title">{name}'s Favorites</h1>
@@ -106,9 +106,3 @@ console.log("favorites before map", favorites)
 };
 
 export default CustomerFavorites;
-
-{
-  /* <button onClick={() => handleDelete(item.id)}>X</button> */
-}
-
-// {item.vendor_category}
