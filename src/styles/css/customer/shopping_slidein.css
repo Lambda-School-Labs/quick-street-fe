@@ -7,12 +7,18 @@
 .cart-content button {
   font-size: 16px;
   cursor: pointer;
+  margin: 10px 0px;
 }
 .cart-content .keep-btn {
   width: 150px;
   border: white 1px solid;
   color: white;
   background-color: inherit;
+}
+.keep-btn:hover {
+  background-color: white;
+  color: #21b787;
+  transition: all 300ms ease-in;
 }
 .checkout-btn {
   font-size: 16px;
@@ -23,7 +29,18 @@
   color: white;
   background: #131314;
 }
+.checkout-btn:hover {
+  transform: scale(1.1);
+  transition: all 200ms ease-in;
+}
 .cart-content a {
   text-decoration: none;
   color: white;
+}
+.cart-content h1 {
+  padding-top: 30px;
+}
+.cart-content p {
+  font-size: 18px;
+  padding-bottom: 5px;
 }
