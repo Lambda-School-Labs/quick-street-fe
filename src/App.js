@@ -62,7 +62,7 @@ const App = () => {
   return (
     <div>
       <CartContext.Provider
-        value={{ cart, subtotal, addToCount, subtractCount }}
+        value={{ cart, setCart, subtotal, addToCount, subtractCount }}
       >
         <Route path="/orderreview/:id" render={OrderReview} />
         <Route path="/orderconfirmation" component={OrderConfirmation} />

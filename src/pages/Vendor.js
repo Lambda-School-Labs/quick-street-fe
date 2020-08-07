@@ -20,7 +20,7 @@ const Vendor = (props) => {
     axiosWithAuth()
       .get(`/vendors/${id}`)
       .then((response) => {
-        // console.log("vendor information", response.data);
+         console.log("vendor information", response.data);
         setVendor(response.data);
       })
       .catch((error) => {
