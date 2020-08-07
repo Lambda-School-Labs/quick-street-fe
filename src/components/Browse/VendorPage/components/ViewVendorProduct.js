@@ -30,14 +30,22 @@ const ViewVendorProduct = (props) => {
         className="vendor-product-cards"
         key={props.product.id}
       >
-        <CloudinaryContext cloudName="quickstlabs">
-          <Image
-            className={props.product.profile_product_image}
-            publicId={newImage}
-          >
-            <Transformation height="210" width="280" crop="fill" />
-          </Image>
-        </CloudinaryContext>
+        {props.product.public_id ? (
+          <CloudinaryContext cloudName="quickstlabs">
+            <Image
+              className={props.product.profile_product_image}
+              publicId={newImage}
+            >
+              <Transformation height="210" width="280" crop="fill" />
+            </Image>
+          </CloudinaryContext>
+        ) : (
+          <img
+            src="https://images.unsplash.com/photo-1576158113840-43db9ff3ef09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            alt="a placeholder image"
+          />
+        )}
+
         <p>{props.product.name}</p>
         <p>${props.product.price}</p>
         <button className={add} onClick={() => handleAdd()}>

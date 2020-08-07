@@ -25,6 +25,7 @@ import CustomerPage from "./customer-flow/components/CustomerPage";
 import CustomerOrders from "./customer-flow/components/CustomerOrders";
 import CustomerFavorites from "./customer-flow/components/CustomerFavorites";
 import ShoppingCart from "./customer-flow/components/ShoppingCart";
+import Confirmation from "./customer-flow/components/Confirmation";
 
 const App = () => {
   const [favorites, setFavorites] = useState([]);
@@ -75,6 +76,7 @@ const App = () => {
             <Route path="/profile" component={ProfilePage} />
             <Route path="/customerHome" component={CustomerPage} />
             <Route path="/shopping-cart" component={ShoppingCart} />
+            <Route path="/confirmation" component={Confirmation} />
             <Route exact path="/browse" component={Browse} />
           </FavoritesContext.Provider>
           <Route path="/dashboard" component={Dashboard} />

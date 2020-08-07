@@ -115,6 +115,11 @@
 .mapbox-container {
   width: 50%;
 }
+@media (max-width: 1200px) {
+  .mapbox-container {
+    width: 100%;
+  }
+}
 
 /* // Phones (landscape view)
 $screen-phone-min: 320px;
