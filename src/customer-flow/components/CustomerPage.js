@@ -4,6 +4,7 @@ import CustomerProfile from "../components/CustomerProfile";
 import CustomerOrders from "../components/CustomerOrders";
 import CustomerFavorites from "../components/CustomerFavorites";
 import CustomerSearch from "./CustomerSearch";
+import CustomerConfirmation from "./CustomerConfirmation";
 import ShoppingSlidein from "./ShoppingSlidein";
 import { Vendor } from "../../pages/index";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
@@ -163,6 +164,10 @@ const CustomerPage = (props) => {
           <Route path="/customerHome/search">
             <CustomerSearch />
           </Route>
+          <Route path="/customerHome/confirmation">
+            <CustomerConfirmation />
+          </Route>
+
           <Route path="/customerHome/browse/:id">
             <Vendor {...props} />
           </Route>
