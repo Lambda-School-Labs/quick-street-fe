@@ -93,22 +93,30 @@ const ViewAboutVendor = (props) => {
             </Link>
           </div>
         </div>
-        <h1>Hours of Operation</h1>
-        <p>{props.vendor.hours}</p>
-        <h1>Contact</h1>
-        <p>{props.vendor.phone}</p>
-        <p>{props.vendor.email}</p>
+        <div className="view-contact">
+          <div>
+            <h1>Hours of Operation</h1>
+            <hr />
+            <p>{props.vendor.hours}</p>
+          </div>
+          <div>
+            <h1>Contact</h1>
+            <hr />
+            <p>{props.vendor.phone}</p>
+            <p>{props.vendor.email}</p>
+          </div>
+        </div>
 
-        <div>
+        {/* <div>
           <h1>Location</h1>
           <p>The vendor can be found at {props.vendor.zipcode} area</p>
-          {/* <Map
+          <Map
               zipcode={vendor.zipcode}
               width={"90vw"}
               height="50vh"
               target={vendor.zipcode}
-            /> */}
-        </div>
+            />
+        </div> */}
       </div>
     </>
   );
