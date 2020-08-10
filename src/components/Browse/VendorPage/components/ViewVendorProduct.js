@@ -30,26 +30,34 @@ const ViewVendorProduct = (props) => {
         key={props.product.id}
       >
         {props.product.public_id ? (
-          <CloudinaryContext cloudName="quickstlabs">
-            <Image
-              className={props.product.profile_product_image}
-              publicId={newImage}
-            >
-              <Transformation height="210" width="280" crop="fill" />
-            </Image>
-          </CloudinaryContext>
+          <div className="image-box">
+            <CloudinaryContext cloudName="quickstlabs">
+              <Image
+                className={props.product.profile_product_image}
+                publicId={newImage}
+              >
+                <Transformation height="211" width="295" crop="fill" />
+              </Image>
+            </CloudinaryContext>
+          </div>
         ) : (
-          <img
-            src="https://images.unsplash.com/photo-1576158113840-43db9ff3ef09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-            alt="a placeholder image"
-          />
+          <div className="image-box">
+            <img
+              src="https://images.unsplash.com/photo-1576158113840-43db9ff3ef09?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+              alt="a placeholder image"
+            />
+          </div>
         )}
+        <div className="card-content">
+          <div>
+            <p>{props.product.name}</p>
+            <p>${props.product.price}</p>
+          </div>
 
-        <p>{props.product.name}</p>
-        <p>${props.product.price}</p>
-        <button className={add} onClick={() => handleAdd()}>
-          ADD to Cart
-        </button>
+          <button className={add} onClick={() => handleAdd()}>
+            +
+          </button>
+        </div>
       </div>
     </>
   );
