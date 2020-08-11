@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import {Redirect} from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 const CustomerForm = () => {
   const [formData, setFormData] = useState({
@@ -16,10 +16,6 @@ const CustomerForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const token = localStorage.getItem("token");
-  const user_id = localStorage.getItem("user_id")
-
-
   const submitHandler = (e) => {
     e.preventDefault();
     axiosWithAuth()
@@ -30,12 +26,11 @@ const CustomerForm = () => {
       address: "",
       phone_number: "",
       zip_code: "",
-    })
+    });
     setHome(true);
-    ;
   };
   return (
-    <div>
+    <div data-testid="customerform-wrapper">
       {home ? <Redirect to="/customerhome/search" /> : null}
       <h1> Customer Profile</h1>
       <form onSubmit={submitHandler}>

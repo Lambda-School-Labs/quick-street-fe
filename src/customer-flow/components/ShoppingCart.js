@@ -6,9 +6,10 @@ import ShoppingCartItem from "./ShoppingCartItem";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/shopping_cart.css";
 
-
-const ShoppingCart = ({history}) => {
-  const { setCart, subtotal, cart, addToCount, subtractCount } = useContext(CartContext);
+const ShoppingCart = ({ history }) => {
+  const { setCart, subtotal, cart, addToCount, subtractCount } = useContext(
+    CartContext
+  );
   const customer = localStorage.getItem("user_id");
   const submitOrder = () => {
     const date = new Date().toLocaleString().split(",")[0];
@@ -67,7 +68,7 @@ const ShoppingCart = ({history}) => {
         <h1>Subtotal: ${subtotal.toFixed(2)} </h1>
         <p>Taxes(where applicable) added at checkout</p>
         <button className="checkout-btn" onClick={() => submitOrder()}>
-        Order
+          Order
         </button>
       </section>
     </div>

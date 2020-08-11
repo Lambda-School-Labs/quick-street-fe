@@ -4,14 +4,10 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/customer_favorites.css";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import {
-  Image,
-  CloudinaryContext,
-  Transformation,
-} from "cloudinary-react";
+import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 
 const CustomerFavorites = ({ name }) => {
-  const [favorites, setFavorites] = useState([]);;
+  const [favorites, setFavorites] = useState([]);
 
   const handleDelete = (favid) => {
     axiosWithAuth()
@@ -34,10 +30,10 @@ const CustomerFavorites = ({ name }) => {
           }
           return false;
         });
-        let newPid = newArray.map(pid => {
+        let newPid = newArray.map((pid) => {
           let image = "product-images/" + pid.public_id;
-          return{...pid, public_id: image}
-        })
+          return { ...pid, public_id: image };
+        });
         setFavorites(newPid);
       })
       .catch((err) => console.log(err));
@@ -47,10 +43,10 @@ const CustomerFavorites = ({ name }) => {
   //     setEditing(!editing);
   //   }
 
-console.log("favorites before map", favorites)
+  console.log("favorites before map", favorites);
 
   return (
-    <div className="favorites-wrapper">
+    <div data-testid="favorites-wrapper" className="favorites-wrapper">
       <h1 className="user-title">{name}'s Favorites</h1>
 
       <div className="fav-info">
@@ -69,11 +65,11 @@ console.log("favorites before map", favorites)
               {favorites.map((item) => (
                 <tr>
                   <td>
-                  <CloudinaryContext cloudName="quickstlabs">
-                    <Image publicId={item.public_id}>
-                      <Transformation height="75" width="75" crop="fill" />
-                    </Image>
-                  </CloudinaryContext>
+                    <CloudinaryContext cloudName="quickstlabs">
+                      <Image publicId={item.public_id}>
+                        <Transformation height="75" width="75" crop="fill" />
+                      </Image>
+                    </CloudinaryContext>
                   </td>
                   <td>
                     <Link to={`/customerHome/browse/${item.vid}`}>

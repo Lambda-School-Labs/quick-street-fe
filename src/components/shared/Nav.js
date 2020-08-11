@@ -122,7 +122,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Nav = () => {
   const { signout } = useContext(AuthContext);
-  const { cart } = useContext(CartContext);
+  // const { cart } = useContext(CartContext);
 
   const classes = useStyles();
   const token = localStorage.getItem("token");
@@ -133,14 +133,14 @@ const Nav = () => {
   const [stateDrawer, setStateDrawer] = React.useState({
     top: false,
   });
-  const cartQuantity = (cart) => {
-    if (cart.items) {
-      return cart.items.length;
-    } else {
-      return 0;
-    }
-  };
-  // console.log("Customer ID", customerId);
+  // const cartQuantity = (cart) => {
+  //   if (cart.items) {
+  //     return cart.items.length;
+  //   } else {
+  //     return 0;
+  //   }
+  // };
+  // // console.log("Customer ID", customerId);
 
   const toggleDrawer = (side, open) => (event) => {
     if (
@@ -207,23 +207,23 @@ const Nav = () => {
       </List>
       <ShoppingCartItems />
       <div className={classes.checkout}>
-        {cart && (
+        {/* {cart && (
           <p>
             Total items({cartQuantity(cart)}){" "}
             <span style={{ float: "right" }}>${cart.total}</span>
           </p>
-        )}
+        )} */}
         <CustomButton
           styleClass="white-border"
           onClick={toggleDrawer("right", false)}
         >
           Keep Shopping
         </CustomButton>
-        <CustomButton styleClass="checkout">
+        {/* <CustomButton styleClass="checkout">
           {cart && (
             <Link to={{ pathname: `/orderreview/${cart._id}` }}>Checkout</Link>
           )}
-        </CustomButton>
+        </CustomButton> */}
       </div>
     </div>
   );
@@ -345,11 +345,11 @@ const Nav = () => {
                     aria-label="show items in car"
                     color="inherit"
                   >
-                    <Badge badgeContent={cartQuantity(cart)} color="secondary">
+                    {/* <Badge badgeContent={cartQuantity(cart)} color="secondary">
                       <ShoppingCartIcon
                         style={{ height: "30px", width: "30px" }}
                       />
-                    </Badge>
+                    </Badge> */}
                   </IconButton>
                   <Drawer
                     anchor="right"

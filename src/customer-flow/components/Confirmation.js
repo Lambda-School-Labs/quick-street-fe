@@ -7,13 +7,13 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/shopping_cart.css";
 
 const Confirmation = ({ orders, setOrders }) => {
-
-  const [orderData, setOrderData] = useState(
-  {"business_name": "",
-  "date_of_order": "",
-  "id": "",
-  "subtotal": "",
-  "user_id": ""});
+  const [orderData, setOrderData] = useState({
+    business_name: "",
+    date_of_order: "",
+    id: "",
+    subtotal: "",
+    user_id: "",
+  });
 
   useEffect(() => {
     axiosWithAuth()
@@ -23,39 +23,41 @@ const Confirmation = ({ orders, setOrders }) => {
           let date = item.date_of_order.split("T")[0];
           return { ...item, date_of_order: date };
         });
-        setOrderData(res.data[res.data.length-1]);
+        setOrderData(res.data[res.data.length - 1]);
       })
       .catch((err) => console.log(err));
   }, []);
 
-
   return (
-    <div>
+    <div data-testid="confirmation-wrapper">
       <div className="back-arrow">
-          <Link to="/customerHome/search">
-            <img src={arrow} alt="backwards arrow" />
-            Back to Search
-          </Link>
-        </div>
-      <h1 className="user-title">Order Confirmation</h1>
-      (
-          <div className="order-wrapper">
-            <div className="order-info">
-              <div><p>Date:</p>
-              <h3>{orderData.date_of_order}</h3></div>
-              <div><p >Order #:</p>
-              <h3>{orderData.id}</h3></div>
-              <div><p>Total Price:</p>
-              <h3>${orderData.subtotal}</h3></div>
-              <div><p>Vendor Name:</p>
-              <h3>{orderData.business_name}</h3></div>
-            </div>
+        <Link to="/customerHome/search">
+          <img src={arrow} alt="backwards arrow" />
+          Back to Search
+        </Link>
+      </div>
+      <h1 className="user-title">Order Confirmation</h1>(
+      <div className="order-wrapper">
+        <div className="order-info">
+          <div>
+            <p>Date:</p>
+            <h3>{orderData.date_of_order}</h3>
           </div>
-
-      )}
+          <div>
+            <p>Order #:</p>
+            <h3>{orderData.id}</h3>
+          </div>
+          <div>
+            <p>Total Price:</p>
+            <h3>${orderData.subtotal}</h3>
+          </div>
+          <div>
+            <p>Vendor Name:</p>
+            <h3>{orderData.business_name}</h3>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 export default Confirmation;
-
-// cart -> count of items -> only unique items ->
