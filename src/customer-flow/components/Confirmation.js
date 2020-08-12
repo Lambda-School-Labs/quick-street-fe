@@ -5,6 +5,8 @@ import { CartContext } from "../../contexts/CartContext";
 import ShoppingCartItem from "./ShoppingCartItem";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/shopping_cart.css";
+import "../../styles/css/customer/confirmation.css";
+
 
 const Confirmation = ({ orders, setOrders }) => {
 
@@ -30,17 +32,18 @@ const Confirmation = ({ orders, setOrders }) => {
 
 
   return (
-    <div>
-      <div className="back-arrow">
-          <Link to="/customerHome/search">
-            <img src={arrow} alt="backwards arrow" />
-            Back to Search
+  <div>
+    <div className="cart-page">
+      <div className="mk-logo">
+          <Link to="/">
+            <img src={logo} alt="market avenue logo" />
           </Link>
-        </div>
-      <h1 className="user-title">Order Confirmation</h1>
-      (
-          <div className="order-wrapper">
-            <div className="order-info">
+      </div>
+
+      <h1 className="conf-user-title">Order Confirmation</h1>
+
+          <div className="conf-order-wrapper">
+            <div className="conf-order-info">
               <div><p>Date:</p>
               <h3>{orderData.date_of_order}</h3></div>
               <div><p >Order #:</p>
@@ -51,11 +54,22 @@ const Confirmation = ({ orders, setOrders }) => {
               <h3>{orderData.business_name}</h3></div>
             </div>
           </div>
-
-      )}
+      </div>
+       <div>
+          <button className="conf-button">
+              <Link to="/customerHome/search" className="conf-link"> Home </Link>
+          </button>
+        </div>
     </div>
+
   );
 };
 export default Confirmation;
 
 // cart -> count of items -> only unique items ->
+{/* <div className="back-arrow">
+          <Link to="/customerHome/search">
+            <img src={arrow} alt="backwards arrow" />
+            Back to Search
+          </Link>
+        </div> */}
