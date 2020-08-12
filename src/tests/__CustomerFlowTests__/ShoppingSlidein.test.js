@@ -10,6 +10,7 @@ import { FavoritesContext } from "../../contexts/FavoritesContext";
 
 describe("running tests on login", () => {
   let favorites = [1, 2, 3, 4, 5];
+  let subtotal = 1000;
   let cart = [
     {
       vendor_id: 1,
@@ -32,8 +33,8 @@ describe("running tests on login", () => {
   ];
   const tree = (
     <Router>
-      <FavoritesContext.Provider value={favorites}>
-        <CartContext.Provider value={cart}>
+      <FavoritesContext.Provider value={{ favorites }}>
+        <CartContext.Provider value={{ cart, subtotal }}>
           <ShoppingSlidein />;
         </CartContext.Provider>
       </FavoritesContext.Provider>

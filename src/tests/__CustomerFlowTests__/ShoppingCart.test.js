@@ -9,6 +9,8 @@ import ShoppingCart from "../../customer-flow/components/ShoppingCart";
 
 describe("running tests on login", () => {
   let favorites = [1, 2, 3, 4, 5];
+  let subtotal = 1000;
+  let setCart = jest.fn();
   let cart = [
     {
       vendor_id: 1,
@@ -31,9 +33,9 @@ describe("running tests on login", () => {
   ];
   const tree = (
     <Router>
-      <FavoritesContext.Provider value={favorites}>
-        <CartContext.Provider value={cart}>
-          <ShoppingCart cart={cart} />;
+      <FavoritesContext.Provider value={{ favorites }}>
+        <CartContext.Provider value={{ setCart, cart, subtotal }}>
+          <ShoppingCart />;
         </CartContext.Provider>
       </FavoritesContext.Provider>
     </Router>
@@ -41,7 +43,6 @@ describe("running tests on login", () => {
 
   it(`loads`, () => {
     const { getByText, getByTestId } = render(tree);
-    console.log(cart);
     expect(getByTestId("shopping-cart")).toBeInTheDocument();
   });
 });

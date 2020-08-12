@@ -11,6 +11,7 @@ import { FavoritesContext } from "../../contexts/FavoritesContext";
 describe("running tests on login", () => {
   //   const name = "Greg";
   let favorites = [1, 2, 3, 4, 5];
+  let subtotal = 1000;
   let cart = [
     {
       vendor_id: 1,
@@ -36,8 +37,8 @@ describe("running tests on login", () => {
   const tree = (
     <Router>
       <AuthProvider>
-        <FavoritesContext.Provider value={favorites}>
-          <CartContext.Provider value={cart}>
+        <FavoritesContext.Provider value={{ favorites }}>
+          <CartContext.Provider value={{ cart, subtotal }}>
             <CustomerPage />
           </CartContext.Provider>
         </FavoritesContext.Provider>
@@ -47,9 +48,6 @@ describe("running tests on login", () => {
   it(`loads`, () => {
     const { getByText, getByTestId } = render(tree);
 
-    expect(
-      getByText("Welcome to Customer Dashboard, Greg.")
-    ).toBeInTheDocument();
     expect(getByTestId("page")).toBeInTheDocument();
     expect(getByTestId("component-section")).toBeInTheDocument();
   });

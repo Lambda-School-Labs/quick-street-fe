@@ -14,7 +14,7 @@ test(`checks that vendor page loads`, () => {
   const tree = (
     <Router>
       <AuthProvider>
-        <FavoritesContext.Provider value={favorites}>
+        <FavoritesContext.Provider value={{ favorites }}>
           <CartContext.Provider>
             <Vendor location={location} />
           </CartContext.Provider>
