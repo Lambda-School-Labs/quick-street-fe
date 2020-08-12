@@ -10,7 +10,7 @@ const ShoppingCartItem = ({ item, addToCount, subtractCount }) => {
   let newImage = "product-images/" + item.avatar;
 
   return (
-    <div className="product-card">
+    <div className="product-card" data-testid="product-card">
       <h1>{item.name}</h1>
       <div className="bottom-content">
         <CloudinaryContext cloudName="quickstlabs">

@@ -9,13 +9,13 @@ import "../../styles/css/customer/confirmation.css";
 
 
 const Confirmation = ({ orders, setOrders }) => {
-
-  const [orderData, setOrderData] = useState(
-  {"business_name": "",
-  "date_of_order": "",
-  "id": "",
-  "subtotal": "",
-  "user_id": ""});
+  const [orderData, setOrderData] = useState({
+    business_name: "",
+    date_of_order: "",
+    id: "",
+    subtotal: "",
+    user_id: "",
+  });
 
   useEffect(() => {
     axiosWithAuth()
@@ -25,11 +25,10 @@ const Confirmation = ({ orders, setOrders }) => {
           let date = item.date_of_order.split("T")[0];
           return { ...item, date_of_order: date };
         });
-        setOrderData(res.data[res.data.length-1]);
+        setOrderData(res.data[res.data.length - 1]);
       })
       .catch((err) => console.log(err));
   }, []);
-
 
   return (
   <div>
@@ -42,7 +41,7 @@ const Confirmation = ({ orders, setOrders }) => {
 
       <h1 className="conf-user-title">Order Confirmation</h1>
 
-          <div className="conf-order-wrapper">
+          <div className="conf-order-wrapper" data-testid="confirmation-wrapper">
             <div className="conf-order-info">
               <div><p>Date:</p>
               <h3>{orderData.date_of_order}</h3></div>
@@ -60,16 +59,10 @@ const Confirmation = ({ orders, setOrders }) => {
               <Link to="/customerHome/search" className="conf-link"> Home </Link>
           </button>
         </div>
+
     </div>
 
   );
 };
 export default Confirmation;
 
-// cart -> count of items -> only unique items ->
-{/* <div className="back-arrow">
-          <Link to="/customerHome/search">
-            <img src={arrow} alt="backwards arrow" />
-            Back to Search
-          </Link>
-        </div> */}

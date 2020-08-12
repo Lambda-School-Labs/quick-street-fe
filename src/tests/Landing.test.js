@@ -21,5 +21,4 @@ test(`loads and display h1`, () => {
     /Finally , A Way For Vendors and Lovers of Food to Come Together in Harmony/i
   );
   findByText(/Browse, buy, share your finds on local food vendors./i);
-  fireEvent.click(getByText("Get Started"));
 });

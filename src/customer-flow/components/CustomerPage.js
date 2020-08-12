@@ -51,7 +51,7 @@ const CustomerPage = (props) => {
     setSidebar(!sidebar);
   };
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper" data-testid="page">
       {cart.length > 0 ? (
         <p className="notification" onClick={handleSidebar}>
           {cart.length}
@@ -142,7 +142,7 @@ const CustomerPage = (props) => {
           </Link>
         </div>
       </div>
-      <div className="component-section">
+      <div className="component-section" data-testid="component-section">
         <Switch>
           <Route exact path="/customerHome">
             <h1 className="welcome-banner">

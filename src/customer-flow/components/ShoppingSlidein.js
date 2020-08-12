@@ -5,9 +5,9 @@ import { CartContext } from "../../contexts/CartContext";
 
 const ShoppingSlidein = ({ handleSidebar }) => {
   const { cart, setCart, subtotal, setSubtotal } = useContext(CartContext);
-
+  console.log("cart on the shopping slide in", cart);
   return (
-    <div className="cart-content">
+    <div className="cart-content" data-testid="cart-content">
       <h1>Your Cart</h1>
       <hr />
       <p>Items: {cart.length}</p>
