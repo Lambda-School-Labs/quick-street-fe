@@ -7,7 +7,7 @@ const ShoppingSlidein = ({ handleSidebar }) => {
   const { cart, setCart, subtotal, setSubtotal } = useContext(CartContext);
 
   return (
-    <div className="cart-content">
+    <div className="cart-content" data-testid="cart-content">
       <h1>Your Cart</h1>
       <hr />
       <p>Items: {cart.length}</p>

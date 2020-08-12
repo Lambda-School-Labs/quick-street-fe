@@ -3,21 +3,22 @@ import { render, fireEvent, waitForElement } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Vendor from "../pages/Vendor";
 import { Provider as AuthProvider } from "../contexts/AuthContext";
-import { Provider as CartProvider } from "../contexts/TestCartContext";
+import { CartContext } from "../contexts/CartContext";
+import { FavoritesContext } from "../contexts/FavoritesContext";
 import { BrowserRouter as Router } from "react-router-dom";
 
 test(`checks that vendor page loads`, () => {
-  const match = {
-    params: {
-      id: 1,
-    },
-  };
+  const location = { pathname: "/dashboard/" };
+  let favorites = [1, 2, 3, 4, 5];
+
   const tree = (
     <Router>
       <AuthProvider>
-        <CartProvider>
-          <Vendor match={match} />
-        </CartProvider>
+        <FavoritesContext.Provider value={favorites}>
+          <CartContext.Provider>
+            <Vendor location={location} />
+          </CartContext.Provider>
+        </FavoritesContext.Provider>
       </AuthProvider>
     </Router>
   );

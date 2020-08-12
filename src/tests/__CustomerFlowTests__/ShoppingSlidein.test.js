@@ -1,15 +1,14 @@
+import ShoppingSlidein from "../../customer-flow/components/ShoppingSlidein";
+
 import React from "react";
 
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { BrowserRouter as Router } from "react-router-dom";
 import { CartContext } from "../../contexts/CartContext";
-import { Provider as AuthProvider } from "../../contexts/AuthContext";
-import CustomerPage from "../../customer-flow/components/CustomerPage";
 import { FavoritesContext } from "../../contexts/FavoritesContext";
 
 describe("running tests on login", () => {
-  //   const name = "Greg";
   let favorites = [1, 2, 3, 4, 5];
   let cart = [
     {
@@ -31,26 +30,19 @@ describe("running tests on login", () => {
       price: 3.5,
     },
   ];
-  //   let signup = jest.fn();
-  //   const CartContext = React.createContext();
   const tree = (
     <Router>
-      <AuthProvider>
-        <FavoritesContext.Provider value={favorites}>
-          <CartContext.Provider value={cart}>
-            <CustomerPage />
-          </CartContext.Provider>
-        </FavoritesContext.Provider>
-      </AuthProvider>
+      <FavoritesContext.Provider value={favorites}>
+        <CartContext.Provider value={cart}>
+          <ShoppingSlidein />;
+        </CartContext.Provider>
+      </FavoritesContext.Provider>
     </Router>
   );
+
   it(`loads`, () => {
     const { getByText, getByTestId } = render(tree);
 
-    expect(
-      getByText("Welcome to Customer Dashboard, Greg.")
-    ).toBeInTheDocument();
-    expect(getByTestId("page")).toBeInTheDocument();
-    expect(getByTestId("component-section")).toBeInTheDocument();
+    expect(getByTestId("cart-content")).toBeInTheDocument();
   });
 });

@@ -5,7 +5,6 @@ import "../../styles/css/customer/customer_profile.css";
 //TESTING
 import banner from "../../styles/scss/vendor/a_vendors_banner.module.scss";
 
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -14,8 +13,6 @@ import {
   Context,
   Transformation,
 } from "cloudinary-react";
-import { Avatar } from "@material-ui/core";
-
 
 const CustomerForm = ({ name, setName }) => {
   const [formData, setFormData] = useState({
@@ -23,7 +20,7 @@ const CustomerForm = ({ name, setName }) => {
     address: "",
     phone_number: "",
     zip_code: "",
-    public_id: ""
+    public_id: "",
   });
   const [editing, setEditing] = useState(false);
 
@@ -50,7 +47,7 @@ const CustomerForm = ({ name, setName }) => {
       .get("/customers/me")
       .then((res) => {
         setFormData(res.data);
-        setNewImage("product-images/" + res.data.public_id)
+        setNewImage("product-images/" + res.data.public_id);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -101,24 +98,22 @@ const CustomerForm = ({ name, setName }) => {
     async (error, result) => {
       if (!error && result && result.event === "success") {
         const banner_info = await result.info;
-        const correctBannerData = banner_info.public_id.split("/",2)
+        const correctBannerData = banner_info.public_id.split("/", 2);
         axiosWithAuth()
-          .put(`/customers/${formData.users_id}/profile-picture`, {"public_id": correctBannerData[1]})
-          .then(res => {
-            setNewImage("product-images/" + correctBannerData[1])
-            setFormData({...formData, "public_id": correctBannerData[1]})
+          .put(`/customers/${formData.users_id}/profile-picture`, {
+            public_id: correctBannerData[1],
+          })
+          .then((res) => {
+            setNewImage("product-images/" + correctBannerData[1]);
+            setFormData({ ...formData, public_id: correctBannerData[1] });
             // setPictureUpdate([]);
           })
           .catch((err) => {
-            console.log('PUT VendorProfile.js Upload widget err', err);
+            console.log("PUT VendorProfile.js Upload widget err", err);
           });
-
       }
     }
   );
-
-
-
 
   function editField() {
     setEditing(!editing);
@@ -129,30 +124,30 @@ const CustomerForm = ({ name, setName }) => {
     myWidget.open();
   };
 
-  const [newImage, setNewImage] = useState("product-images/" + formData.public_id);
-   
+  const [newImage, setNewImage] = useState(
+    "product-images/" + formData.public_id
+  );
 
   return (
-    <div className="profile-wrapper">
+    <div className="profile-wrapper" data-testid="customer-profile">
       <h1 className="user-title">{name}'s Profile</h1>
       {editing ? (
         <div className="form-wrapper">
-          <div className="avatar-box" >
-            
-          <CloudinaryContext cloudName="quickstlabs" >
-          <Image publicId={newImage} >
-            <Transformation height="100" width="100" crop="fill" />
-          </Image>
-        </CloudinaryContext>
+          <div className="avatar-box">
+            <CloudinaryContext cloudName="quickstlabs">
+              <Image publicId={newImage}>
+                <Transformation height="100" width="100" crop="fill" />
+              </Image>
+            </CloudinaryContext>
 
-        <div className={banner.customer_avatar_upload}>
-          <FontAwesomeIcon
-          id={banner.upload}
-          className={banner.icon}
-          icon={faUpload}
-          onClick={uploadPicture}/>
-        </div>
-            
+            <div className={banner.customer_avatar_upload}>
+              <FontAwesomeIcon
+                id={banner.upload}
+                className={banner.icon}
+                icon={faUpload}
+                onClick={uploadPicture}
+              />
+            </div>
           </div>
           <form className="customer-form" onSubmit={submitHandler}>
             <label htmlFor="customer_name">Name</label>
@@ -196,19 +191,18 @@ const CustomerForm = ({ name, setName }) => {
       ) : (
         <section>
           <div className="avatar-box float">
-          <CloudinaryContext cloudName="quickstlabs">
-          <Image publicId={newImage}>
-            <Transformation height="100" width="100" crop="fill" />
-          </Image>
-        </CloudinaryContext>
-        {/* <div className={banner.customer_avatar_upload}>
+            <CloudinaryContext cloudName="quickstlabs">
+              <Image publicId={newImage}>
+                <Transformation height="100" width="100" crop="fill" />
+              </Image>
+            </CloudinaryContext>
+            {/* <div className={banner.customer_avatar_upload}>
           <FontAwesomeIcon
           id={banner.upload}
           className={banner.icon}
           icon={faUpload}
           onClick={uploadPicture}/>
           </div> */}
-
           </div>
           <div className="customer-info">
             <p>Name</p>

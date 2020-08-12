@@ -32,7 +32,7 @@ const ShoppingCart = ({ history }) => {
   };
 
   return (
-    <div className="cart-page">
+    <div className="cart-page" data-testid="shopping-cart">
       <section className="left-cart-wrapper">
         <div className="mk-logo">
           <Link to="/">
