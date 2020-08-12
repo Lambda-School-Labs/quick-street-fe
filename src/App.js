@@ -70,16 +70,14 @@ const App = () => {
         <Route exact path="/" component={Landing} />
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Switch>
-          <FavoritesContext.Provider value={{ favorites, setFavorites }}>
-            <Route path="/profile" component={ProfilePage} />
-            <Route path="/customerHome" component={CustomerPage} />
-            <Route path="/shopping-cart" component={ShoppingCart} />
-            <Route path="/confirmation" component={Confirmation} />
-            <Route exact path="/browse" component={Browse} />
-          </FavoritesContext.Provider>
-          <Route path="/dashboard" component={Dashboard} />
-        </Switch>
+        <FavoritesContext.Provider value={{ favorites, setFavorites }}>
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/customerHome" component={CustomerPage} />
+          <Route path="/shopping-cart" component={ShoppingCart} />
+          <Route path="/confirmation" component={Confirmation} />
+          <Route exact path="/browse" component={Browse} />
+        </FavoritesContext.Provider>
+        <Route path="/dashboard" component={Dashboard} />
       </CartContext.Provider>
     </div>
   );

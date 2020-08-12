@@ -13,14 +13,14 @@ const CustomerOrders = ({ orders, setOrders, name }) => {
         let newArr = res.data.map((item) => {
           let date = item.date_of_order.split("T")[0];
           return { ...item, date_of_order: date };
-        });;
+        });
         setOrderData(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <div className="orders-wrapper">
+    <div className="orders-wrapper" data-testid="orders-wrapper">
       <h1 className="user-title">{name}'s Orders</h1>
       {orderData.length === 0 ? (
         <h1>You have no orders.</h1>

@@ -19,8 +19,7 @@ const Map = ({ zip, width, height, target, setFinalZip }) => {
   });
   const [vendorInfo, setVendorInfo] = useState([]);
 
-  const apiKey = process.env.MAPBOX_APIKEY;
-  console.log("API KEY", apiKey);
+  const apiKey = process.env.REACT_APP_MAPBOX;
 
   const getGeocode = () => {
     console.log("firing geocode");

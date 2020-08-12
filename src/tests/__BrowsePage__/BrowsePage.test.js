@@ -22,7 +22,7 @@ describe("running tests on login", () => {
     </Router>
   );
   it(`full component renders`, () => {
-    const { getByTestId, getAllByText } = render(tree);
+    const { getByTestId } = render(tree);
 
     expect(getByTestId("browse-wrapper")).toBeInTheDocument();
   });
