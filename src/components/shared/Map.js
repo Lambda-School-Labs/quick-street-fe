@@ -20,12 +20,11 @@ const Map = ({ zip, width, height, target, setFinalZip }) => {
   const [vendorInfo, setVendorInfo] = useState([]);
 
   const apiKey = process.env.REACT_APP_MAPBOX;
-  console.log("THIS IS THE APIKEY", apiKey);
-  const getGeocode = () => {
+  const getGeocode = (data) => {
     console.log("firing geocode");
     axios
       .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${zip}.json?access_token=${apiKey}`
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${data}.json?access_token=${apiKey}`
       )
       .then((response) => {
         console.log("mapbox response", response);
@@ -42,9 +41,15 @@ const Map = ({ zip, width, height, target, setFinalZip }) => {
   useEffect(() => {
     console.log("zipcode", zip);
     if (zip !== "") {
-      getGeocode();
+      getGeocode(zip);
     }
   }, [zip]);
+
+  useEffect(() => {
+    if (target) {
+      getGeocode(target);
+    }
+  }, []);
 
   useEffect(() => {
     axiosWithAuth()
@@ -71,20 +76,20 @@ const Map = ({ zip, width, height, target, setFinalZip }) => {
     });
   }, [vendors]);
 
-  if (target) {
-    axios
-      .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${target}.json?access_token=${apiKey}`
-      )
-      .then((response) => {
-        console.log("mapbox response", response);
-        setTag({
-          id: Date.now(),
-          latitude: response.data.features[0].center[1],
-          longitude: response.data.features[0].center[0],
-        });
-      });
-  }
+  // if (target) {
+  //   axios
+  //     .get(
+  //       `https://api.mapbox.com/geocoding/v5/mapbox.places/${target}.json?access_token=${apiKey}`
+  //     )
+  //     .then((response) => {
+  //       console.log("mapbox response", response);
+  //       setTag({
+  //         id: Date.now(),
+  //         latitude: response.data.features[0].center[1],
+  //         longitude: response.data.features[0].center[0],
+  //       });
+  //     });
+  // }
 
   useEffect(() => {
     console.log("vendors", vendors);

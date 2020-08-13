@@ -7,12 +7,7 @@ import banner from "../../styles/scss/vendor/a_vendors_banner.module.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
-import {
-  Image,
-  CloudinaryContext,
-  Context,
-  Transformation,
-} from "cloudinary-react";
+import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 
 const CustomerForm = ({ name, setName }) => {
   const [formData, setFormData] = useState({
