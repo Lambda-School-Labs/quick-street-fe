@@ -9,7 +9,7 @@ const RegisterAll = (props) => {
   const [userValues, setUserValues] = useState({
     email: "",
     password: "",
-    isVendor: null,
+    isVendor: false,
   });
   const [errors, setErrors] = useState({
     emailError: "",
@@ -28,7 +28,7 @@ const RegisterAll = (props) => {
         props.nextStep();
       } else if (
         response.status === 200 &&
-        response.data.user.isVendor === "false"
+        response.data.user.isVendor == false
       ) {
         console.log("user is customer?");
         props.nextStep();
