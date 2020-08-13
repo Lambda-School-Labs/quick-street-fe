@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import Map from "../../components/shared/Map";
 import { magGlass } from "../../assets/svgs/customerflow";
+import {
+  Image,
+  CloudinaryContext,
+  Transformation,
+  Placeholder,
+} from "cloudinary-react";
 import "../../styles/css/customer/customer_search.css";
 import { Link } from "react-router-dom";
 
-const CustomerSearch = () => {
+const CustomerSearch = ({ defaultZip }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [results, setResults] = useState([]);
   const [finalZip, setFinalZip] = useState("");
@@ -22,6 +28,7 @@ const CustomerSearch = () => {
     axiosWithAuth()
       .post(`vendors/all/places`, newObj)
       .then((response) => {
+        console.log("all results", response.data);
         setResults(response.data);
         if (response.data.length > 0) {
           setFinalZip(response.data[0].zipcode);
@@ -65,6 +72,8 @@ const CustomerSearch = () => {
           ) : (
             <div className="listings-function">
               {results.map((vendor) => {
+                console.log("VENDOR INFOR", vendor);
+                let newImage = "product-images/" + vendor.public_id;
                 let cat;
                 if (vendor.vendor_category) {
                   cat = `${vendor.vendor_category[0].toUpperCase()}${vendor.vendor_category.slice(
@@ -75,13 +84,25 @@ const CustomerSearch = () => {
                 return (
                   <Link to={`/customerHome/browse/${vendor.id}`}>
                     <div className="listing-card" key={vendor.id}>
-                      <img
-                        className="vendor_banner_image"
-                        src={
-                          "https://images.unsplash.com/photo-1595228702420-b3740f7f9761?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3500&q=80"
-                        }
-                        alt="Banner Image"
-                      ></img>
+                      {vendor.public_id ? (
+                        <CloudinaryContext cloudName="quickstlabs">
+                          <Image publicId={newImage}>
+                            <Transformation
+                              height="100"
+                              width="100"
+                              crop="fill"
+                            />
+                          </Image>
+                        </CloudinaryContext>
+                      ) : (
+                        <img
+                          className="vendor_banner_image"
+                          src={
+                            "https://images.unsplash.com/photo-1595228702420-b3740f7f9761?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3500&q=80"
+                          }
+                          alt="Banner Image"
+                        ></img>
+                      )}
                       <div id="vendor-info-box">
                         <h1>{vendor.business_name}</h1>
                         <p>{vendor.phone}</p>
@@ -101,6 +122,7 @@ const CustomerSearch = () => {
             zip={finalZip}
             setFinalZip={setFinalZip}
             vendors={results}
+            target={defaultZip}
           />
         </div>
       </div>
