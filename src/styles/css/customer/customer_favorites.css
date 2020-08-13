@@ -12,8 +12,6 @@
   font-weight: 700;
 }
 
-
-
 .fav-info {
   width: 800px;
   margin-left: 50px;
@@ -50,4 +48,10 @@ p {
 .vendor-img {
   width: 50px;
   height: 50px;
+}
+
+.fav-image {
+  height: 75px;
+  width: 75px;
+  object-fit: cover;
 }

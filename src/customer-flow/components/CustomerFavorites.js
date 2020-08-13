@@ -65,11 +65,19 @@ const CustomerFavorites = ({ name }) => {
               {favorites.map((item) => (
                 <tr>
                   <td>
-                    <CloudinaryContext cloudName="quickstlabs">
-                      <Image publicId={item.public_id}>
-                        <Transformation height="75" width="75" crop="fill" />
-                      </Image>
-                    </CloudinaryContext>
+                    {!item.public_id ? (
+                      <img
+                        className="fav-image"
+                        src="https://images.unsplash.com/photo-1533558527255-407147f3ae72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                        alt="default fav image"
+                      />
+                    ) : (
+                      <CloudinaryContext cloudName="quickstlabs">
+                        <Image publicId={item.public_id}>
+                          <Transformation height="75" width="75" crop="fill" />
+                        </Image>
+                      </CloudinaryContext>
+                    )}
                   </td>
                   <td>
                     <Link to={`/customerHome/browse/${item.vid}`}>
