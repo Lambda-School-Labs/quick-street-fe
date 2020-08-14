@@ -7,7 +7,6 @@ import axiosWithAuth from "../../utils/axiosWithAuth";
 import "../../styles/css/customer/shopping_cart.css";
 import "../../styles/css/customer/confirmation.css";
 
-
 const Confirmation = ({ orders, setOrders }) => {
   const [orderData, setOrderData] = useState({
     business_name: "",
@@ -31,38 +30,46 @@ const Confirmation = ({ orders, setOrders }) => {
   }, []);
 
   return (
-  <div>
-    <div className="cart-page">
-      <div className="mk-logo">
+    <div>
+      <div className="cart-page">
+        <div className="mk-logo">
           <Link to="/">
             <img src={logo} alt="market avenue logo" />
           </Link>
-      </div>
-
-      <h1 className="conf-user-title">Order Confirmation</h1>
-
-          <div className="conf-order-wrapper" data-testid="confirmation-wrapper">
-            <div className="conf-order-info">
-              <div><p>Date:</p>
-              <h3>{orderData.date_of_order}</h3></div>
-              <div><p >Order #:</p>
-              <h3>{orderData.id}</h3></div>
-              <div><p>Total Price:</p>
-              <h3>${orderData.subtotal}</h3></div>
-              <div><p>Vendor Name:</p>
-              <h3>{orderData.business_name}</h3></div>
-            </div>
-          </div>
-      </div>
-       <div>
-          <button className="conf-button">
-              <Link to="/customerHome/search" className="conf-link"> Home </Link>
-          </button>
         </div>
 
-    </div>
+        <h1 className="conf-user-title">Order Confirmation</h1>
 
+        <div className="conf-order-wrapper" data-testid="confirmation-wrapper">
+          <div className="conf-order-info">
+            <div>
+              <p>Date:</p>
+              <h3>{orderData.date_of_order}</h3>
+            </div>
+            <div>
+              <p>Order #:</p>
+              <h3>{orderData.id}</h3>
+            </div>
+            <div>
+              <p>Total Price:</p>
+              <h3>${orderData.subtotal}</h3>
+            </div>
+            <div>
+              <p>Vendor Name:</p>
+              <h3>{orderData.business_name}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="conf-box">
+        <button className="conf-button">
+          <Link to="/customerHome/search" className="conf-link">
+            {" "}
+            Home{" "}
+          </Link>
+        </button>
+      </div>
+    </div>
   );
 };
 export default Confirmation;
-
