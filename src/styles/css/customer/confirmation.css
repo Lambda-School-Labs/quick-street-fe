@@ -24,15 +24,24 @@
 .conf-link {
   color: black;
 }
-
+.conf-box {
+  position: relative;
+}
 .conf-button {
-  margin-top: 70px;
-  margin-left: 1400px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
   width: 96px;
   height: 40px;
-  background: #21B787;
+  background: #21b787;
   border-radius: 200px;
+  border: none;
   font-size: 12pt;
+  color: black;
+  cursor: pointer;
+}
+.conf-button a {
+  text-decoration: none;
   color: black;
 }
 
@@ -66,7 +75,6 @@
     text-align: center;
   }
 }
-
 
 .conf-avatar-box img {
   object-fit: cover;
