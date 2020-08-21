@@ -121,6 +121,16 @@
   }
 }
 
+.mapbox-container > .fake-map {
+  background-color: lightgray;
+  height: 500px;
+}
+
+.fake-map h1 {
+  text-align: center;
+  padding-top: 30%;
+}
+
 /* // Phones (landscape view)
 $screen-phone-min: 320px;
 

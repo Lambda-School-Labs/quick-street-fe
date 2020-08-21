@@ -24,7 +24,7 @@ import {
 
 const CustomerPage = (props) => {
   const { cart } = useContext(CartContext);
-  const [defaultZip, setDefaultZip] = useState(84101);
+  const [defaultZip, setDefaultZip] = useState("");
   const { favorites, setFavorites } = useContext(FavoritesContext);
   const { signout } = useContext(AuthContext);
   const [name, setName] = useState("");
@@ -34,18 +34,12 @@ const CustomerPage = (props) => {
   useEffect(() => {
     axiosWithAuth()
       .get("/customers/me")
-      .then((res) => setName(res.data.customer_name))
-      .catch((err) => console.log(err));
-    getFavorites();
-  }, []);
-  useEffect(() => {
-    axiosWithAuth()
-      .get("/customers/me")
       .then((res) => {
         setDefaultZip(res.data.zip_code);
         setName(res.data.customer_name);
       })
       .catch((err) => console.log(err));
+    getFavorites();
   }, []);
   const getFavorites = () => {
     axiosWithAuth()
@@ -172,7 +166,10 @@ const CustomerPage = (props) => {
             <CustomerFavorites name={name} />
           </Route>
           <Route path="/customerHome/search">
-            <CustomerSearch defaultZip={defaultZip} />
+            <CustomerSearch
+              defaultZip={defaultZip}
+              setDefaultZip={setDefaultZip}
+            />
           </Route>
           <Route path="/customerHome/browse/:id">
             <Vendor {...props} />

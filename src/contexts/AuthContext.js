@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import createDataContext from "./createDataContext";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
-
 const authReducer = (state, action) => {
   switch (action.type) {
-    case "add_error":
-      return { ...state, errorMessage: action.payload };
+    case "error":
+      return {
+        ...state,
+        errorMessage: "There was an error logging in. Try again.",
+      };
     case "signup":
       return { errorMessage: "", token: action.payload };
     case "signout":
@@ -59,6 +61,7 @@ const signin = (dispatch) => async ({ email, password }) => {
       window.location.href = "customerHome/search";
     }
   } catch (error) {
+    dispatch({ type: "error" });
     console.log(error.response);
   }
 };
