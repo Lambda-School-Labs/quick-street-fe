@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../../utils/axiosWithAuth";
 import Map from "../../components/shared/Map";
 import { magGlass } from "../../assets/svgs/customerflow";
-import {
-  Image,
-  CloudinaryContext,
-  Transformation,
-  Placeholder,
-} from "cloudinary-react";
+import { Image, CloudinaryContext, Transformation } from "cloudinary-react";
 import "../../styles/css/customer/customer_search.css";
 import { Link } from "react-router-dom";
 
@@ -22,7 +17,6 @@ const CustomerSearch = ({ defaultZip }) => {
     e.preventDefault();
     getSearchResults(searchQuery);
   };
-
   const getSearchResults = (zip) => {
     let newObj = { data: zip };
     axiosWithAuth()
@@ -117,13 +111,19 @@ const CustomerSearch = ({ defaultZip }) => {
           )}
         </div>
         <div className="mapbox-container">
-          <Map
-            className="map-search"
-            zip={finalZip}
-            setFinalZip={setFinalZip}
-            vendors={results}
-            target={defaultZip}
-          />
+          {defaultZip ? (
+            <Map
+              className="map-search"
+              zip={finalZip}
+              setFinalZip={setFinalZip}
+              vendors={results}
+              target={defaultZip}
+            />
+          ) : (
+            <div className="fake-map">
+              <h1>Loading Map...</h1>
+            </div>
+          )}
         </div>
       </div>
     </section>

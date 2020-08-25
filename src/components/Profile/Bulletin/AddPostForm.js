@@ -8,8 +8,7 @@ const AddPostForm = ({ post, setPost, show, cancelAddPost, postSubmit }) => {
   let yyyy = today.getFullYear();
   today = mm + "/" + dd + "/" + yyyy;
 
-  let newDate = new Date();
-  post.date = newDate;
+  post.date = today;
   const postChangeHandler = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value });
   };
