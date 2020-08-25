@@ -18,6 +18,7 @@ const VendorProducts = ({
   const [editingProd, setEditingProd] = useState(false); // change back to false
   // Passed to EditingProdcut MODAL // 5e1c9cedcb86ae00173f8aee change back to ""
   const [editingProdId, setEditingProdId] = useState("");
+  const [trigger, setTrigger] = useState(false);
 
 
   const showEditProduct = (prodId) => {
@@ -62,6 +63,8 @@ const VendorProducts = ({
             reloadProducts={reloadProducts}
             setReloadProducts={setReloadProducts}
             showEditProduct={showEditProduct}
+            trigger={trigger}
+            setTrigger = {setTrigger}
           />
         )}
         <header className={v_products.vendor_product_list_title}>
@@ -85,7 +88,7 @@ const VendorProducts = ({
                 className="product-wrapper"
               >
                 <Product
-                  key={idx}
+                  key={p.id} //SHOULD NOT BE INDEX
                   name={p.name}
                   productId={p.id}
                   price={p.price}

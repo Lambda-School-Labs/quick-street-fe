@@ -10,6 +10,8 @@ const Product = ({
   productId,
   setReloadProducts,
   reloadProducts,
+  trigger,
+  setTrigger,
 }) => {
   const [productImages, setProductImages] = useState("");
 
@@ -24,7 +26,7 @@ const Product = ({
         console.log(`ERROR GET /:productId/product-images Product.js`, error);
   		})
     }, []);
-    
+
   return (
     <div className={product.vendor_product}>
       <CloudinaryContext cloudName="quickstlabs">
