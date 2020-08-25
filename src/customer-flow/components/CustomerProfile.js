@@ -23,8 +23,6 @@ const CustomerForm = ({ name, setName }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const [pictureUpdate, setPictureUpdate] = useState([]);
-
   const submitHandler = (e) => {
     e.preventDefault();
     axiosWithAuth()
