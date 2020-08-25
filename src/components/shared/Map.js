@@ -61,9 +61,10 @@ const Map = ({ zip, width, height, target, setFinalZip }) => {
   useEffect(() => {
     console.log("vendors on map", vendors);
     vendors.map((item) => {
+      console.log("item", item);
       axios
         .get(
-          `https://api.mapbox.com/geocoding/v5/mapbox.places/${item.city}.json?access_token=${apiKey}`
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${item.zipcode}.json?access_token=${apiKey}`
         )
         .then((response) => {
           console.log("mapbox response", response);
