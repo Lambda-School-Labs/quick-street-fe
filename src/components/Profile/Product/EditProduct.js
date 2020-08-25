@@ -49,6 +49,7 @@ const EditProduct = (props) => {
     setAllChangesSaved(true);
     setReloadProducts(!reloadProducts);
     submitProductDetails();
+    props.setTrigger(!props.trigger);
     setTimeout(function () {
       setAllChangesSaved(false);
       props.setEditingProd(false);

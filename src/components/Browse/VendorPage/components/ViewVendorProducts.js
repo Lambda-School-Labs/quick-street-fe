@@ -8,6 +8,7 @@ import "../../../../styles/css/customer/customer_view_profile.css";
 const ViewVendorProducts = (props) => {
   const [vendorProducts, setVendorProducts] = useState([]);
 
+
   const getVendorProducts = (id) => {
     axiosWithAuth()
       .get(`/vendors/${id}/products`)
