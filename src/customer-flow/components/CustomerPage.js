@@ -40,7 +40,7 @@ const CustomerPage = (props) => {
       })
       .catch((err) => console.log(err));
     getFavorites();
-  }, []);
+  }, [name]);
   const getFavorites = () => {
     axiosWithAuth()
       .get("/auth/favorites")
